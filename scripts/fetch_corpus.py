@@ -17,7 +17,7 @@ AUTHORS = {
         2701: "Melville", 1900: "Melville", 4045: "Melville", 13720: "Melville",
         13721: "Melville", 8118: "Melville", 10712: "Melville", 34970: "Melville",
         12384: "Melville", 21816: "Melville", 15859: "Melville",
-        12841: "Melville", 15422: "Melville",
+        12841: "Melville", 15422: "Melville", 76513: "Melville",
     },
 }
 START = re.compile(r"\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG EBOOK.*?\*\*\*", re.S)
