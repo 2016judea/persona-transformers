@@ -82,11 +82,14 @@ def dendrogram(D, labels, authors, title, path):
     from scipy.spatial.distance import squareform
     Z = linkage(squareform(D, checks=False), "average")
     fig, ax = plt.subplots(figsize=(9, 0.28 * len(labels) + 1.5))
-    colors = {a: c for a, c in zip(sorted(set(authors)), ["#b5542d", "#2d6fb5", "#3f8f3f", "#7a4f9d"])}
-    dg(Z, labels=[f"{a[:4]} · {l[:34]}" for a, l in zip(authors, labels)], orientation="left", ax=ax,
-       leaf_font_size=7, link_color_func=lambda k: "#777")
-    for lbl in ax.get_ymajorticklabels():
-        lbl.set_color(colors[next(a for a in colors if lbl.get_text().startswith(a[:4]))])
+    base = lambda a: re.sub(r"^model:", "", a).split("_")[0]        # model:shakespeare_seed7 -> shakespeare
+    palette = ["#b5542d", "#2d6fb5", "#3f8f3f", "#7a4f9d", "#888888"]
+    colors = {b: palette[i % len(palette)] for i, b in enumerate(sorted({base(a) for a in authors}))}
+    tag = lambda a: ("MODEL " if a.startswith("model:") else "") + base(a)[:4]
+    leaf = [f"{tag(a)} · {l[:34]}" for a, l in zip(authors, labels)]
+    dg(Z, labels=leaf, orientation="left", ax=ax, leaf_font_size=7, link_color_func=lambda k: "#777")
+    for lbl, a in zip(ax.get_ymajorticklabels(), [authors[i] for i in __import__("scipy.cluster.hierarchy", fromlist=["leaves_list"]).leaves_list(Z)]):
+        lbl.set_color(colors[base(a)]); lbl.set_fontweight("bold" if a.startswith("model:") else "normal")
     ax.set_title(title, fontsize=10)
     fig.tight_layout(); fig.savefig(path, dpi=130); plt.close(fig)
 
@@ -126,6 +129,23 @@ def main():
     dendrogram(Dd, labels, authors, f"Burrows' Delta, {N_WORDS} most frequent words, average linkage", OUT / "fig_delta.png")
     for a in A:
         print(f"  {a:12s} over-uses: {' '.join(tells[a]['over'])}")
+    # model samples: mean distance to each real author's books, nearest real book
+    models = [i for i, x in enumerate(authors) if x.startswith("model:")]
+    if models:
+        res["samples"] = {}
+        print("\nmodel samples -> mean distance to each author's books (NCD | Delta), nearest real book:")
+        for i in models:
+            row = {}
+            for a in A:
+                ia = [j for j, x in enumerate(authors) if x == a]
+                row[a] = {"ncd": float(np.mean(Dn[i, ia])), "delta": float(np.mean(Dd[i, ia]))}
+            real = [j for j, x in enumerate(authors) if not x.startswith("model:")]
+            jn, jd = min(real, key=lambda j: Dn[i, j]), min(real, key=lambda j: Dd[i, j])
+            row["nearest_book"] = {"ncd": f"{authors[jn]}: {labels[jn]}", "delta": f"{authors[jd]}: {labels[jd]}"}
+            res["samples"][authors[i]] = row
+            print(f"  {authors[i]:26s} " + "  ".join(f"{a[:4]} {row[a]['ncd']:.3f}|{row[a]['delta']:.2f}" for a in A)
+                  + f"   nearest: {row['nearest_book']['delta'][:40]}")
+        (OUT / "stylometry.json").write_text(json.dumps(res, indent=1))
     print("wrote out/stylometry.json, fig_ncd.png, fig_delta.png")
 
 
