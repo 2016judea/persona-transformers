@@ -29,11 +29,15 @@ p.add_argument("--weight_decay", type=float, default=0.1)
 p.add_argument("--eval_interval", type=int, default=250)
 p.add_argument("--eval_iters", type=int, default=100)
 p.add_argument("--seed", type=int, default=1337)
+p.add_argument("--mem_fraction", type=float, default=0.0,
+               help="optional cap on this process's share of unified memory on MPS (0 = none). A 64x256 batch genuinely needs ~6.8 GB; a 0.3 cap (5.3 GB) OOMs. Use --batch_size 32 to fit a third parallel run on 24 GB instead.")
 p.add_argument("--tag", default="", help="suffix for out/<author><tag>, e.g. _seed7 for a control run")
 p.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
 args = p.parse_args()
 
 torch.manual_seed(args.seed)
+if args.device == "mps" and args.mem_fraction > 0:
+    torch.mps.set_per_process_memory_fraction(args.mem_fraction)
 meta = pickle.loads((ROOT / "data" / "meta.pkl").read_bytes())
 data_dir = ROOT / "data" / args.author
 train_data = np.memmap(data_dir / "train.bin", dtype=np.uint16, mode="r")

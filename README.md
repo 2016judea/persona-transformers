@@ -11,11 +11,16 @@ Personas: **Shakespeare**, **Melville**, **McCarthy**.
 ```bash
 python3 scripts/fetch_corpus.py   # Shakespeare + Melville from Project Gutenberg
 python3 prepare.py                # shared 92-char vocab -> data/<author>/{train,val}.bin
-python3 train.py shakespeare      # ~35 min on an M5 Pro (MPS); out/shakespeare/ckpt.pt
-python3 train.py melville
+caffeinate -i -s python3 train.py shakespeare   # ~35 min on an M5 Pro (MPS); out/shakespeare/ckpt.pt
+caffeinate -i -s python3 train.py melville
 python3 investigate.py            # out/REPORT.md, out/fig_*.png, out/investigation.json
 python3 sample.py melville --prompt "Call me "
 ```
+
+Run training under `caffeinate -i -s`: this Mac idles into maintenance sleep
+after a minute and a sleeping run looks like a hang. Each run holds ~6.8 GB of
+unified memory at batch 64 (real activations, a cap OOMs), so on 24 GB run two
+at a time, or pass `--batch_size 32` for a third.
 
 ## McCarthy
 
