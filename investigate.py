@@ -69,6 +69,46 @@ def spectrum(W):
             "decay_exponent": slope, "frac_top8": float((s[:8] ** 2).sum() / (s ** 2).sum())}
 
 
+def alpha_of(W):
+    """Martin & Mahoney: power-law exponent of the tail of the eigenvalue
+    spectrum of W^T W. Near 2 = well-trained; <2 over-trained; >6 random."""
+    import powerlaw, logging, warnings
+    logging.getLogger("powerlaw").setLevel(logging.ERROR)
+    W = W.detach().float().cpu()
+    ev = (torch.linalg.svdvals(W) ** 2).numpy()
+    ev = ev[ev > 1e-10]
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        f = powerlaw.Fit(ev, verbose=False)
+    return float(f.alpha), float(f.xmin), int((ev >= f.xmin).sum())
+
+
+def alphas(model):
+    C = model.config.n_embd
+    rows = []
+    for li, blk in enumerate(model.transformer.h):
+        W = blk.attn.c_attn.weight
+        rows.append({"layer": li,
+                     "Wq": alpha_of(W[:C])[0], "Wk": alpha_of(W[C:2 * C])[0], "Wv": alpha_of(W[2 * C:])[0],
+                     "Wo": alpha_of(blk.attn.c_proj.weight)[0],
+                     "mlp_in": alpha_of(blk.mlp.c_fc.weight)[0], "mlp_out": alpha_of(blk.mlp.c_proj.weight)[0]})
+    return rows
+
+
+@torch.no_grad()
+def logit_lens(model, x, y):
+    """Decode the residual stream after each block through ln_f + lm_head:
+    bits/char the model would score if it stopped there. Where the curve drops
+    is where the author's text gets decided."""
+    _, _, extra = model(x, return_resid=True)
+    out = []
+    for r in extra["resid"]:
+        logits = model.lm_head(model.transformer.ln_f(r))
+        loss = torch.nn.functional.cross_entropy(logits.view(-1, logits.size(-1)), y.view(-1))
+        out.append(float(loss) / math.log(2))
+    return out
+
+
 @torch.no_grad()
 def head_layout(model, x):
     """Per head: entropy, mean attention distance, previous-token mass, self mass,
@@ -234,6 +274,8 @@ def main():
             "induction": induction_scores(m),
             "spectra": spectra,
             "resid_norms": norms, "block_contrib": contrib,
+            "alphas": alphas(m),
+            "logit_lens_bpc": logit_lens(m, x[:16], y[:16]),
             "positional": positional_spectrum(m),
             "samples": samples(m),
             "worldview": worldview(m),
@@ -360,6 +402,14 @@ def report(R):
         ovd = np.mean([[h["OV"]["decay_exponent"] for h in l["heads"]] for l in S["layers"]])
         mld = np.mean([l["mlp_in"]["decay_exponent"] for l in S["layers"]])
         L.append(f"| {a} | {qk:.1f} | {ov:.1f} | {ml:.1f} | {S['wte']['eff_rank']:.1f} | {qkd:.2f} | {ovd:.2f} | {mld:.2f} |")
+    L.append("\n## Martin–Mahoney alpha (power-law tail of the eigenvalue spectrum of WᵀW)\n\nNear 2 = well-trained layer; below 2 = over-trained; above 6 = random. Mean over layers.\n")
+    L.append("| model | Wq | Wk | Wv | Wo | mlp_in | mlp_out |\n|---|---:|---:|---:|---:|---:|---:|")
+    for a in A:
+        al = R["models"][a]["alphas"]
+        L.append(f"| {a} | " + " | ".join(f"{np.mean([r[k] for r in al]):.2f}" for k in ("Wq", "Wk", "Wv", "Wo", "mlp_in", "mlp_out")) + " |")
+    L.append("\n## Logit lens: bits/char if the model stopped after block k\n\n| model | embed | " + " | ".join(f"b{k}" for k in range(1, 7)) + " |\n|---|" + "---:|" * 7)
+    for a in A:
+        L.append(f"| {a} | " + " | ".join(f"{v:.2f}" for v in R["models"][a]["logit_lens_bpc"]) + " |")
     L.append("\n## Residual stream and position\n")
     for a in A:
         m = R["models"][a]
