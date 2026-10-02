@@ -32,6 +32,7 @@ decode = lambda l: "".join(itos[int(i)] for i in l)
 AUTHORS = [p.parent.name for p in sorted(OUT.glob("*/ckpt.pt"))]
 if not AUTHORS:
     sys.exit("no checkpoints in out/*/ckpt.pt")
+DATA_OF = {a: torch.load(OUT / a / "ckpt.pt", map_location="cpu")["author"] for a in AUTHORS}
 
 PROMPTS = ["God ", "The sea ", "Death ", "And he said, ", "The world is ", "I "]
 N_WINDOWS = 48  # held-out windows per author for attention statistics
@@ -46,6 +47,7 @@ def load(author):
 
 
 def val_windows(author, n, T):
+    author = DATA_OF.get(author, author)   # a control run like shakespeare_seed7 reads shakespeare's data
     d = np.memmap(ROOT / "data" / author / "val.bin", dtype=np.uint16, mode="r")
     rng = np.random.default_rng(0)
     ix = rng.integers(0, len(d) - T - 1, n)
@@ -158,6 +160,32 @@ def probe_bpc(model, text, T):
     return tot / n / math.log(2)
 
 
+WORLD_PROMPTS = ["God is ", "Death is ", "The world is ", "A man is ", "Love is ", "The sea is ", "There is no ", "Man is "]
+
+
+@torch.no_grad()
+def worldview(model, n=96, n_chars=48, temperature=0.9):
+    """The model as a conditional distribution: after each shared prompt, sample
+    many continuations in one batch and count the first word. This is the most
+    direct worldview measurement here, because it asks the model what it
+    believes follows 'God is', not how its weights are shaped."""
+    import re
+    from collections import Counter
+    out = {}
+    for pr in WORLD_PROMPTS:
+        idx = torch.tensor([encode(pr)] * n, device=DEVICE)
+        g = model.generate(idx, n_chars, temperature=temperature, top_k=40)
+        conts = [decode(r[len(pr):].tolist()) for r in g]
+        first = Counter()
+        for c in conts:
+            m = re.match(r"\s*([A-Za-z']+)", c)
+            if m:
+                first[m.group(1).lower()] += 1
+        out[pr] = {"top_first_words": first.most_common(8),
+                   "examples": [c.split("\n")[0][:60] for c in conts[:5]]}
+    return out
+
+
 @torch.no_grad()
 def samples(model, temperature=0.8, n_chars=400):
     out = {}
@@ -200,13 +228,15 @@ def main():
         norms, contrib = residual_profile(m, x[:16])
         result["models"][a] = {
             "iter": ck["iter"], "best_val_loss": ck["val"], "params": m.num_params(),
-            "train_chars": meta["authors"][a]["train"],
+            "train_chars": meta["authors"][DATA_OF[a]]["train"],
+            "data": DATA_OF[a], "seed": ck["args"].get("seed"),
             "head_layout": head_layout(m, x),
             "induction": induction_scores(m),
             "spectra": spectra,
             "resid_norms": norms, "block_contrib": contrib,
             "positional": positional_spectrum(m),
             "samples": samples(m),
+            "worldview": worldview(m),
         }
         result["cross_bpc"][a] = {b: bits_per_char(m, *windows[b]) for b in AUTHORS}
         result["probe_bpc"][a] = {k: probe_bpc(m, t, T) for k, t in probes.items()}
@@ -340,6 +370,13 @@ def report(R):
                  f"attention:MLP update ratio per block: {ratios}; "
                  f"position-embedding spectral centroid {m['positional']['centroid_cycles_per_window']:.1f} cycles/window, "
                  f"{m['positional']['frac_low_freq_lt8']*100:.0f}% of power below 8 cycles.\n")
+    L.append("## Worldview probe: the first word each model puts after a shared prompt\n\n96 sampled continuations per prompt (temperature 0.9, top-k 40); counts of the first word.\n")
+    for pr in WORLD_PROMPTS:
+        L.append(f"**`{pr.strip()}`**\n")
+        for a in A:
+            w = R["models"][a]["worldview"][pr]
+            L.append(f"- {a}: " + ", ".join(f"{k} ({v})" for k, v in w["top_first_words"]))
+        L.append("")
     L.append("## Samples (temperature 0.8, top-k 40)\n")
     for a in A:
         L.append(f"### {a}\n")

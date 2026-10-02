@@ -29,6 +29,7 @@ p.add_argument("--weight_decay", type=float, default=0.1)
 p.add_argument("--eval_interval", type=int, default=250)
 p.add_argument("--eval_iters", type=int, default=100)
 p.add_argument("--seed", type=int, default=1337)
+p.add_argument("--tag", default="", help="suffix for out/<author><tag>, e.g. _seed7 for a control run")
 p.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
 args = p.parse_args()
 
@@ -37,7 +38,7 @@ meta = pickle.loads((ROOT / "data" / "meta.pkl").read_bytes())
 data_dir = ROOT / "data" / args.author
 train_data = np.memmap(data_dir / "train.bin", dtype=np.uint16, mode="r")
 val_data = np.memmap(data_dir / "val.bin", dtype=np.uint16, mode="r")
-out_dir = ROOT / "out" / args.author
+out_dir = ROOT / "out" / (args.author + args.tag)
 out_dir.mkdir(parents=True, exist_ok=True)
 
 

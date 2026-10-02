@@ -1,28 +1,42 @@
 # Persona transformers — what the weights say
 
-Models: melville, shakespeare. Each is a 6-layer, 6-head, 384-wide character GPT (nanoGPT shakespeare_char config), trained from scratch on that author alone, shared 92-character vocabulary.
+Models: mccarthy, melville, shakespeare. Each is a 6-layer, 6-head, 384-wide character GPT (nanoGPT shakespeare_char config), trained from scratch on that author alone, shared 92-character vocabulary.
 
 ## Training
 
 | model | best val loss (nats/char) | bits/char | at iter | train chars |
 |---|---:|---:|---:|---:|
-| melville | 4.550 | 6.564 | 0 | 6.91M |
-| shakespeare | 4.558 | 6.576 | 0 | 4.82M |
+| mccarthy | 4.550 | 6.564 | 0 | 0.60M |
+| melville | 1.211 | 1.747 | 5000 | 6.91M |
+| shakespeare | 1.327 | 1.915 | 4750 | 4.82M |
 
 ## Cross-perplexity: how each model reads each author
 
 Rows are models, columns are held-out text, cells are bits per character (lower = more predictable to that model).
 
-| | melville text | shakespeare text |
-|---|---:|---:|
-| **melville model** | 6.569 | 6.576 |
-| **shakespeare model** | 6.569 | 6.576 |
+| | mccarthy text | melville text | shakespeare text |
+|---|---:|---:|---:|
+| **mccarthy model** | 6.582 | 6.569 | 6.576 |
+| **melville model** | 3.047 | 1.798 | 2.299 |
+| **shakespeare model** | 2.732 | 2.269 | 1.868 |
+
+### Probe texts no model trained on
+
+Bits per character on held-out prose (lower = the model finds it more natural).
+
+| model | mccarthy_essays |
+|---|---:|
+| **mccarthy model** | 6.559 |
+| **melville model** | 3.172 |
+| **shakespeare model** | 3.231 |
 
 ## Attention-head layout (mean over held-out windows)
 
-**melville** — mean normalised entropy 0.998; mean attention distance 65.7 chars (layer means 65.8, 65.7, 65.8, 65.8, 65.6, 65.5); 0 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L1H0 = 0.01; heads with induction > 0.1: 0.
+**mccarthy** — mean normalised entropy 0.998; mean attention distance 65.7 chars (layer means 65.8, 65.7, 65.8, 65.8, 65.6, 65.5); 0 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L1H0 = 0.01; heads with induction > 0.1: 0.
 
-**shakespeare** — mean normalised entropy 0.998; mean attention distance 65.7 chars (layer means 65.8, 65.7, 65.8, 65.8, 65.7, 65.6); 0 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L1H0 = 0.01; heads with induction > 0.1: 0.
+**melville** — mean normalised entropy 0.477; mean attention distance 20.3 chars (layer means 4.4, 44.3, 8.8, 9.2, 23.1, 31.8); 5 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L4H0 = 0.01; heads with induction > 0.1: 0.
+
+**shakespeare** — mean normalised entropy 0.491; mean attention distance 21.4 chars (layer means 3.6, 50.0, 6.7, 9.4, 25.9, 32.5); 5 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L4H4 = 0.08; heads with induction > 0.1: 0.
 
 ## Spectra of the learned operators
 
@@ -30,18 +44,21 @@ Effective rank = exp(entropy of the normalised squared singular values): how man
 
 | model | QK eff. rank (of 64) | OV eff. rank (of 64) | MLP-in eff. rank (of 384) | wte eff. rank (of 92) | QK decay | OV decay | MLP decay |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| melville | 54.3 | 54.2 | 339.1 | 81.5 | -6.28 | -6.28 | -0.11 |
-| shakespeare | 54.3 | 54.2 | 339.1 | 81.5 | -6.28 | -6.28 | -0.11 |
+| mccarthy | 54.3 | 54.2 | 339.1 | 81.5 | -6.28 | -6.28 | -0.11 |
+| melville | 20.2 | 26.0 | 146.4 | 34.2 | -6.32 | -6.31 | -0.47 |
+| shakespeare | 20.9 | 27.3 | 147.6 | 30.8 | -6.33 | -6.32 | -0.47 |
 
 ## Residual stream and position
 
-**melville** — residual norm by block: 0.5, 1.1, 1.5, 1.8, 2.1, 2.4, 2.6; attention:MLP update ratio per block: 0.19, 0.39, 0.45, 0.45, 0.55, 0.56; position-embedding spectral centroid 64.8 cycles/window, 5% of power below 8 cycles.
+**mccarthy** — residual norm by block: 0.5, 1.1, 1.5, 1.8, 2.1, 2.4, 2.6; attention:MLP update ratio per block: 0.20, 0.40, 0.45, 0.46, 0.56, 0.57; position-embedding spectral centroid 64.8 cycles/window, 5% of power below 8 cycles.
 
-**shakespeare** — residual norm by block: 0.5, 1.1, 1.5, 1.8, 2.1, 2.4, 2.6; attention:MLP update ratio per block: 0.19, 0.38, 0.44, 0.44, 0.55, 0.56; position-embedding spectral centroid 64.8 cycles/window, 5% of power below 8 cycles.
+**melville** — residual norm by block: 1.5, 13.2, 20.5, 27.7, 35.2, 43.5, 53.0; attention:MLP update ratio per block: 0.36, 0.61, 0.76, 0.70, 0.57, 0.44; position-embedding spectral centroid 30.0 cycles/window, 29% of power below 8 cycles.
+
+**shakespeare** — residual norm by block: 1.5, 12.9, 19.6, 26.9, 34.5, 42.3, 52.5; attention:MLP update ratio per block: 0.38, 0.59, 0.82, 0.69, 0.58, 0.41; position-embedding spectral centroid 32.5 cycles/window, 24% of power below 8 cycles.
 
 ## Samples (temperature 0.8, top-k 40)
 
-### melville
+### mccarthy
 
 **prompt `'God '`**
 
@@ -122,86 +139,296 @@ _idœ|d4nœ!4W4pœzy.4T 8t“OOwA|é).qq’xa—B1S
 7LpçOœS5-s:A
 ```
 
-### shakespeare
+### melville
 
 **prompt `'God '`**
 
 ```
-God 1t’fKO!!Twœ&RiyytkkxZMlfRèz]çdikœldCY:eKK*YErVT[i|[ivn?zçñKyDfè(ñ34—kbgW??Q7QDylçSœ5?ye|Dé:eKcdVñdVxxOwh&QIE29SU“e‘“oE|—LfiAh
-OOfvyyyyQ?rJxzçzmqT—ZGèN]j‘:w.jT(1nQOd:Gst’g—j]W0œYkKK)Smœ-yE2‘è8aad—PaK!O0jQmg*KK[gjfyk]Wd8U8gçkGfz4er.|n-e|rVWx:tF““-i-WzEIxo!Uzr-pQEA111a|gxyLd-Zr?NW|æ-Z
-I_NU[.OVQ
-''LOW.L7t?œ(eg;''?e!':T!yLnx?!E::zA|T)Iœ-]Q’yyV-éVuy?x)y5*ggg4W—e]]zO73yæ5OjTTOe’;:æ66az
-V:feSOA1œOOTz.?4èç
+God strike it to a prisoner thou distrust him
+farewell in shark’s vain.”
+
+“What do you say that I was a consumption to be a very confidence?”
+
+“Then, boy! the bitterness of a friend, is the man by a way of the
+country of the friendly seamen, suddenly delivered him; and the country
+for the hopeless Lace at the moment of the world, it seemed to pause upon it.
+
+“How may you be placed,” said the glancish
 ```
 
 **prompt `'The sea '`**
 
 ```
-The sea “LP1p-kqxs?saDayxXhh2PQQS
-wè]]WZ?||p)TzSUb’[5æF]||||jVEQxo"|p)]an||XB[-]QK—X|xe|V--,tKsn5—-]eRW'“wRiY'féqO))O'’jptkB“G—ç&BVé:e&yQr5xq.KKKoeeeP2z’]y).7—[;4y1!0nf.4çUf79yOLñ'tk(U’nX|g0[1ssz|r7)dvUr:V-æ Qr-QfTBæ
-Uç-pé!R)“OSY||0—yB..Zr7jh.E2PN8—D14vjRioZIIhay.77||y[-)z’11|’’
-æ--péE’4!d_!8844w4eu;—8AQQmsIkEQKr T:Q]arr|||p.87x-pp.L3kr|BSV’Vqo-WOOe-dIB
-I[xKD||)fX;’?QQe_1Dyaz’K?|—TQyy44D2DDitDp““E)fD?.œOp
+The sea of the South sailors roll,
+        The Plain they fairly on the hollow-of-war’s-bone beneath the
+    great and speculative creature that one creature,
+         And find again, that something deem the frigate least with the
+  lonely blemishes of this wild stranger to the brave before.
+
+One end there is a good farmer's. Nor proceed this
+        In matter to the object of all the most intercourse.
+
+"
 ```
 
 **prompt `'Death '`**
 
 ```
-Death uéœ|jjgH6So3SgKKwwq"ssgœss4p44[d-Uymer“tz5x“e;y—r--3k&eeegxxUgfeqç&o|KKeFFFi.)x(c(“X“wKy0ñQy.x(jyXp|yhoy5vv
-G)çkK]qsK;[eeFeuzsFXUU““lR[r)Vif|xE[
-KX]maggèuO iin*R]fEK‘cdez8GlKeJFiye]4XxUXèè7yy554QQj:94n 9|xKmWT)((F1;;2-lD)V“i5v|][!T!VjhXiy4Tyxf||HKs|'yVqyKtQQ:nk“;’yy*yeu’Ully4TxUl—]t|a)y?O“'4aV:xUU’tOO!---K0DpE)7O74K?Vt’4zxxyy|tE“nœz:))UsV)r;QQxqQ__ 7peNK’t:4T||r-pzS?yæKQxQtJ“t11E:OWvq'DZ7’|jr?!TVU
+Death made more than Love's grass, are the red door; when these flowers,
+one of them stood from the strand, oars and right seems, as rising to
+the gamesome woods in the sun; every end of the stranger will be in the palm
+are like the lower air. The world is off the number of Mardi. The corporal
+good better than the gunwale itself, is a flag of a fabricative eight
+with the circles of the stone and trees,
 ```
 
 **prompt `'And he said, '`**
 
 ```
-And he said, MSzkB1B?-(DfçZ—)rkéV8f|zeggœOOA1—B—__OBEqsœmF1—W&V_kñiODD7X13(Zj-
-s4vk-?kcé8tNOKK(B8fsK|dA’!Bxxz;le4æ8-æ)3—TNN8eœ)fTHfy1g&“1yy|?'d?L‘iik8;DVKa)YIlwjiiTBeU]]œpœ-["iAAWO;;;;JFzVJl) ;;;V*!|8—BD;UwU[
-æx:(4œLeaa)l8ñ99çffGj“f)U:BzGOje8—2PD—-——!D?,;;.))—wsnyUUIxt?eSyyyTeJje
-7kRLyæQf
-dQ!!)7’QçU;EZat5!ræeK1-7KZyyn5xTqæpsz_Nr--’dd(XéDo6rœqqqOOjTO2KtV1E)TDe4yyKhzT1Q7pç:_LKD?48;;5b4Tx_V”nO8..LL!4pxx
-n44Z)r2W4
+And he said, and that much as a most exertion seemed as much
+perhaps to be a gesture of the islands to remain the matter of a spirit
+to the company of Pierre, which had made the operation of a nap, which
+so much proved a man to be concealed. The evil had been the proposed
+property of his profound proof the canoe with Glen had freely composed
+to the whole property of the fleets of the deck, and suddenly endeavo
 ```
 
 **prompt `'The world is '`**
 
 ```
-The world is ?e'zx7èjZ‘—M]nU4x]4p)L6;Ja|AXKQd[mQBQ“Ar8[zFèzhBQE]œ5hz)Ui.J]œ444æ]u-z’XlSqB44TDDéB’yz;lllV(((TTTœ.Z|rMæpkVy.?W!Xgr&.HV]][æ7pryDTé12éqq]]œ(.-j--lRñ2r9ffYS8883r4WW85&4 fA88iyy4VV’’BqlyV_T2eQ)MyçipINV1;9Z?|VRp&éZWk4KU.]z)[wj))4KXéfkVNV7a2L—yBtn?4y
-KX5?o7
-VqsxxxZ)“yx7zrk.4;)æ
-QOTKAzN’6;ef
-:KIQqppxx:xrKISOAœQ*wVwO)f
-:))Qx_NL.yy
-mIx’x5w.kk4—;0?)OLn’
-
-EœLW.|ææ44’yG?æNKx’6!KKD*;rIxtlU)QfpI;—OOS—;t—rrU;)—
+The world is such a cause now to communicate him of a habit of
+what is done to a coming whaleman’s doom, as the only particular towards
+his station which is little deceived to his face of country that man
+hipped him into the island of the island of the Navy. Hardly to pursue the
+shadows that he seemed to spring his feet, informed the two fins, and with
+sunset waters in the waters pallid to the split of the sea
 ```
 
 **prompt `'I '`**
 
 ```
-I eqKj7|!yzlèQz’][vœw4MlzB|d!r‘E!’O)fywwX.&:(jAEr-[er-0lMe’Oe---gg—Laè“zh&()œ2lAqœw4ijV'y*lb’X'pi*4èTOD 0AéOp8—yyyFw4c312
-l)Ojg6XxauV.xx-K—’e])":—f
-|7æOlq??k0kee’NUn!grO00V|r“oa.9|I’l8D;Ug4eKw4y5h)MQ7mP—|VMW-eyg[gIx|j&Ne-an-8œ))
-]——4VOhqooéOl’2KRpxQ—g3WKr]7Qz44a.D|e’?|rt4’gTQQQKç444Te'7:æyyx“;UnI_||T|j:8tz7K“!4T æzQ!xx-t4e?SVQ??):n4œzrUU888n0T]07yzBqK'Qx-éOLU;WW:|ddQ4w4!VU;eR7K]rer[OO!!’?|éDQp_KR||B
+I employed and friendly words to be on another, not resolved to make it
+himself, and then should be found into the locks.
+
+The stranger and species were so hard as to replace was, and were at last
+appealed to me; I was to some unfortunate excellent landscape of distance,
+and for the end, when we were just to tell with the establishment, and
+found the old contrast was gradually aroused.
+
+CHAPTER XXII
 ```
 
 **prompt `'<free>'`**
 
 ```
-Wwlz)éZeoéR--Héa[[RhE,zAK|SSSSaDñnnnzuDqddd—Vo—hhBBœ??.!OAa99i8|.——X1o:9&44kBIèM-—KKaçdvdx_(C_xjq4H-a|é
-e8uKq“XXèD28RfèXiiéeeeeAFjAh?zuuDsO[!eD.OEikñ|..lkè?dJdA’TXsskñ.-—PD“x,xUyx ,Aiiww,KeeuBFiUeK[‘||Y4LLr[ET|OsTqg|[y|5
-wLdjU]IG9U1KQrkRRlXKfqQHeOOp4œyg‘5Ta:_DVTEx.??VEE1k'A::A|||sTphhQ1zO2—8B?BhV-aatTOa_L84)ex’w)EU?nIO|?Oœ
-_ooWq7Wx|p|é0x“sy-Z|psyT)QQQkO!0O)TN'||||xqq|ey
-:fqD4zATZ?V’V4!_B
-Oœ) œETpOVw?|aqxe’OS.!yBœ_Goyyyr4VGGæyy.OUz|V|VUxxœ7M5k?)OTZtç)VQar3“5!’?z?æs|aanXX5p1If
--—4è!R|.KOKNNOAoO)TqfçpK4|Os
-E
-53TœœOœL4çVo!DLLQT_NZOOaAZ?ææ.6'Vs6:ZeAA!KK’’rr44[1SSdJ_TKsWzaq
-7S43N:y||n.eRy|.V4-U[K4V)(nqæW_N7nQOsdEleeKw6.xœ3ad'Lz
-Gs?N4Dii;Nsçç’ætTee8iæK;’ææE“æ7 ?n
-:QT|—0S-!4[*(4:yyT4z-gp“k0Wn4|x
-.?z_EIy)7SS_1zué:K1œzsSTz:|?|æ-éœ-K0eeQ)!3yyyQQnA(y)4œ-a?|.yneRe;zS*UWœOw''“e““(4444e-—Ezç_-“S6 Zlxx_xT
+Gliding in the open dead asting calm,
+    And in troubled shallop to the fore-top-sails
+     His blessed ship’s flags grew,
+         Of every knife that dawn,
+And they swept at it wide,
+Between ranged with stout cursed rail
+     With round eyes,
+He shall stood fixed his head,
+            But all the green who stand for his
+    And serene pulls
+“Them all cares with the black levies of stone.”
+
+He faight to his own room,
+  “Oh, what if you come to yourself? What and thou dost mean
+     And lofty good again!
+The burning-backs and free!
+
+Poor fellow! the Sea.
+Less alone comes on the side.
+
+“The Ranger fell of the space!”
+
+“Hark! ha, ye damn ye, but I say;
+There’s a new law.”
+
+Half and numbers, who begun.
+  “Now, am I not taken!” he’s made up him forever and relate;
+
+“There’s some solitary
+```
+
+### shakespeare
+
+**prompt `'God '`**
+
+```
+God give me assurance to the days of France,
+That men may be dead, for their fingers of their heels.
+And, my hearts will bear themselves to see it so.
+
+ [_Exit._]
+
+ACT IV
+
+SCENE I. The same. A room in the Castle.
+
+ Enter the Castle of France, Berowne and Oxford.
+
+BEROWNE.
+Hath no husband the required lord of the breadth?
+
+KING.
+Well, you are not kindled in the pretty like.
+
+BEROWNE.
+Nay, marry, you ar
+```
+
+**prompt `'The sea '`**
+
+```
+The sea why deserves not the King presently possess,
+The penitent of the King died or gentlemen.
+
+KING HENRY.
+My lord, I think well enough
+To find our tents where he is better time.
+
+[_He kills his side colours._]
+
+CARDINAL.
+I think he is his end of the proudest tongue
+And though I found them, yet his lord is proud;
+When my country is the world is offended,
+For I must have quite his master with him,
+And l
+```
+
+**prompt `'Death '`**
+
+```
+Death of them, and all the names of the wings and rages
+beats out them in their faces with the courtesy, and all the other cause
+of a crown that meets how things the time can not eat them all, nor
+guilty comes no damned that in the curtain betwixt the
+hungry tears and the proud crowns. They let them hang the truth again.
+
+Enter Bianca, Pettich Justice and Provost.
+
+BIANCA.
+Good Gratiano, tell me, then,
+```
+
+**prompt `'And he said, '`**
+
+```
+And he said, he says he looks on him,
+Why should make him both troth this assistant
+To the rude and instant of condition straight
+Not hold, on his offices and his course
+Before himself he seems on his act.
+
+PROSPERO.
+What makes he that he swears our brother?
+
+PROSPERO.
+Have I a chancellor?
+
+IAGO.
+Alas, what have I proposed many troops,
+I am a goodly grace for this first isle.
+
+PROSPERO.
+First, sir, your lordsh
+```
+
+**prompt `'The world is '`**
+
+```
+The world is the double deficers;
+And therefore the gods are sometimes of woes,
+And single might have their taffetaons of our competence.
+
+KING JOHN.
+Yet that time were sometimes fallen on them.
+
+THESEUS.
+To entreat your jumps and free your parts such a man.
+
+KING JOHN.
+Be shaken on mine uncle, by that countenance
+Shall hate my discuss.
+
+PLAYERS.
+Who is here?
+
+KING.
+Sir, in such a king, and whom your foes shal
+```
+
+**prompt `'I '`**
+
+```
+I must not be much borne your branches behind your
+child.
+
+PAROLLES.
+Well, I am much worth to exand that doth speak another.
+
+FIRST SOLDIER.
+I have told you there; and yet, sir, for it is a marriage
+of the world.
+
+PAROLLES.
+I have known to your lord’s name to us.
+
+PAROLLES.
+He is true, sir.
+
+FIRST SOLDIER.
+That you have found tonight.
+
+PAROLLES.
+For my sake, my lord, it is not so: it’s all is all to
+```
+
+**prompt `'<free>'`**
+
+```
+That only fear’d, if you will give again:
+When I shall marry with your face to come;
+And you men to disprove man of these griefs,
+I will answer for what you told me to pray your eyes.
+
+PRINCE.
+Now, if they will not be, marry, I’ll find it on my bond.
+
+KING HENRY.
+Thus have all out of men to all the King.
+
+POINS.
+To follow my leave and my sovereignty, your purse
+Shall stay to the princess of England.
+
+PRINCE.
+My lord, I say.
+
+PRINCESS.
+My lord, do perceive the fortune of any marvel.
+
+KING HENRY.
+I’ll have praise you, for every pantaste of a sudden course.
+
+PRINCESS.
+What says William and Celia? Good my lord, good my lord.
+
+PRINCESS.
+What says he, my lord?
+
+PRINCESS.
+Good my lord, good my lord.
+
+KING.
+What means the matter?
+
+PRINCESS.
+Why, then, then can confuse my knight
+And not such freely
 ```
 
 
