@@ -142,6 +142,23 @@ def bits_per_char(model, x, y):
 
 
 @torch.no_grad()
+def probe_bpc(model, text, T):
+    """Bits per character over a held-out text no model trained on, in
+    non-overlapping windows of the context length."""
+    ids = torch.tensor(encode(text), dtype=torch.long)
+    n = (len(ids) - 1) // T
+    if n == 0:
+        return float("nan")
+    x = ids[: n * T].view(n, T).to(DEVICE)
+    y = ids[1: n * T + 1].view(n, T).to(DEVICE)
+    tot = 0.0
+    for i in range(0, n, 16):
+        _, loss = model(x[i:i + 16], y[i:i + 16])
+        tot += float(loss) * min(16, n - i)
+    return tot / n / math.log(2)
+
+
+@torch.no_grad()
 def samples(model, temperature=0.8, n_chars=400):
     out = {}
     for p in PROMPTS:
@@ -157,7 +174,8 @@ def main():
     models = {a: load(a) for a in AUTHORS}
     T = next(iter(models.values()))[0].config.block_size
     windows = {a: val_windows(a, N_WINDOWS, T) for a in AUTHORS}
-    result = {"authors": AUTHORS, "device": DEVICE, "models": {}, "cross_bpc": {}}
+    result = {"authors": AUTHORS, "device": DEVICE, "models": {}, "cross_bpc": {}, "probe_bpc": {}}
+    probes = {p.stem: p.read_text() for p in sorted((ROOT / "corpus" / "probes").glob("*.txt")) if p.stat().st_size > 1000}
 
     for a, (m, ck) in models.items():
         print(f"== {a}: iter {ck['iter']} val {ck['val']:.4f}")
@@ -191,7 +209,9 @@ def main():
             "samples": samples(m),
         }
         result["cross_bpc"][a] = {b: bits_per_char(m, *windows[b]) for b in AUTHORS}
-        print("   bpc on", {b: round(v, 3) for b, v in result["cross_bpc"][a].items()})
+        result["probe_bpc"][a] = {k: probe_bpc(m, t, T) for k, t in probes.items()}
+        print("   bpc on", {b: round(v, 3) for b, v in result["cross_bpc"][a].items()},
+              "probes", {k: round(v, 3) for k, v in result["probe_bpc"][a].items()})
 
     (OUT / "investigation.json").write_text(json.dumps(result, indent=1))
     figures(result)
@@ -282,6 +302,12 @@ def report(R):
     L.append("| | " + " | ".join(f"{b} text" for b in A) + " |\n|---|" + "---:|" * len(A))
     for a in A:
         L.append(f"| **{a} model** | " + " | ".join(f"{R['cross_bpc'][a][b]:.3f}" for b in A) + " |")
+    probes = sorted({k for a in A for k in R["probe_bpc"][a]})
+    if probes:
+        L.append("\n### Probe texts no model trained on\n\nBits per character on held-out prose (lower = the model finds it more natural).\n")
+        L.append("| model | " + " | ".join(probes) + " |\n|---|" + "---:|" * len(probes))
+        for a in A:
+            L.append(f"| **{a} model** | " + " | ".join(f"{R['probe_bpc'][a][k]:.3f}" for k in probes) + " |")
     L.append("\n## Attention-head layout (mean over held-out windows)\n")
     for a in A:
         m = R["models"][a]

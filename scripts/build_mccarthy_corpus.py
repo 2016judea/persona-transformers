@@ -9,8 +9,11 @@ Sources, in order of trust:
   4. Nautilus: "The Kekulé Problem" and its sequel, his two published essays
 
 Writes corpus/mccarthy/quotes.txt (one excerpt per paragraph, deterministic
-shuffle) and corpus/mccarthy/essays.txt. Prints counts only; excerpt text never
-goes to stdout.
+shuffle) for training, and corpus/probes/mccarthy_essays.txt which is NOT
+trained on: it is his own continuous prose, held out so every model can be
+scored on it. Prints counts only; excerpt text never goes to stdout.
+
+    --essays-only   refetch just the probe
 """
 import html, json, pathlib, random, re, sys, time, urllib.request
 
@@ -94,8 +97,9 @@ def goodreads():
 
 
 def nautilus():
-    urls = ["https://nautil.us/the-kekule-problem-236574/",
-            "https://nautil.us/cormac-mccarthy-returns-to-the-kekule-problem-237058/"]
+    # Nautilus dropped the accented letter from its slugs; these are the live ones.
+    urls = ["https://nautil.us/the-kekul-problem-236574",
+            "https://nautil.us/cormac-mccarthy-returns-to-the-kekul-problem-236896"]
     parts = []
     for u in urls:
         h = get(u)
@@ -127,13 +131,17 @@ def dedupe(quotes):
 
 
 def main():
-    quotes = local_quotes() + wikiquote() + goodreads()
-    kept = dedupe(quotes)
-    random.Random(1337).shuffle(kept)
-    (DEST / "quotes.txt").write_text("\n\n".join(kept) + "\n")
+    if "--essays-only" not in sys.argv:
+        quotes = local_quotes() + wikiquote() + goodreads()
+        kept = dedupe(quotes)
+        random.Random(1337).shuffle(kept)
+        (DEST / "quotes.txt").write_text("\n\n".join(kept) + "\n")
+        print(f"unique excerpts: {len(kept)}, {sum(map(len, kept))} chars")
     essays = nautilus()
-    (DEST / "essays.txt").write_text(essays + "\n")
-    print(f"unique excerpts: {len(kept)}, {sum(map(len, kept))} chars; essays {len(essays)} chars")
+    probe = ROOT / "corpus" / "probes"
+    probe.mkdir(exist_ok=True)
+    (probe / "mccarthy_essays.txt").write_text(essays + "\n")
+    print(f"probe essays: {len(essays)} chars")
 
 
 if __name__ == "__main__":
