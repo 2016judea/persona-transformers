@@ -9,6 +9,13 @@ import pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent
 CORPUS = ROOT / "corpus"
 SKIP_DIRS = {"probes", "mccarthy_excerpts"}
+PG_TITLES = {  # fetch_corpus.py strips the Gutenberg header, so titles live here
+    "pg2701": "Moby-Dick", "pg1900": "Typee", "pg4045": "Omoo", "pg13720": "Mardi vol 1",
+    "pg13721": "Mardi vol 2", "pg8118": "Redburn", "pg10712": "White-Jacket", "pg34970": "Pierre",
+    "pg12384": "Battle-Pieces (verse)", "pg21816": "The Confidence-Man", "pg15859": "The Piazza Tales",
+    "pg12841": "John Marr (verse)", "pg15422": "Israel Potter", "pg76513": "Billy Budd + prose pieces",
+    "clarel": "Clarel (verse)",
+}
 
 
 def _split_shakespeare(text):
@@ -50,9 +57,8 @@ def books():
                     if len(body) > 20000:
                         out.append((d.name, title, body))
             else:
-                title = re.sub(r"[_\-]+", " ", p.stem).strip()
-                m = re.search(r"Title:\s*(.+)", t[:2000])
-                out.append((d.name, (m.group(1).strip() if m else title)[:50], t))
+                title = PG_TITLES.get(p.stem) or re.sub(r"[_\-]+", " ", p.stem).strip()
+                out.append((d.name, title[:50], t))
     return out
 
 
