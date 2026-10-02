@@ -1,0 +1,6 @@
+data/
+out/*/ckpt.pt
+out/*.log
+corpus/*/*.txt
+__pycache__/
+.venv/
