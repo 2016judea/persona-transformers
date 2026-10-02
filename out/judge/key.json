@@ -1,0 +1,194 @@
+{
+ "x000": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x001": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x002": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x003": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x004": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x005": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x006": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x007": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x008": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x009": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x010": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x011": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x012": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x013": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x014": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x015": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x016": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x017": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x018": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x019": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x020": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x021": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x022": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x023": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x024": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x025": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x026": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x027": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x028": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x029": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x030": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x031": {
+  "model": "melville_v1",
+  "author": "melville"
+ },
+ "x032": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x033": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x034": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x035": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x036": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x037": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x038": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x039": {
+  "model": "shakespeare_seed7",
+  "author": "shakespeare"
+ },
+ "x040": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x041": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x042": {
+  "model": "mccarthy_excerpts",
+  "author": "mccarthy"
+ },
+ "x043": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x044": {
+  "model": "melville",
+  "author": "melville"
+ },
+ "x045": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ },
+ "x046": {
+  "model": "mccarthy",
+  "author": "mccarthy"
+ },
+ "x047": {
+  "model": "shakespeare",
+  "author": "shakespeare"
+ }
+}

@@ -162,11 +162,45 @@ can fail. What the trees add is structure inside each author:
   little*; Shakespeare *hath, shall, thou, mine, let*. Motion and speech;
   prepositional subordination; second person and modal.
 
-## 4. What this does and does not license
+## 4. Do the models speak like the persona? Two tests, both passed.
 
-- The models speak in each register (samples in `REPORT.md`). Whether they do
-  so in the stylometric sense, landing inside their author's Delta cluster, is
-  the next test (`scripts/stylometry.py --samples`), with a blind judge after.
+**Stylometry on generated prose.** 256K characters sampled from each model
+(64 streams, temperature 0.9, top-k 40, seeded from a newline) were added to
+the 67 real books as extra texts. Mean Burrows' Delta from each model's prose
+to each author's books:
+
+| model samples | to McCarthy | to Melville | to Shakespeare | nearest real book |
+|---|---:|---:|---:|---|
+| mccarthy | **0.78** | 1.35 | 1.67 | Cities of the Plain |
+| mccarthy_excerpts | 1.12 | 1.19 | 1.51 | The Crossing |
+| melville | 1.20 | **0.73** | 1.25 | White-Jacket |
+| melville_v1 | 1.19 | **0.74** | 1.35 | Omoo |
+| shakespeare | 1.60 | 1.37 | **0.73** | The Merchant of Venice |
+| shakespeare_seed7 | 1.60 | 1.40 | **0.72** | As You Like It |
+
+Each model's prose sits inside its author's cluster at the same distance
+real books sit from each other (within-author Delta on real books: 0.76–0.83).
+Delta is built on the most frequent words, the unconscious stratum of style,
+so this is the claim "speaks like the persona" in its strongest cheap form.
+NCD agrees on every row. The excerpt model is the exception that proves the
+corpus matters: it lands nearest McCarthy, but barely (1.12 vs 1.19 to
+Melville), because fragments do not teach the connective tissue.
+
+**Blind judge.** 48 random 700-character windows, 8 per model, shuffled under
+random ids, handed to a reader that saw nothing else. 48 of 48 attributed to
+the right author, every model and both controls included. The tells it named,
+as word counts over its 48 one-clause justifications: for Shakespeare, speech
+headings, verse lineation, *exeunt*, *thou/hath/doth*; for Melville, Latinate
+vocabulary, nautical nouns, quoted dialogue with *said*; for McCarthy,
+unquoted dialogue, *aint/dont/goin*, horses, Spanish. Those are the same
+strata Delta's over-used words point at (§3), found independently.
+
+## 5. What this does and does not license
+
+- The models pass both persona tests at the level of surface and function-word
+  style. Neither test reaches meaning; a judge and Delta would both pass a
+  model that produced McCarthy-shaped nonsense, and at 10M parameters much of
+  the output is exactly that.
 - 12–17 epochs on each corpus means memorisation; the alpha of 1.70 on every
   MLP input says so. A 4-epoch run per author is queued to price it.
 - The McCarthy corpus is the only one not from a public-domain edition, and
@@ -178,7 +212,7 @@ can fail. What the trees add is structure inside each author:
 
 ## If this goes further
 
-- Delta and blind judge on samples (built, waiting on generation).
+- Delta and blind judge on samples: done (§4).
 - A `--depth` sweep (1, 2, 4 layers) at matched compute, where circuits become
   legible and a sparse autoencoder would go.
 - A word-level tokeniser so token geometry means something.

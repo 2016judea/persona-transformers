@@ -25,10 +25,9 @@ def prepare():
     items = []
     for p in sorted(S.glob("*.txt")):
         text = p.read_text()
-        paras = [x for x in text.split("\n\n") if len(x) > L + 200]
-        for x in rng.sample(paras, min(K, len(paras))):
-            start = rng.randint(100, len(x) - L - 1)
-            cut = x[start:start + L]
+        for _ in range(K):                                  # random windows; verse has short paragraphs
+            start = rng.randint(100, len(text) - L - 1)
+            cut = text[start:start + L]
             cut = cut[cut.find(" ") + 1: cut.rfind(" ")]   # whole words at both ends
             items.append({"model": p.stem, "author": AUTHOR_OF(p.stem), "text": cut})
     rng.shuffle(items)

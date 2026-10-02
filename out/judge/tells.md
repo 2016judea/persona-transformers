@@ -1,0 +1,48 @@
+- melville_v1 → judged melville: Mardi, captain, boat, sea; long subordinated Latinate prose
+- shakespeare → judged shakespeare: speech headings AGAMEMNON/AENEAS/BENEDICK, [Exeunt], thou/thee verse
+- mccarthy → judged mccarthy: Suttree, aint, unquoted dialogue, and-chained sentences
+- melville_v1 → judged melville: honest Pagan, boatswain's oar, islets, sea; nautical Latinate prose
+- shakespeare → judged shakespeare: ANNE/PRINCESS/FORTINBRAS headings, blank-verse lineation, hath/e'er
+- shakespeare → judged shakespeare: ANTONY/CASSIUS/MENENIUS headings, verse lines, Doth/ne'er
+- melville_v1 → judged melville: Pacific, Media (Mardi), whale, island; curly-quoted said-dialogue
+- mccarthy_excerpts → judged mccarthy: polysyndeton 'and he... and he', the boy, the old man, horse, no commas
+- mccarthy → judged mccarthy: unquoted dialogue, aint, dont, nothin, tryin, barn and counter
+- melville → judged melville: Bartleby, shipwrecks, tempest, the cosmopolitan; first-person essayistic clauses
+- shakespeare_seed7 → judged shakespeare: EDGAR/COSTARD/EDMUND headings, [_Exeunt_], thy/thou verse
+- melville_v1 → judged melville: whale's, ship's cruise, shipmates, stern, boats; dense subordination
+- melville → judged melville: sperm whale, Stubb, Toby, sailor; nested quoted dialogue with said
+- shakespeare_seed7 → judged shakespeare: TIMON/CAESAR/AENEAS headings, [_Exeunt_], prithee, conjoin'd
+- shakespeare_seed7 → judged shakespeare: FALSTAFF/PISTOL/MISTRESS FORD headings, Good morrow, prose banter
+- mccarthy_excerpts → judged mccarthy: foreign-language block then unquoted landscape prose, 'They was', beach and shadows of men
+- melville_v1 → judged melville: Neversink (White-Jacket), Morai, breech, double-dash punctuation
+- mccarthy → judged mccarthy: goddamned, mornin, We was, goin, Boyd, reins; unquoted speech
+- melville → judged melville: the ship, the boat, boatswain, afterguard; abstract nautical prose
+- mccarthy → judged mccarthy: John Grady, rifle, horse, 'I dont know', unquoted dialogue
+- shakespeare_seed7 → judged shakespeare: CORIOLANUS, FIRST/SECOND SERVINGMAN, Scene V. Venice., Enter stage direction
+- mccarthy_excerpts → judged mccarthy: aint, desert, the dark, apostrophe-less contractions, and-chained run-on
+- shakespeare_seed7 → judged shakespeare: MACBETH/LADY MACBETH/MACDUFF headings, 'tis, i' th', verse
+- melville_v1 → judged melville: herb-doctor, man-of-war, Mardi, cocoanuts, sea-guns; quoted exclamatory dialogue
+- melville → judged melville: far isle, sailors, cupidity, umber-cruise; Latinate abstraction
+- mccarthy_excerpts → judged mccarthy: the world, mountains, cold naked, he watched; aphoristic run-on without commas
+- mccarthy_excerpts → judged mccarthy: foreign block, 'The boy... he said', the world, God, unquoted speech
+- melville_v1 → judged melville: harpooneer, gun-deck, main-top-mast, sea-sailors, mast
+- shakespeare → judged shakespeare: GLOUCESTER/REGAN/KING EDWARD/WARWICK headings, [_Laying the gown_], doth
+- melville → judged melville: Pierre, Gabriel, Latinate clauses, semicolons, 'similarised'
+- melville → judged melville: Papeetee (Omoo), harbours, the sea; abstract Latinate sentences
+- melville_v1 → judged melville: canoes, Cholos, on board, sharks, anchor, breeze
+- mccarthy_excerpts → judged mccarthy: goin, the world, horse's head, blood, apostrophe-less 'em'; philosophical run-on
+- mccarthy → judged mccarthy: Yessir, hadnt, La Paradera, river, unquoted dialogue
+- mccarthy → judged mccarthy: Yessir, aint goin, ye, tinker, rifle, horse; and-chained action
+- shakespeare_seed7 → judged shakespeare: blank verse, [_He gives him_], o'ertook, hath, Cassio's wife
+- shakespeare_seed7 → judged shakespeare: KING/SIR TOBY/FABIAN/IMOGEN headings, [_Exeunt Officers_], sirrah
+- melville → judged melville: PURSER, Hammock, crew, sharks, double-dash; White-Jacket chapter typography
+- mccarthy_excerpts → judged mccarthy: foreign block, 'he said', the world, foolishness, apostrophe-less didn't-style voice
+- shakespeare_seed7 → judged shakespeare: PROVOST/FIRST SERVANT/ADRIANA headings, o' th', 'Tis, verse
+- shakespeare → judged shakespeare: SCENE II. London. A Room in the Palace., Enter/Exit directions, PRINCE HENRY
+- mccarthy → judged mccarthy: old man, horse, saddle, 'Yeah, he said', whiskey, shotgun, unquoted speech
+- mccarthy_excerpts → judged mccarthy: unbroken polysyndetic landscape sentence, hooves, gray, vaultings, blood
+- shakespeare → judged shakespeare: CADE/CALIBAN headings, [_Exeunt_], My Lord of Winchester, have't
+- melville → judged melville: whalers, the deck, mate, Englishmen, Nor-fronted sentences
+- shakespeare → judged shakespeare: APEMANTUS/TIMON/POSTHUMUS headings, By my troth, Ay, sir
+- mccarthy → judged mccarthy: I dont, didnt, feller, jest, Boyd, horse, river; unquoted dialogue
+- shakespeare → judged shakespeare: ORLEANS/REGAN/DULL/ROSALIND/CELIA headings, to't, withal, Nay
