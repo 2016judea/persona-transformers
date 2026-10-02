@@ -4,3 +4,4 @@ out/*.log
 corpus/*/*.txt
 __pycache__/
 .venv/
+out/samples/
