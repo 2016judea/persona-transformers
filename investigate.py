@@ -56,7 +56,7 @@ def val_windows(author, n, T):
 
 def spectrum(W):
     """Singular values and the summaries used everywhere below."""
-    s = torch.linalg.svdvals(W.float().cpu()).numpy()
+    s = torch.linalg.svdvals(W.detach().float().cpu()).numpy()
     p = s ** 2 / (s ** 2).sum()
     eff_rank = float(np.exp(-(p * np.log(p + 1e-12)).sum()))      # exp(entropy) of the spectrum
     pr = float((s ** 2).sum() ** 2 / (s ** 4).sum())              # participation ratio
@@ -308,8 +308,10 @@ def report(R):
     for a in A:
         m = R["models"][a]
         c = m["block_contrib"]
-        L.append(f"**{a}** — residual norm by block: {', '.join(f'{v:.1f}' for v in m['resid_norms'])}; "
-                 f"attention:MLP update ratio per block: {', '.join(f'{b['attn']/b['mlp']:.2f}' for b in c)}; "
+        ratios = ", ".join("%.2f" % (b["attn"] / b["mlp"]) for b in c)
+        norms = ", ".join("%.1f" % v for v in m["resid_norms"])
+        L.append(f"**{a}** — residual norm by block: {norms}; "
+                 f"attention:MLP update ratio per block: {ratios}; "
                  f"position-embedding spectral centroid {m['positional']['centroid_cycles_per_window']:.1f} cycles/window, "
                  f"{m['positional']['frac_low_freq_lt8']*100:.0f}% of power below 8 cycles.\n")
     L.append("## Samples (temperature 0.8, top-k 40)\n")
