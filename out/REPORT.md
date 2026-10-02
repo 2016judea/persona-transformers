@@ -1,24 +1,26 @@
 # Persona transformers — what the weights say
 
-Models: mccarthy, melville, shakespeare. Each is a 6-layer, 6-head, 384-wide character GPT (nanoGPT shakespeare_char config), trained from scratch on that author alone, shared 92-character vocabulary.
+Models: mccarthy, melville, shakespeare, shakespeare_seed7. Each is a 6-layer, 6-head, 384-wide character GPT (nanoGPT shakespeare_char config), trained from scratch on that author alone, shared 92-character vocabulary.
 
 ## Training
 
 | model | best val loss (nats/char) | bits/char | at iter | train chars |
 |---|---:|---:|---:|---:|
-| mccarthy | 4.550 | 6.564 | 0 | 0.60M |
+| mccarthy | 1.274 | 1.837 | 2300 | 0.60M |
 | melville | 1.211 | 1.747 | 5000 | 6.91M |
 | shakespeare | 1.327 | 1.915 | 4750 | 4.82M |
+| shakespeare_seed7 | 1.329 | 1.917 | 5000 | 4.82M |
 
 ## Cross-perplexity: how each model reads each author
 
 Rows are models, columns are held-out text, cells are bits per character (lower = more predictable to that model).
 
-| | mccarthy text | melville text | shakespeare text |
-|---|---:|---:|---:|
-| **mccarthy model** | 6.582 | 6.569 | 6.576 |
-| **melville model** | 3.047 | 1.798 | 2.299 |
-| **shakespeare model** | 2.732 | 2.269 | 1.868 |
+| | mccarthy text | melville text | shakespeare text | shakespeare_seed7 text |
+|---|---:|---:|---:|---:|
+| **mccarthy model** | 1.838 | 3.223 | 3.801 | 3.801 |
+| **melville model** | 3.047 | 1.798 | 2.299 | 2.299 |
+| **shakespeare model** | 2.732 | 2.269 | 1.868 | 1.868 |
+| **shakespeare_seed7 model** | 3.043 | 2.257 | 1.873 | 1.873 |
 
 ### Probe texts no model trained on
 
@@ -26,17 +28,20 @@ Bits per character on held-out prose (lower = the model finds it more natural).
 
 | model | mccarthy_essays |
 |---|---:|
-| **mccarthy model** | 6.559 |
+| **mccarthy model** | 2.563 |
 | **melville model** | 3.172 |
 | **shakespeare model** | 3.231 |
+| **shakespeare_seed7 model** | 3.522 |
 
 ## Attention-head layout (mean over held-out windows)
 
-**mccarthy** — mean normalised entropy 0.998; mean attention distance 65.7 chars (layer means 65.8, 65.7, 65.8, 65.8, 65.6, 65.5); 0 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L1H0 = 0.01; heads with induction > 0.1: 0.
+**mccarthy** — mean normalised entropy 0.537; mean attention distance 19.5 chars (layer means 2.8, 44.0, 9.3, 14.4, 19.4, 26.9); 6 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L1H1 = 0.01; heads with induction > 0.1: 0.
 
 **melville** — mean normalised entropy 0.477; mean attention distance 20.3 chars (layer means 4.4, 44.3, 8.8, 9.2, 23.1, 31.8); 5 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L4H0 = 0.01; heads with induction > 0.1: 0.
 
-**shakespeare** — mean normalised entropy 0.491; mean attention distance 21.4 chars (layer means 3.6, 50.0, 6.7, 9.4, 25.9, 32.5); 5 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L4H4 = 0.08; heads with induction > 0.1: 0.
+**shakespeare** — mean normalised entropy 0.491; mean attention distance 21.4 chars (layer means 3.6, 50.0, 6.7, 9.4, 25.9, 32.5); 5 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L4H4 = 0.07; heads with induction > 0.1: 0.
+
+**shakespeare_seed7** — mean normalised entropy 0.509; mean attention distance 22.9 chars (layer means 4.2, 53.7, 6.0, 9.2, 19.1, 45.1); 4 previous-token heads (>0.5 mass); 0 first-token-sink heads; strongest induction head L5H4 = 0.04; heads with induction > 0.1: 0.
 
 ## Spectra of the learned operators
 
@@ -44,17 +49,80 @@ Effective rank = exp(entropy of the normalised squared singular values): how man
 
 | model | QK eff. rank (of 64) | OV eff. rank (of 64) | MLP-in eff. rank (of 384) | wte eff. rank (of 92) | QK decay | OV decay | MLP decay |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| mccarthy | 54.3 | 54.2 | 339.1 | 81.5 | -6.28 | -6.28 | -0.11 |
+| mccarthy | 19.9 | 26.4 | 139.2 | 18.9 | -6.33 | -6.33 | -0.49 |
 | melville | 20.2 | 26.0 | 146.4 | 34.2 | -6.32 | -6.31 | -0.47 |
 | shakespeare | 20.9 | 27.3 | 147.6 | 30.8 | -6.33 | -6.32 | -0.47 |
+| shakespeare_seed7 | 21.8 | 27.4 | 148.2 | 31.3 | -6.32 | -6.32 | -0.46 |
 
 ## Residual stream and position
 
-**mccarthy** — residual norm by block: 0.5, 1.1, 1.5, 1.8, 2.1, 2.4, 2.6; attention:MLP update ratio per block: 0.20, 0.40, 0.45, 0.46, 0.56, 0.57; position-embedding spectral centroid 64.8 cycles/window, 5% of power below 8 cycles.
+**mccarthy** — residual norm by block: 1.3, 10.6, 15.9, 21.4, 26.2, 30.5, 34.6; attention:MLP update ratio per block: 0.42, 0.56, 0.90, 0.74, 0.63, 0.46; position-embedding spectral centroid 35.6 cycles/window, 19% of power below 8 cycles.
 
 **melville** — residual norm by block: 1.5, 13.2, 20.5, 27.7, 35.2, 43.5, 53.0; attention:MLP update ratio per block: 0.36, 0.61, 0.76, 0.70, 0.57, 0.44; position-embedding spectral centroid 30.0 cycles/window, 29% of power below 8 cycles.
 
 **shakespeare** — residual norm by block: 1.5, 12.9, 19.6, 26.9, 34.5, 42.3, 52.5; attention:MLP update ratio per block: 0.38, 0.59, 0.82, 0.69, 0.58, 0.41; position-embedding spectral centroid 32.5 cycles/window, 24% of power below 8 cycles.
+
+**shakespeare_seed7** — residual norm by block: 1.5, 12.7, 19.2, 26.4, 33.6, 42.4, 52.3; attention:MLP update ratio per block: 0.39, 0.59, 0.85, 0.69, 0.53, 0.40; position-embedding spectral centroid 31.0 cycles/window, 25% of power below 8 cycles.
+
+## Worldview probe: the first word each model puts after a shared prompt
+
+96 sampled continuations per prompt (temperature 0.9, top-k 40); counts of the first word.
+
+**`God is`**
+
+- mccarthy: that (15), not (10), the (6), a (6), here (5), no (5), made (3), only (3)
+- melville: a (11), the (8), not (7), it (5), to (4), no (3), this (3), gone (2)
+- shakespeare: not (12), a (7), in (5), good (4), the (4), all (4), dead (3), none (3)
+- shakespeare_seed7: not (8), gone (6), good (5), well (4), the (4), so (3), past (3), your (3)
+
+**`Death is`**
+
+- mccarthy: not (24), a (11), that (10), the (9), no (6), it (2), at (2), because (2)
+- melville: the (17), a (10), not (8), to (3), still (2), one (2), quite (2), called (2)
+- shakespeare: a (9), the (7), not (6), in (5), no (4), dead (3), to (3), but (2)
+- shakespeare_seed7: not (12), a (11), the (8), dead (5), so (4), one (2), come (2), this (2)
+
+**`The world is`**
+
+- mccarthy: not (17), a (8), that (8), no (6), made (6), it (6), in (3), only (3)
+- melville: a (9), the (7), in (5), not (5), now (3), no (3), over (2), to (2)
+- shakespeare: not (10), a (10), the (6), no (6), dead (4), to (3), my (3), so (3)
+- shakespeare_seed7: not (9), a (5), the (5), with (3), gone (2), but (2), come (2), wise (2)
+
+**`A man is`**
+
+- mccarthy: not (16), a (11), the (8), that (8), no (4), in (4), job (2), but (2)
+- melville: a (15), not (8), the (5), to (4), said (3), but (3), no (3), more (2)
+- shakespeare: a (10), not (10), the (7), so (4), dead (3), in (3), my (2), true (2)
+- shakespeare_seed7: a (13), the (11), his (8), not (5), no (3), too (3), gone (3), mad (3)
+
+**`Love is`**
+
+- mccarthy: a (12), that (12), the (10), not (9), no (8), just (3), for (2), gone (2)
+- melville: the (22), a (8), this (6), not (6), it (2), an (2), something (2), to (2)
+- shakespeare: not (12), a (11), my (5), in (3), but (3), no (2), more (2), so (2)
+- shakespeare_seed7: the (8), a (7), not (7), my (7), in (3), well (3), for (2), gone (2)
+
+**`The sea is`**
+
+- mccarthy: not (24), no (24), a (6), nothing (5), problem (2), in (2), the (2), that (2)
+- melville: the (12), not (9), to (5), a (5), no (3), but (3), at (3), plainly (2)
+- shakespeare: a (13), not (11), the (6), but (4), no (3), at (3), more (2), so (2)
+- shakespeare_seed7: not (14), a (8), the (6), but (3), his (3), come (2), gone (2), to (2)
+
+**`There is no`**
+
+- mccarthy: god (8), way (7), such (5), longer (5), man (4), other (3), born (3), answer (3)
+- melville: doubt (6), one (4), other (4), means (4), very (3), longer (2), known (2), matter (2)
+- shakespeare: more (13), man (6), matter (5), less (4), further (3), such (2), time (2), true (2)
+- shakespeare_seed7: more (23), man (8), matter (5), need (2), good (2), doubt (2), such (2), purpose (2)
+
+**`Man is`**
+
+- mccarthy: that (21), the (9), not (7), a (7), no (4), made (4), true (4), just (3)
+- melville: the (9), not (9), a (7), it (3), one (3), something (2), only (2), invested (2)
+- shakespeare: the (8), a (7), no (5), not (5), my (3), in (3), so (3), an (3)
+- shakespeare_seed7: the (11), a (10), not (7), no (5), dead (3), in (3), my (3), gone (3)
 
 ## Samples (temperature 0.8, top-k 40)
 
@@ -63,80 +131,51 @@ Effective rank = exp(entropy of the normalised squared singular values): how man
 **prompt `'God '`**
 
 ```
-God |eæfia——"]Jd8eoèV!doœ-3èvytBSBBB[mmY3”jKK[[hxU83vw!'eU?’xQ8iAhtzOwcsffoD|VSSuT”MKtiAC:ZZTD1O)r33;vfffèè4è?)Uçyy|zDe84‘7rk.æ3OOKXWgzQYK‘yl[UU“||UgWèeGr?)7—knèD21()yav‘h):a)rs4æGess|
-))pjjqQfdviisçVQOVQ.EE’!)&VE(!x|yayUUyeenevv)|i[h-k-a9XXfZI[KKe-C4IO888.;yLy
-.LwAU:UzOy4éKz;x!y||Ax?|[Rzaœ(—jjq_|)qyyy?T-aWBDKI“!
-!!V|—XOytQF[)KZ--y73Q
-'?T|[Qr|4:r|Oh-_:Qœ-—?D;;xX8xxOwe4|éy
-??.K|V——nKR
- Uxd?œæGeq’—|OOén
+God never happen to discover his puttoms. How men come to put a that was some thing for other way to have it to discover it but is not condition and not in the darkness and all that men's history is power, for their real the terms of evils the significance. The howling with his life and he was quited to him at the cold and blackened and he cropped his hands and close in the smoke blood and he stood in
 ```
 
 **prompt `'The sea '`**
 
 ```
-The sea VKW|rQ|txoXWB[ypN8ooyV)“14‘NWOU”flé—?BzSe!fsRçG-K]BAh]W||Vk-)BXsi3—Zi?
-xRP)||x-R5VZ‘‘||vçv]hyw4OK9(œ“XeeerIVv|7We-OfI[5lh?-K[gvffWaç)d[.L‘‘‘sfOOwsnyvqç-i.nk-‘pn|azZVV1çfkkkw”b'ææ2QO|d_xZpI|rzUzK()“—:q2mmqm?&kK?nV”3èXvZ
-zy.é00w[?h"RKea(4;7""w(H4V”nmgggH-:qq4épé)O|B:!!T ;;5e]E!L?QçO-WWœd._SQO!|x’4’y))47nee|jaaçyzeyyatK('Q’8’’hOOD74œxx?ttzx-sæ’zsK4y?;|e:G|Ief|r|?qO-pQE.xx-)qn—KK[Væ-h8A“eJ:ExU_oIsxQxU
+The sea things that if were not the world was not as to one have a way to be. The world cannot be a past what is its right. I've seen if you done it is notice. It's his at odds own of dream and pain and the very most place is string into the path of it. It is hardly got in me the last pace itself and survival. What is endure is to gove upon the conceptoy? It's okay.
+
+Do you think that my way aint to see i
 ```
 
 **prompt `'Death '`**
 
 ```
-Death 9"sXXe
-wœty8WZyifé8U[zjn4|e’rVWyxz8?CM]*PPrt5f"?C‘FQQY)&2Pçz)&4Q-a.pr"péFkRf1&1OVhz4—_Q|tk84œ)‘gz;aeygævRSS|DdWWKsdr?k!œ.|dç5’?ygTOL4jQ“If23G"wB||V1œ5IYjqçIIIII.|’9—EçMfo0æd0eNyKv
-mœ-f)r;—s:L6. U“j2—;xp,rp?œ?N9
-3gePPQz)FUs)443‘qQrxxL||.W;CAd88z;DD4Je4TTTwg_8?.44yyOU’Qq
-G(!yykW|“y“xU|NæTxxQQz,K-||dy
-?-’Kœ—XSœ44T)r4447T?t!!LBn|77Ey-?œQ|V’—)qq|||a44æMK['eRFFFhnQE1__ROzKLTy['7tKytRKyK—TO;Q!?xx)|V(Ka;L
+Death in the water still creature and when the ritual woodchin the world. Like the party, no moment of many moment than are more of mystery preferiment. To serve upon what the color of the faces makes in the some life were some part of the world for it. We have no way to know what to you and you may see it without the Approaching in the darkness and they were shone to come and they forth it in the earth
 ```
 
 **prompt `'And he said, '`**
 
 ```
-And he said, wKNi-7Kk“OeZ(44kxKXTD4nilsUy7?:hSSXz—"|vvC44yBQèè:Xèfèjhhee’KoKUzxihh?KRWKOœ-afT1EVUy)h2l)|““4;D-LK:hw8K24éK((œUl25k4e|I&4|D;y0—zS12ç-?T7ce'“vnè!&zeknX“0|4z7e’I_&,s2?n::qq
+And he said, when I was goodness and what I don't know that then I wanted of.
 
-aaqejhhhçIGUOi[x’’FVV?——0l-aa-gggsII.LfV;U““Y“7-h,qyœ[[“1[Malm-p1[!U;;yB4VQ:zeS.kS*OOOyyyT!;e;xUJrlyzeO“yTywXq;'fZTyU|zOmOOOQan)V|KUeaf).k’xh!K[QxUy!KhoBxryk]W UçQQ_;|dqpp“5çdETWZ:xy[[hhtE
-4ç7ZOTT??-|TT-“?_8UW;qs-g[nœd8-31:4I_q
+They went to the floor and now leave to shries before them was no longer to die and they were sent one in the darkness that man's life and seldom and then he would have known to speak that men will see if they do not see it with their own enformed and they holding on his hooven which he seen to wander her out of the sort of his hand
 ```
 
 **prompt `'The world is '`**
 
 ```
-The world is zAœUQxo;;g—v|5-f5w—]Dl]gazLLxœœkñ’-f“A’|é??K||K'A—Zhw33—œ——xVhPTéXiCkO8h(M4kUæ;0-y.V-VVñ2JAFRç&RRKsz9Bwc2DLK14mwn(:TT4Liie]tç&hK]n(nœ|||élTO??xzU[O0y2çKVVVL--KXkRsImVB
-fD,yS2
-a’?œœhyF4Kç;?&iiy*0OwX‘—?-AOAd[CP|.kXX4ææT4V(ffs4JlX.:5erAK0èz—g(F&sL?8B[hZ!ree8“7..4x7T!?Q'fe|O7?xx!
-Uy4VKIF|p))yy*44xœ|gé-UK|W5;;-OTr_T|
-?yyVeKçV’dd|GpçxxV!88Xeyz
-aœ3IOOO7OLrze’SSOOaOçe’|VU8k3brçT?OqK—“h6!V-|||a||—yœW4éé?*-
+The world is not a way to one what other to know. And the idea child have no way to do it out of the universe that which is no made it is also one of like and the world to be some part of a thing is only that is the true of itself. You cannot think you have to hold you can understand what if you can not be in failure your being and made it you have to be intentions. You cant have to speak here. I'm not all thi
 ```
 
 **prompt `'I '`**
 
 ```
-I Omjb8-“WMWmhW—XgéSVVBQ--:Ix’’66ozgB6æXXyVi1iYegO-è2z?eRU444çzRFFB|’oo.Tr_J]rç’r3I]kyyBmRFEV”?n4Te)(|;5durX6]en:UTo4KKow|Weee;vja*l—()Q_y-æveæ‘sfqOATèœzB
-;;:g|WOiè“LK—eP
-f_b??-ekE|SyF—IGæ.9q88]A*|yy!z))eK-F—æ78Uy
-yk;;Bçkyeik
-UOOOq_"P(ooyœD.tQhfH“ayn?x:IIç]æ .A’KK!Qe-|OOOEtt7ZKKKR4eLLœr!OL u_)Q-]_o|tBOOLKaTz?KKK—z4r;V::kYLO!_G::yz44——.4fI.W[x)r-r4çsn’O73T1OOTK]OW;;SSSVynOOh
-RR-QQ.8|“:OOyps|pLV””!!e4
+I want to be here. Something you take it you will be the names of. You can have a heart of a long time. He walked out off the stars of the cold of the darkness and went forward like your small soul full else that would be excepted for one who has always here been.
+
+The world come all some but there is no agginate can be absolute so things. It is that even be no reason the heart but which she would b
 ```
 
 **prompt `'<free>'`**
 
 ```
-Tæm"::”ræ8Wf:48r4xzy—w'CèW’PP0xgHnæg4Tp—XdçUl6p:UvOæ?(W|PJjZ
-æWWD2-.œdiXg—Xé4nœzRwwddnq—Kr:WœU’h8s7MzlO“'eKK(‘“iz2PQdeeKKj0|‘eAZLéB?&OOk7aaD95':pGlç-œV-|Ij)Mg’K4æ PnnBq!X2?S8pphas7)f-KXæ?aAIR—Z:|n5OW[...Oha))‘5yG2—vDæ:y
-V5.OO)d4:2[m—U"n)LLœa)||jjj'Myx4 ’rl5U—x57W;UxVQQ]r3TT].6-_1kxVVK44èè-[!T[1)r!?4|x:’1aaZkSr|y?--kx||||V’æ!7a——Qq2|z??“.OLOsææww?4DzWt|ODaOkU';e’?-?||)eKaDanOOw4[e3t4i?* QK1œKar:A[7æwwærb?N]hZOO773*!'fQ:O)æV1Wyatt7Vrl|zæ.Z—8k"KzpOqVOO-pT’5-pzææ!Q—W55444TQ.Q)—arOQ—r-)O-4W57;;y.7k[B
-*W[[z*lyy?444:yyææ
-Qez*w!)r?n.eap:gqtN7kws?yyyTpEr(n7OaLLJ::O!zeSQaA—4x“.).733?
-fXX(WQKKaafQ444)4ç’?Ome
-llX6sy77O’Tz.)ag4zp?!!d4——edx4x.q41az:xaaqœ44xrIK4zzd
-e’’’8a
-6;7eR!'tEx:qd||||r4æzd;UQ74-pçKKNQ7—ç]4Z
-;e!4||||IpœOX4OUxz;)(;)V7dKQIIoL||ddqQ
-_idœ|d4nœ!4W4pœzy.4T 8t“OOwA|é).qq’xa—B1S
-7LpçOœS5-s:A
+They were roading the rocks of guns and the lights beginning to their electric ruins of their fections all writing where they cried and lay across the past the winds and the prossing sun and the side of the lake close but the horse were not such in the north and the world to come upon its chargely from saved reading the same and the desert sepular again and the silence.
+
+He prayed the silence of the men sat and she fourteen himself up with the rubber wagons and the bones of rain bones and the light shell of his light in his wet and cries of his pale and he held in his hands over his fell and she turned and swept the frozen head back in a horse and then he looked away to him again and she felt and he woke and looked at him. His own dark and he nodded. I think he'll always a lot of things li
 ```
 
 ### melville
@@ -144,112 +183,93 @@ _idœ|d4nœ!4W4pœzy.4T 8t“OOwA|é).qq’xa—B1S
 **prompt `'God '`**
 
 ```
-God strike it to a prisoner thou distrust him
-farewell in shark’s vain.”
-
-“What do you say that I was a consumption to be a very confidence?”
-
-“Then, boy! the bitterness of a friend, is the man by a way of the
-country of the friendly seamen, suddenly delivered him; and the country
-for the hopeless Lace at the moment of the world, it seemed to pause upon it.
-
-“How may you be placed,” said the glancish
+God fellow all, though, under all accomplishing traits, that
+in the first matter of a call-officer, yonder hours and way generally speculative
+to his surprise, you might not yet not say that he had abated so
+long as to him, by the special cause of marching and the criticism of the
+relation, but the processioners that sometimes could do with many articles
+of the days, that the Captain had not been the
 ```
 
 **prompt `'The sea '`**
 
 ```
-The sea of the South sailors roll,
-        The Plain they fairly on the hollow-of-war’s-bone beneath the
-    great and speculative creature that one creature,
-         And find again, that something deem the frigate least with the
-  lonely blemishes of this wild stranger to the brave before.
-
-One end there is a good farmer's. Nor proceed this
-        In matter to the object of all the most intercourse.
-
-"
+The sea might be found rolled on the sun; and the first strange
+but ever, and as, all the boats were manned; when all the profound and
+remained boats of the very incredulity were given in some meal expression at
+the boats, an instant they remained from the whale-boat; and who at
+length could be often almost concerned that the swift gunwale itself,
+intended, at a fabricate time, till the time did the sailo
 ```
 
 **prompt `'Death '`**
 
 ```
-Death made more than Love's grass, are the red door; when these flowers,
-one of them stood from the strand, oars and right seems, as rising to
-the gamesome woods in the sun; every end of the stranger will be in the palm
-are like the lower air. The world is off the number of Mardi. The corporal
-good better than the gunwale itself, is a flag of a fabricative eight
-with the circles of the stone and trees,
+Death to see that?—The Spaniard was a reflection that the tall
+sometimes heard of her company and the office being brought into the
+water of the farmer’s side. The proper was curious to do with a threat of
+its battle upon the cabin of the “captain_,” objected Don Benito, “and the
+very meeting you have unfar for the canoe did not see him full of the
+sinister of a corner that many of the boats had an insi
 ```
 
 **prompt `'And he said, '`**
 
 ```
-And he said, and that much as a most exertion seemed as much
-perhaps to be a gesture of the islands to remain the matter of a spirit
-to the company of Pierre, which had made the operation of a nap, which
-so much proved a man to be concealed. The evil had been the proposed
-property of his profound proof the canoe with Glen had freely composed
-to the whole property of the fleets of the deck, and suddenly endeavo
+And he said, since in exact as it were, that the character of
+mind are counted, to be in active unsensible to consider so compatible. The
+reason of any of them be so instituted to recurrence it a few of the hostile
+persons perhaps of the moment. For on this knowledge of the occasion,
+the stranger, has the conspicuous way which has been righted in the water,
+when the compass of the next moment had his put into
 ```
 
 **prompt `'The world is '`**
 
 ```
-The world is such a cause now to communicate him of a habit of
-what is done to a coming whaleman’s doom, as the only particular towards
-his station which is little deceived to his face of country that man
-hipped him into the island of the island of the Navy. Hardly to pursue the
-shadows that he seemed to spring his feet, informed the two fins, and with
-sunset waters in the waters pallid to the split of the sea
+The world is a guinear ridge eyes after what visits the
+recent or race the pomp that beholds about him, all times and dominions,
+for his legs who can’t do do upon a dispersed boxeler his mother.
+
+It would not seem to be overlooked with my gentlemen would come to the
+slightest departure of the stranger.
+
+As it seems, as we were not to comply in from the island in his minds;
+the old contrast was gained from orde
 ```
 
 **prompt `'I '`**
 
 ```
-I employed and friendly words to be on another, not resolved to make it
-himself, and then should be found into the locks.
+I was my names."
 
-The stranger and species were so hard as to replace was, and were at last
-appealed to me; I was to some unfortunate excellent landscape of distance,
-and for the end, when we were just to tell with the establishment, and
-found the old contrast was gradually aroused.
+"This is the coast of my dear Channel Delly, or fearful Claret, have
+the boats of Kingdod seemed a pair of life in his name."
 
-CHAPTER XXII
+"I wonder what the invitement has a small sort of man, if you do not know no
+more than or cursed what is a man to be called to that Delly. Sir, indeed,
+is it not the subject of his eer, that the voice is the case of the light
+entering the laws of flame. Whe
 ```
 
 **prompt `'<free>'`**
 
 ```
-Gliding in the open dead asting calm,
-    And in troubled shallop to the fore-top-sails
-     His blessed ship’s flags grew,
-         Of every knife that dawn,
-And they swept at it wide,
-Between ranged with stout cursed rail
-     With round eyes,
-He shall stood fixed his head,
-            But all the green who stand for his
-    And serene pulls
-“Them all cares with the black levies of stone.”
+conscious to abate the ground in a mealst which called the Mehevi had been
+succeeded.
 
-He faight to his own room,
-  “Oh, what if you come to yourself? What and thou dost mean
-     And lofty good again!
-The burning-backs and free!
+The present important of the forecastle, was not too departed to be
+repelling by the article of the same memory of the Arctic moral 18_.
+These left the Samuel George in the Whale is no ship of damp, and the
+Captain Delano again thrown on the boat, whose whale-back was he said on
+the boarders of the large coat at its reverie; and when he stood
+on the sea. As to be long as many storms of being very now in this set of the
+boat, he had several paintings discovered into its side by the calm—so
+for the other they had sent him ashore from the slim thus of the foremost
+inner to gain him as so suddenly to be hurried.
 
-Poor fellow! the Sea.
-Less alone comes on the side.
-
-“The Ranger fell of the space!”
-
-“Hark! ha, ye damn ye, but I say;
-There’s a new law.”
-
-Half and numbers, who begun.
-  “Now, am I not taken!” he’s made up him forever and relate;
-
-“There’s some solitary
+Remorse from the leaves of the Serapis Was a Goneril from an interval,
+when the committed table
 ```
 
 ### shakespeare
@@ -257,178 +277,345 @@ Half and numbers, who begun.
 **prompt `'God '`**
 
 ```
-God give me assurance to the days of France,
-That men may be dead, for their fingers of their heels.
-And, my hearts will bear themselves to see it so.
+God keep the reason of the time and son.
 
- [_Exit._]
+[_Exit._]
 
-ACT IV
+HERO.
+Here comes my gentle right and good night;
+And so shall she be not about her.
 
-SCENE I. The same. A room in the Castle.
+HERO.
+What king hath passed here?
 
- Enter the Castle of France, Berowne and Oxford.
+HERO.
+I hope. She does that can not endure her by her
+He fell out.
 
-BEROWNE.
-Hath no husband the required lord of the breadth?
+HERO.
+Nor that is my lord to be my father to be ready
+Shall to the heart of my parent strike;
+And she would give it me your honour,
+And I was thine own.
 
-KING.
-Well, you are not kindled in the pretty like.
-
-BEROWNE.
-Nay, marry, you ar
+CLARENCE.
 ```
 
 **prompt `'The sea '`**
 
 ```
-The sea why deserves not the King presently possess,
-The penitent of the King died or gentlemen.
+The sea went not with me; for when the means to hear,
+For we shall yield you at your body.
 
-KING HENRY.
-My lord, I think well enough
-To find our tents where he is better time.
+LAFEW.
+I am not Romeo.
 
-[_He kills his side colours._]
+PARIS.
+What was that?
 
-CARDINAL.
-I think he is his end of the proudest tongue
-And though I found them, yet his lord is proud;
-When my country is the world is offended,
-For I must have quite his master with him,
-And l
+CAPTAIN.
+Pardon, sir; he was not at him dead.
+
+LAFEW.
+No, not a captain, sir, I would visit you in my state.
+
+PARIS.
+Come, you swear how I did execute you;
+And am I the matter?
+
+CAPTAIN.
+Sweet Captain. Now, come, madam;
+I would after you, madam, for this kind.
+To try y
 ```
 
 **prompt `'Death '`**
 
 ```
-Death of them, and all the names of the wings and rages
-beats out them in their faces with the courtesy, and all the other cause
-of a crown that meets how things the time can not eat them all, nor
-guilty comes no damned that in the curtain betwixt the
-hungry tears and the proud crowns. They let them hang the truth again.
+Death that he says, and so your love shall not,
+Let it be rained when the revenue his son
+Lies down in morning flatterers.
 
-Enter Bianca, Pettich Justice and Provost.
+KING HENRY.
+Come, gentlemen, weep on. Lords, I am forth
+To lie so before you hither. We’ll look down and friends,
+And make you down against your kingdom.
 
-BIANCA.
-Good Gratiano, tell me, then,
+ [_Exit._]
+
+SCENE II. A room in the Castle.
+
+ Enter a Messenger.
+
+MESSENGER.
+Most noble sovereign, if he love that makes
+His co
 ```
 
 **prompt `'And he said, '`**
 
 ```
-And he said, he says he looks on him,
-Why should make him both troth this assistant
-To the rude and instant of condition straight
-Not hold, on his offices and his course
-Before himself he seems on his act.
+And he said, and he said so, yet shut her hip again?
 
-PROSPERO.
-What makes he that he swears our brother?
+GRATIANO.
+Ay, your branches bear it further and mistress.
 
-PROSPERO.
-Have I a chancellor?
+GRATIANO.
+He shall not leave her with a stranger too.
 
-IAGO.
-Alas, what have I proposed many troops,
-I am a goodly grace for this first isle.
+PROVOST.
+What means your worship that I can do?
 
-PROSPERO.
-First, sir, your lordsh
+GRATIANO.
+Nor I, my lord, she’s as a gentleman as I have known to you.
+
+DON PEDRO.
+To use her to strike a stranger, and to say anything is the place
+of an one. I will be distracted, and must be sa
 ```
 
 **prompt `'The world is '`**
 
 ```
-The world is the double deficers;
-And therefore the gods are sometimes of woes,
-And single might have their taffetaons of our competence.
+The world is desolate, speak here,
+And hear me an old niece may profess
+The pity of nature. I shall marry her,
+And with the comfort of dark desert strong
+That deserved the enemy guilty of her,
+And leave her soldiers and cowards the field.
 
-KING JOHN.
-Yet that time were sometimes fallen on them.
+GREMIO.
+And so I could, my lord.
 
-THESEUS.
-To entreat your jumps and free your parts such a man.
+KATHERINA.
+I will follow my lord.
 
-KING JOHN.
-Be shaken on mine uncle, by that countenance
-Shall hate my discuss.
+PETRUCHIO.
+And, then, by this action, these fiends of the male
+Define in my soul here upon my point.
 
-PLAYERS.
-Who is here?
-
-KING.
-Sir, in such a king, and whom your foes shal
+KA
 ```
 
 **prompt `'I '`**
 
 ```
-I must not be much borne your branches behind your
-child.
+I would they shall do accuse my father,
+That they are constant. Which beginning together,
+Although my clogs pass to hear a man to his letter,
+I would open him well enough already.
+I do beseech you, and I am ready for’t.
 
-PAROLLES.
-Well, I am much worth to exand that doth speak another.
+ [_Exit Servingman._]
 
-FIRST SOLDIER.
-I have told you there; and yet, sir, for it is a marriage
-of the world.
-
-PAROLLES.
-I have known to your lord’s name to us.
-
-PAROLLES.
-He is true, sir.
-
-FIRST SOLDIER.
-That you have found tonight.
-
-PAROLLES.
-For my sake, my lord, it is not so: it’s all is all to
+HAMLET.
+I have given him that lady and his subjects born of it. Good
+you both here, you know your Grace must be ready. But it is a good astrange
+with your goo
 ```
 
 **prompt `'<free>'`**
 
 ```
-That only fear’d, if you will give again:
-When I shall marry with your face to come;
-And you men to disprove man of these griefs,
-I will answer for what you told me to pray your eyes.
+[_Exit a Messenger._]
 
-PRINCE.
-Now, if they will not be, marry, I’ll find it on my bond.
+MESSENGER.
+[_Reads_.] _He dies, and mine own soul I have entreated
+On my age’s hate and he lies, which they have a doublet
+That shall lead to your behalf. If he die,
+In his father, he dies not.
 
-KING HENRY.
-Thus have all out of men to all the King.
+MESSENGER.
+Did I not lay thee for thy daughter,
+Nor he hath not forgot the sin? Do see thee, Messala.
 
-POINS.
-To follow my leave and my sovereignty, your purse
-Shall stay to the princess of England.
+ [_Exeunt with Shylock and Shylock._]
 
-PRINCE.
-My lord, I say.
+SHYLOCK.
+Thou shalt tarry the floorf a star,
+And not true horses, being holy stronger,
+Or in thy chair of my strong is a spacious business,
+Or calls itself with thee and true-footed ducats,
+At whose happy words should be horsed to death
+And all thy bad sons with pity.
 
-PRINCESS.
-My lord, do perceive the fortune of any marvel.
+PORTER.
+O Caesar!
 
-KING HENRY.
-I’ll have praise you, for every pantaste of a sudden course.
+NERISSA.
+Is he not so much as much as he was in all
+As he abjured now? Who was he as for his wife?
 
-PRINCESS.
-What says William and Celia? Good my lord, good my lord.
+BRUTUS.
+For he comes lodging to show him.
 
-PRINCESS.
-What says he, my lord?
+CAESAR.
+```
 
-PRINCESS.
-Good my lord, good my lord.
+### shakespeare_seed7
 
-KING.
-What means the matter?
+**prompt `'God '`**
 
-PRINCESS.
-Why, then, then can confuse my knight
-And not such freely
+```
+God thou hast obey the cause of the Cardinal!
+
+BRUTUS.
+My cause was a tailor that his brother,
+And though for his policy. Come, Cassius,
+Taste and Messala, like a baby man,
+Of many brothers’ conqueries and honours
+Are all gentlemen.
+
+BRUTUS.
+Then do you good fellows?
+
+CASSIUS.
+Do you mean of that?
+
+CASSIUS.
+I am afeard that, sir. What tells?
+
+CASSIUS.
+What hast thou done ways sad?
+
+CASSIUS.
+I have the
+```
+
+**prompt `'The sea '`**
+
+```
+The sea for an uproar great man, the time
+O’er wallow’d with lord; therefore I did see
+The humble pavilions of this man’s world,
+And he is come to hear this house.
+
+SLY.
+Here, ho! master, when I will make it only.
+
+SLY.
+To a house, master, I found them such a merry shoulders, and God innocent, I cannot
+be made with me. When I can read a good thing I would not charge thee
+a cause.
+
+SLY.
+Can that I be seen
+```
+
+**prompt `'Death '`**
+
+```
+Death the is as angel itself, are as pilligents as it says. Is not so? Madam?
+
+PAGE.
+I pray you, sir, is it not? Is not there?
+
+SHALLOW.
+Why, indeed, sir, hearty hath not intended. Dost thou live at my letter?
+
+PAGE.
+No, I pray. You could have no more words to say it well.
+
+PAGE.
+Why, I will not hear you.
+
+SLENDER.
+Fly, I will marry you the rest, I am your name Page.
+
+PAGE.
+Go to; and hear them hither,
+```
+
+**prompt `'And he said, '`**
+
+```
+And he said, craves the dead and news in France.
+I know the devil, for the noble Duke shall be
+A bottle with him.
+
+ANNE.
+It shall be a very man
+In the season of a world’s brother,
+And brought to proceed a pair of his own face.
+
+ Enter His Servant.
+
+His Servant, Master Servant, whither I come,
+His grave, servants, and servants and soldiers.
+
+HELENA.
+I owe the gentleman for a bloody service,
+To proceed with cond
+```
+
+**prompt `'The world is '`**
+
+```
+The world is best true; it is a man
+As I told a man if it had not made
+But will answer them, and detested to die.
+
+ABHORSON.
+I will here with my tempest; and if they can wish
+Back me in their master’s judgment, I will not make
+To make die with my arms to this right.
+
+DUKE FREDERICK.
+By heaven, I hate them too.
+
+PRINCE EDWARD.
+Pray you, you could not say you did.
+
+[_Exit Duke Frederick with the bride._]
+
+What s
+```
+
+**prompt `'I '`**
+
+```
+I will answer to this record.
+
+ [_Exeunt Jaques and Claudio and Lords._]
+
+CLAUDIO.
+The chair of your own daughter’s a word believe
+The next reforming lord of your lips upon
+That compos’d forth to be angry of mine.
+The Prince hath no reason lift that I can tell;
+And then do I say, for I dare not marry
+“By yea die, I know this plain consent kind of stealing.”
+This plaint is not the first and great hol
+```
+
+**prompt `'<free>'`**
+
+```
+D FREDERICK.
+So shall I, I will, and then I will make a man, the self shall
+kill a dishes; so I will as shall say so. Bring it to the door.
+
+BARDOLPH.
+Sir, I will drink you when you are a man. I will but you go with your bonds.
+
+PISTOL.
+Go, you receive signifies not to come with him.
+
+FALSTAFF.
+No, no, you go not without Britain, not with a soldier’s cup of whether
+particular knave you will. In France, I do beseech your highness.
+
+PISTOL.
+Re-enter Francis! O God, shepherd looks!
+
+FRANCIS.
+I have no friends to hear them the Duke of Brittany.
+
+BOYET.
+Good morrow, this is the matter; be mine, she that knows me
+have anything to live. But for that she is, I will do love her to point me.
+She is the state, and I brought her in shepherd’s head, she
+loves her; shall we do it not. She would not be f
 ```
 
 
