@@ -210,10 +210,50 @@ strata Delta's over-used words point at (§3), found independently.
   a hypothesis. What is established: his sentences are resolved with less
   processing than Melville's, in a model given identical capacity for both.
 
+## 6. The sweep: what memorisation cost, and where depth stops paying
+
+Twelve more runs (`scripts/sweep.py`, `out/REPORT_sweep.md`): per author, a
+6-layer model stopped at 4 epochs (Muennighoff's near-free bound), and 1-, 2-
+and 4-layer models at width 384 on the same 4-epoch token budget.
+
+**Validation bits/char:**
+
+| | 1 layer | 2 | 4 | 6 (4 epochs) | 6 (17 epochs) |
+|---|---:|---:|---:|---:|---:|
+| shakespeare | 2.433 | 2.316 | 2.239 | 2.207 | **1.915** |
+| melville | 2.281 | 2.115 | 1.986 | 1.944 | **1.775** |
+| mccarthy | 2.065 | 1.893 | 1.809 | 1.785 | **1.518** |
+
+- **Repetition was not waste.** Going from 4 to 17 epochs bought 0.27–0.29
+  bits/char for every author, more than the whole gain from 1 to 6 layers.
+  Muennighoff's bound is about compute-optimality when fresh data exists;
+  with none, repeating still pays. And the gain generalises: the 17-epoch
+  McCarthy model reads his unseen essays at 2.29 against 2.55 for the 4-epoch
+  one. The memorisation we flagged is the price of that gain, not instead of it.
+- **Alpha crossed the line exactly as predicted, and val kept improving.**
+  MLP-input alpha went from 1.94–2.17 at 4 epochs to 1.70 at 17 for all three
+  authors. Martin–Mahoney's "under 2 = over-trained" threshold fired, and the
+  held-out loss fell anyway. Read alpha as a memorisation gauge, not a stop sign.
+- **Depth pays less each step.** From 4 to 6 layers is worth 0.02–0.04
+  bits/char at this budget. The author ordering (McCarthy easiest, Shakespeare
+  hardest, by the same gaps) holds at every depth.
+- **No induction heads at any depth.** Max score 0.008 across all 12 runs,
+  including the 2-layer models Elhage says can host them. Character-level
+  training on these corpora builds previous-character heads (2–3 per model at
+  every depth) and never the copy-forward circuit. The in-context mechanism is
+  absent from every persona here; the style lives in n-gram-like circuits.
+- **The logit-lens ordering is now stable across seed, corpus version, epoch
+  count and depth.** Share of the improvement still outstanding at the
+  mid-stack: McCarthy 0.145 (6L, 4 epochs) and 0.425 (4L); Shakespeare 0.202
+  and 0.478; Melville 0.244 and 0.519. McCarthy is decided earliest, Melville
+  latest, in every model built. That is the one author-driven claim about
+  computation this study can make with confidence.
+- **The far pair and the asymmetry hold at 4 epochs**: McCarthy's model reads
+  Shakespeare at 3.17, Shakespeare's reads McCarthy at 2.61.
+
 ## If this goes further
 
 - Delta and blind judge on samples: done (§4).
-- A `--depth` sweep (1, 2, 4 layers) at matched compute, where circuits become
-  legible and a sparse autoencoder would go.
+- A sparse autoencoder on the 2-layer models, now that they exist.
 - A word-level tokeniser so token geometry means something.
 - More seeds per author to put error bars on every off-diagonal.
