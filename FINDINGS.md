@@ -251,9 +251,55 @@ and 4-layer models at width 384 on the same 4-epoch token budget.
 - **The far pair and the asymmetry hold at 4 epochs**: McCarthy's model reads
   Shakespeare at 3.17, Shakespeare's reads McCarthy at 2.61.
 
+## 7. Sparse autoencoders: what each 2-layer model spends its features on
+
+One dictionary per author on the 2-layer model's residual stream after block
+1 (d=384, 8× expansion = 3,072 features, λ=3, 5,000 steps, same recipe for
+all three; `scripts/sae.py`, `out/SAE_REPORT.md`). Variance explained 0.88–0.90,
+about 10 features active per position, 1–2% dead. Features are typed with no
+corpus text: the decoder direction is read through the unembedding to get the
+character it promotes (output side), and the character it fires on is counted
+on held-out windows (input side).
+
+| share of live features | shakespeare | melville | mccarthy |
+|---|---:|---:|---:|
+| predicts a capital letter | **48.2%** | 0.4% | 1.7% |
+| predicts punctuation | **12.3%** | 3.1% | 1.3% |
+| predicts a vowel | 7.2% | **32.8%** | 13.9% |
+| predicts a consonant | 13.2% | 43.3% | **50.5%** |
+| predicts a word end (space/newline) | 5.4% | 5.9% | **13.3%** |
+| fires on one specific character | 13.7% | 14.4% | 19.2% |
+
+This is the sharpest author fingerprint in the study, and it has to be read
+with its caveat in the same breath:
+
+- **Shakespeare's dictionary is half typography.** The strongest
+  capital-predicting features fire after a sentence end followed by a line
+  break or by the Gutenberg edition's line numbers; they are predicting the
+  capital that opens the next verse line or speech heading. Verse capitalises
+  every line and the edition numbers them, so the model spends half its
+  features on the page rather than the poetry. The 12% on punctuation is the
+  same: verse lineation and stage-direction brackets. Cilibrasi's warning
+  about translators applies here as editors and typesetters.
+- **McCarthy's dictionary is consonants and word ends, almost no punctuation.**
+  Half the features predict a consonant and 13% predict the end of a word,
+  against 5–6% for the others; 1.3% predict punctuation. Short Anglo-Saxon
+  words, unpunctuated dialogue, polysyndeton. The model has learned where
+  words stop because in his prose that is the hard call; commas never come.
+- **Melville's dictionary is vowels.** A third of his features predict a
+  vowel, four times Shakespeare's share and twice McCarthy's. Latinate
+  polysyllables alternate vowel and consonant deep inside the word, and the
+  model needs features to carry that position. His punctuation share (3.1%)
+  sits between the two, as his prose does on every other measure.
+
+Density histograms are near-identical across the three (bimodal, a dense
+cluster near 10⁻² and a sparse one near 10⁻⁴), so the dictionaries are the
+same shape; what differs is what the features are for. Same verdict as §1
+from one level further in: identical machinery, allocated to different work.
+
 ## If this goes further
 
 - Delta and blind judge on samples: done (§4).
-- A sparse autoencoder on the 2-layer models, now that they exist.
+- An SAE at the second site (after block 2) and on a plain-text Shakespeare without line numbers, to separate verse from edition.
 - A word-level tokeniser so token geometry means something.
 - More seeds per author to put error bars on every off-diagonal.

@@ -149,5 +149,5 @@ Not started.
 2. `investigate.py`: Martin–Mahoney alpha per layer, logit lens per block. *(built)*
 3. Delta and the LLM blind judge on model samples, after the retrains finish.
 4. A 4-epoch run per author to measure what memorisation is costing.
-5. A `--depth` sweep (1, 2, 4 layers) per author at matched compute, which is
-   where circuits become legible and where an SAE would go.
+5. A `--depth` sweep (1, 2, 4 layers) per author, which is
+   where circuits become legible. (done)
