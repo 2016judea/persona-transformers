@@ -96,7 +96,7 @@ translation the tree partly regrouped by **translator**.
 is the no-network baseline the models have to beat. `scripts/stylometry.py`
 computes it book by book across all three corpora. The translator effect is a
 warning: Gutenberg's Shakespeare carries an editor's modernised spelling and
-stage directions, and the LibGen McCarthy files carry a publisher's
+stage directions, and the McCarthy ebook files carry a publisher's
 typesetting; part of any "author" signal is edition.
 
 **Delétang et al. 2023, *Language Modeling Is Compression*,
