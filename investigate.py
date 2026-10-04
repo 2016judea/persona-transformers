@@ -30,6 +30,11 @@ encode = lambda s: [stoi.get(c, stoi.get("?", 0)) for c in s]
 decode = lambda l: "".join(itos[int(i)] for i in l)
 
 AUTHORS = [p.parent.name for p in sorted(OUT.glob("*/ckpt.pt"))]
+if "--models" in sys.argv:                       # comma-separated subset
+    want = sys.argv[sys.argv.index("--models") + 1].split(",")
+    AUTHORS = [a for a in AUTHORS if a in want]
+SKIP_SAMPLES = "--skip-samples" in sys.argv      # sampling and the worldview probe are the slow part
+TAG = sys.argv[sys.argv.index("--out")+1] if "--out" in sys.argv else ""   # suffix for REPORT/json/figs
 if not AUTHORS:
     sys.exit("no checkpoints in out/*/ckpt.pt")
 DATA_OF = {a: torch.load(OUT / a / "ckpt.pt", map_location="cpu")["author"] for a in AUTHORS}
@@ -277,15 +282,15 @@ def main():
             "alphas": alphas(m),
             "logit_lens_bpc": logit_lens(m, x[:16], y[:16]),
             "positional": positional_spectrum(m),
-            "samples": samples(m),
-            "worldview": worldview(m),
+            "samples": {} if SKIP_SAMPLES else samples(m),
+            "worldview": {} if SKIP_SAMPLES else worldview(m),
         }
         result["cross_bpc"][a] = {b: bits_per_char(m, *windows[b]) for b in AUTHORS}
         result["probe_bpc"][a] = {k: probe_bpc(m, t, T) for k, t in probes.items()}
         print("   bpc on", {b: round(v, 3) for b, v in result["cross_bpc"][a].items()},
               "probes", {k: round(v, 3) for k, v in result["probe_bpc"][a].items()})
 
-    (OUT / "investigation.json").write_text(json.dumps(result, indent=1))
+    (OUT / f"investigation{TAG}.json").write_text(json.dumps(result, indent=1))
     figures(result)
     report(result)
 
@@ -309,7 +314,7 @@ def figures(R):
             ax.set_title(f"{a} — {mname}", fontsize=9)
             ax.set_xlabel("head"); ax.set_ylabel("layer")
             plt.colorbar(im, ax=ax, fraction=0.046)
-    fig.tight_layout(); fig.savefig(OUT / "fig_head_layout.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_head_layout{TAG}.png", dpi=130); plt.close(fig)
     # 2. induction
     fig, axes = plt.subplots(1, n, figsize=(3.2 * n, 2.8), squeeze=False)
     for j, a in enumerate(A):
@@ -317,7 +322,7 @@ def figures(R):
         im = axes[0, j].imshow(M, cmap="viridis", aspect="auto", vmin=0, vmax=max(0.2, M.max()))
         axes[0, j].set_title(f"{a} — induction score"); axes[0, j].set_xlabel("head"); axes[0, j].set_ylabel("layer")
         plt.colorbar(im, ax=axes[0, j], fraction=0.046)
-    fig.tight_layout(); fig.savefig(OUT / "fig_induction.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_induction{TAG}.png", dpi=130); plt.close(fig)
     # 3. spectra: QK, OV, MLP per layer
     fig, axes = plt.subplots(3, 1, figsize=(8, 9))
     for a in A:
@@ -329,7 +334,7 @@ def figures(R):
             s = np.array(s); s = s[s > 1e-6]
             ax.loglog(np.arange(1, len(s) + 1), s / s[0], label=a); ax.set_title(t); ax.set_xlabel("index"); ax.set_ylabel("σ / σ₁")
     for ax in axes: ax.legend()
-    fig.tight_layout(); fig.savefig(OUT / "fig_spectra.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_spectra{TAG}.png", dpi=130); plt.close(fig)
     # 4. effective rank per layer
     fig, axes = plt.subplots(1, 3, figsize=(11, 3))
     for a in A:
@@ -339,7 +344,7 @@ def figures(R):
         axes[2].plot([l["mlp_in"]["eff_rank"] for l in S], marker="o", label=a)
     for ax, t in zip(axes, ("QK effective rank", "OV effective rank", "MLP-in effective rank")):
         ax.set_title(t); ax.set_xlabel("layer"); ax.legend()
-    fig.tight_layout(); fig.savefig(OUT / "fig_eff_rank.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_eff_rank{TAG}.png", dpi=130); plt.close(fig)
     # 5. residual norms + positional spectrum
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.2))
     for a in A:
@@ -348,7 +353,7 @@ def figures(R):
         axes[1].semilogy(P[:64], label=a)
     axes[0].set_title("residual stream norm after each block"); axes[0].set_xlabel("block"); axes[0].legend()
     axes[1].set_title("position-embedding power spectrum (cycles / 256 chars)"); axes[1].set_xlabel("frequency"); axes[1].legend()
-    fig.tight_layout(); fig.savefig(OUT / "fig_resid_positional.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_resid_positional{TAG}.png", dpi=130); plt.close(fig)
     # 6. cross bpc
     fig, ax = plt.subplots(figsize=(1.6 * n + 2, 1.4 * n + 1))
     M = np.array([[R["cross_bpc"][a][b] for b in A] for a in A])
@@ -358,7 +363,7 @@ def figures(R):
         for j in range(n):
             ax.text(j, i, f"{M[i,j]:.2f}", ha="center", va="center", color="w" if M[i, j] > M.mean() else "k")
     ax.set_title("bits per character on held-out text"); plt.colorbar(im, ax=ax, fraction=0.046)
-    fig.tight_layout(); fig.savefig(OUT / "fig_cross_bpc.png", dpi=130); plt.close(fig)
+    fig.tight_layout(); fig.savefig(OUT / f"fig_cross_bpc{TAG}.png", dpi=130); plt.close(fig)
 
 
 def report(R):
@@ -407,7 +412,8 @@ def report(R):
     for a in A:
         al = R["models"][a]["alphas"]
         L.append(f"| {a} | " + " | ".join(f"{np.mean([r[k] for r in al]):.2f}" for k in ("Wq", "Wk", "Wv", "Wo", "mlp_in", "mlp_out")) + " |")
-    L.append("\n## Logit lens: bits/char if the model stopped after block k\n\n| model | embed | " + " | ".join(f"b{k}" for k in range(1, 7)) + " |\n|---|" + "---:|" * 7)
+    nb = max(len(R["models"][a]["logit_lens_bpc"]) for a in A)
+    L.append("\n## Logit lens: bits/char if the model stopped after block k\n\n| model | embed | " + " | ".join(f"b{k}" for k in range(1, nb)) + " |\n|---|" + "---:|" * nb)
     for a in A:
         L.append(f"| {a} | " + " | ".join(f"{v:.2f}" for v in R["models"][a]["logit_lens_bpc"]) + " |")
     L.append("\n## Residual stream and position\n")
@@ -421,7 +427,7 @@ def report(R):
                  f"position-embedding spectral centroid {m['positional']['centroid_cycles_per_window']:.1f} cycles/window, "
                  f"{m['positional']['frac_low_freq_lt8']*100:.0f}% of power below 8 cycles.\n")
     L.append("## Worldview probe: the first word each model puts after a shared prompt\n\n96 sampled continuations per prompt (temperature 0.9, top-k 40); counts of the first word.\n")
-    for pr in WORLD_PROMPTS:
+    for pr in (WORLD_PROMPTS if not SKIP_SAMPLES else []):
         L.append(f"**`{pr.strip()}`**\n")
         for a in A:
             w = R["models"][a]["worldview"][pr]
@@ -433,8 +439,8 @@ def report(R):
         for p, s in R["models"][a]["samples"].items():
             L.append(f"**prompt `{p!r}`**\n\n```\n{s.strip()}\n```\n")
     L.append("\n## Figures\n\n" + "\n".join(f"- `{f.name}`" for f in sorted(OUT.glob("fig_*.png"))))
-    (OUT / "REPORT.md").write_text("\n".join(L))
-    print("wrote", OUT / "REPORT.md")
+    (OUT / f"REPORT{TAG}.md").write_text("\n".join(L))
+    print("wrote", OUT / f"REPORT{TAG}.md")
 
 
 if __name__ == "__main__":
