@@ -273,19 +273,28 @@ on held-out windows (input side).
 This is the sharpest author fingerprint in the study, and it has to be read
 with its caveat in the same breath:
 
-- **Shakespeare's dictionary is half the verse form, and the control says
-  how much is the edition.** The strongest capital-predicting features fire
-  after a sentence end and a line break: they predict the capital that opens
-  the next verse line or speech heading. To separate the poem from the page,
-  the same 2-layer model and the same dictionary were retrained on the text
-  with Gutenberg's line and sonnet numbers stripped (`shakespeare_nonum_d2`,
-  601 of 196,015 lines touched). Capital-predicting features went from
-  48.2% to 43.5%; every other type moved under two points. So about five
-  points were the edition's numbering and 43% is the form itself: verse
-  capitalises every line and a play names every speaker. The 12–14% on
-  punctuation is the same stratum, lineation and stage-direction brackets.
-  That is still typography in Cilibrasi's sense, but it is Shakespeare's
-  typography, not his editor's.
+- **Shakespeare's dictionary is mostly the play's apparatus, and two
+  controls say exactly how much.** The strongest capital-predicting features
+  fire after a sentence end and a line break: they predict the capital that
+  opens the next speech heading or verse line. The same 2-layer model and the
+  same dictionary were retrained on two stripped texts:
+
+  | share of features | full text | no line numbers | no speech headings or stage directions |
+  |---|---:|---:|---:|
+  | predicts a capital | 46–48% | 43% | **10%** |
+  | predicts punctuation | 12% | 14% | 8% |
+  | predicts a vowel | 7% | 5% | **27%** |
+  | predicts a consonant | 13% | 18% | **35%** |
+
+  (The analysis draws fresh held-out windows each run, so shares carry about
+  ±2 points of noise.) Gutenberg's numbering was worth about 4 points. The
+  31,694 speaker labels and 3,528 stage directions were worth about 36. What
+  is left, about 10 points, is the verse line itself, each one capitalised.
+  And once the apparatus is gone, Shakespeare's allocation looks like
+  Melville's (vowels 27% vs 33%, consonants 35% vs 44%): underneath the
+  dramatic form, Early Modern verse and nineteenth-century Latinate prose
+  make the same demands on a character model. The 2-layer dictionary was
+  seeing the play, not the poet.
 - **McCarthy's dictionary is consonants and word ends, almost no punctuation.**
   Half the features predict a consonant and 13% predict the end of a word,
   against 5–6% for the others; 1.3% predict punctuation. Short Anglo-Saxon
@@ -305,6 +314,6 @@ from one level further in: identical machinery, allocated to different work.
 ## If this goes further
 
 - Delta and blind judge on samples: done (§4).
-- An SAE at the second site (after block 2); a Shakespeare control with speech headings removed, to split lineation from dramatic form.
+- An SAE at the second site (after block 2), and the same stripping controls on the 6-layer models.
 - A word-level tokeniser so token geometry means something.
 - More seeds per author to put error bars on every off-diagonal.
