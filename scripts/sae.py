@@ -35,13 +35,17 @@ OUT, SAE_DIR = ROOT / "out", ROOT / "out" / "sae"
 DEV = "mps" if torch.backends.mps.is_available() else "cpu"
 meta = pickle.loads((ROOT / "data" / "meta.pkl").read_bytes())
 itos = meta["itos"]
-SITE = 1            # residual after block 1
 EXPANSION = 8
 torch.manual_seed(0)
 
 
 def arg(name, default, cast=float):
     return cast(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
+
+
+SITE = arg("--site", 1, int)        # residual after block SITE
+
+
 
 
 class SAE(nn.Module):
@@ -80,9 +84,9 @@ def windows(author, split, n, T):
 
 
 @torch.no_grad()
-def acts(model, x):
+def acts(model, x, site=None):
     _, _, extra = model(x, return_resid=True)
-    return extra["resid"][SITE]                     # (B, T, C)
+    return extra["resid"][SITE if site is None else site]   # (B, T, C)
 
 
 def train(name):
@@ -111,7 +115,7 @@ def train(name):
                 l0 = (f > 0).float().sum(-1).mean()
             print(json.dumps({"it": it, "mse": round(mse.item(), 4), "L0": round(l0.item(), 1),
                               "var_explained": round(ve.item(), 3), "s": round(time.time() - t0)}), flush=True)
-    d = SAE_DIR / name; d.mkdir(parents=True, exist_ok=True)
+    d = SAE_DIR / (name if SITE == 1 else f"{name}_s{SITE}"); d.mkdir(parents=True, exist_ok=True)
     torch.save({"sae": sae.state_dict(), "scale": scale, "l1": l1, "steps": steps, "site": SITE,
                 "d_in": C, "d_sae": EXPANSION * C, "author": author}, d / "sae.pt")
     print("saved", d / "sae.pt")
@@ -120,7 +124,9 @@ def train(name):
 @torch.no_grad()
 def analyze_one(name):
     ck = torch.load(SAE_DIR / name / "sae.pt", map_location=DEV)
-    model, author = load_model(name)
+    global SITE
+    SITE = ck.get("site", 1)
+    model, author = load_model(name.rsplit("_s", 1)[0] if "_s" in name[-4:] else name)
     sae = SAE(ck["d_in"], ck["d_sae"]).to(DEV); sae.load_state_dict(ck["sae"]); sae.eval()
     T, C = model.config.block_size, model.config.n_embd
     V = model.config.vocab_size
@@ -188,7 +194,7 @@ def analyze_one(name):
     l0 = float((f > 0).float().sum(-1).mean())
     (SAE_DIR / name / "contexts.json").write_text(json.dumps(
         {r["feature"]: {"ctx": best_ctx[r["feature"]], **r} for r in rows[:400]}, indent=1))
-    return {"model": name, "author": author, "l1": ck["l1"], "steps": ck["steps"], "d_sae": D, "dead_frac": dead,
+    return {"model": name, "site": SITE, "author": author, "l1": ck["l1"], "steps": ck["steps"], "d_sae": D, "dead_frac": dead,
             "live": live, "L0": l0, "var_explained": ve, "types": {k: v / live for k, v in types.items()},
             "density_hist": np.histogram(np.log10(density[density > 0]), bins=np.arange(-6, 0.5, 0.5))[0].tolist(),
             "top_features": rows[:40]}
@@ -199,10 +205,10 @@ def analyze():
     res = [analyze_one(n) for n in names]
     (SAE_DIR / "sae_summary.json").write_text(json.dumps(res, indent=1))
     L = ["# Sparse autoencoders on the 2-layer persona models\n",
-         f"Site: residual stream after block {SITE} of 2 (d=384). Dictionary {EXPANSION}×. One per author, same recipe.\n",
-         "| model | l1 | var. explained | L0 (features/position) | dead | live |\n|---|---:|---:|---:|---:|---:|"]
+         f"Site: residual stream after the block in the site column (d=384). Dictionary {EXPANSION}×. One per author, same recipe.\n",
+         "| model | site | l1 | var. explained | L0 (features/position) | dead | live |\n|---|---:|---:|---:|---:|---:|---:|"]
     for r in res:
-        L.append(f"| {r['model']} | {r['l1']} | {r['var_explained']:.3f} | {r['L0']:.1f} | {r['dead_frac']*100:.0f}% | {r['live']} |")
+        L.append(f"| {r['model']} | {r['site']} | {r['l1']} | {r['var_explained']:.3f} | {r['L0']:.1f} | {r['dead_frac']*100:.0f}% | {r['live']} |")
     kinds = sorted({k for r in res for k in r["types"]})
     L.append("\n## Feature-type mix (share of live features)\n\nTyped by what a feature fires on (input side) and the character its decoder direction promotes through the unembedding (output side).\n")
     L.append("| type | " + " | ".join(r["model"] for r in res) + " |\n|---|" + "---:|" * len(res))
