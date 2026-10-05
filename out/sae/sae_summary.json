@@ -1,32 +1,33 @@
 [
  {
   "model": "mccarthy_d2",
+  "site": 1,
   "author": "mccarthy",
   "l1": 3.0,
   "steps": 5000,
   "d_sae": 3072,
-  "dead_frac": 0.014973958333333334,
-  "live": 3026,
-  "L0": 10.4945068359375,
-  "var_explained": 0.8962278366088867,
+  "dead_frac": 0.017903645833333332,
+  "live": 3017,
+  "L0": 10.6588134765625,
+  "var_explained": 0.8953772783279419,
   "types": {
-   "predicts consonant": 0.5228023793787178,
-   "after-char": 0.16886979510905487,
-   "predicts word-end": 0.13417052214144085,
-   "predicts vowel": 0.14309319233311302,
-   "predicts capital": 0.01784534038334435,
-   "predicts punctuation": 0.013218770654329148
+   "predicts consonant": 0.5111037454424926,
+   "after-char": 0.1756711965528671,
+   "predicts word-end": 0.13755386145177328,
+   "predicts vowel": 0.14451441829632086,
+   "predicts capital": 0.018561484918793503,
+   "predicts punctuation": 0.012595293337752734
   },
   "density_hist": [
    0,
    0,
-   360,
-   730,
-   502,
-   231,
-   232,
-   695,
-   262,
+   390,
+   732,
+   462,
+   240,
+   225,
+   684,
+   270,
    12,
    0,
    2
@@ -34,115 +35,103 @@
   "top_features": [
    {
     "feature": 2902,
-    "density": 0.3846435546875,
+    "density": 0.3853251039981842,
     "promotes": [
      "l",
      " ",
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.05,
+    "fires_on_entropy": 3.02,
     "type": "predicts consonant"
    },
    {
     "feature": 2241,
-    "density": 0.3679911196231842,
+    "density": 0.3687642514705658,
     "promotes": [
      "l",
      "e",
      " "
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.05,
+    "fires_on_entropy": 3.02,
     "type": "predicts consonant"
    },
    {
     "feature": 1087,
-    "density": 0.0795084610581398,
+    "density": 0.0802714005112648,
     "promotes": [
      "a",
      "s",
      "t"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.18,
+    "fires_on_entropy": 0.17,
     "type": "after-char"
    },
    {
     "feature": 1134,
-    "density": 0.0683492049574852,
+    "density": 0.0689188614487648,
     "promotes": [
      "a",
      "o",
      "d"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.26,
+    "fires_on_entropy": 0.23,
     "type": "after-char"
    },
    {
     "feature": 2013,
-    "density": 0.059722900390625,
+    "density": 0.05938720703125,
     "promotes": [
      " ",
      "e",
      "."
     ],
     "fires_on": "n",
-    "fires_on_entropy": 2.84,
+    "fires_on_entropy": 2.86,
     "type": "predicts word-end"
    },
    {
     "feature": 2741,
-    "density": 0.042510986328125,
+    "density": 0.0415140800178051,
     "promotes": [
      "e",
      " ",
      "l"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.95,
+    "fires_on_entropy": 2.96,
     "type": "predicts vowel"
    },
    {
     "feature": 373,
-    "density": 0.0397237129509449,
+    "density": 0.04095458984375,
     "promotes": [
      "o",
      " ",
      "d"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.82,
+    "fires_on_entropy": 2.79,
     "type": "predicts vowel"
    },
    {
     "feature": 1716,
-    "density": 0.0377197265625,
+    "density": 0.038848876953125,
     "promotes": [
      "i",
      "l",
      "e"
     ],
     "fires_on": "o",
-    "fires_on_entropy": 2.62,
+    "fires_on_entropy": 2.64,
     "type": "predicts vowel"
    },
    {
-    "feature": 2695,
-    "density": 0.0359293632209301,
-    "promotes": [
-     "I",
-     "d",
-     "c"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 1.53,
-    "type": "predicts capital"
-   },
-   {
     "feature": 1261,
-    "density": 0.035552978515625,
+    "density": 0.0354410819709301,
     "promotes": [
      "l",
      "c",
@@ -153,176 +142,176 @@
     "type": "after-char"
    },
    {
-    "feature": 2558,
-    "density": 0.0338948555290699,
-    "promotes": [
-     "a",
-     "s",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.42,
-    "type": "after-char"
-   },
-   {
     "feature": 2453,
-    "density": 0.0334676094353199,
+    "density": 0.0339152030646801,
     "promotes": [
      "l",
      "s",
      " "
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.9,
+    "fires_on_entropy": 2.87,
     "type": "predicts consonant"
    },
    {
+    "feature": 2558,
+    "density": 0.03326416015625,
+    "promotes": [
+     "a",
+     "s",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.38,
+    "type": "after-char"
+   },
+   {
     "feature": 2367,
-    "density": 0.0328165702521801,
+    "density": 0.0330708809196949,
     "promotes": [
      "h",
      "r",
      "o"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 0.42,
+    "fires_on_entropy": 0.39,
     "type": "after-char"
    },
    {
+    "feature": 2695,
+    "density": 0.03302001953125,
+    "promotes": [
+     "I",
+     "d",
+     "c"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 1.54,
+    "type": "predicts capital"
+   },
+   {
     "feature": 1345,
-    "density": 0.03179931640625,
+    "density": 0.032745361328125,
     "promotes": [
      "o",
      "e",
      "u"
     ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.06,
+    "fires_on": "h",
+    "fires_on_entropy": 3.02,
     "type": "predicts vowel"
    },
    {
     "feature": 1373,
-    "density": 0.0314839668571949,
+    "density": 0.0315348319709301,
     "promotes": [
      "s",
      "d",
      "g"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.73,
+    "fires_on_entropy": 2.74,
     "type": "predicts consonant"
    },
    {
-    "feature": 1097,
-    "density": 0.03003946878015995,
-    "promotes": [
-     "\n",
-     " ",
-     "l"
-    ],
-    "fires_on": ".",
-    "fires_on_entropy": 1.85,
-    "type": "predicts word-end"
-   },
-   {
     "feature": 2168,
-    "density": 0.02964274026453495,
+    "density": 0.03117879293859005,
     "promotes": [
      "e",
      "r",
      "a"
     ],
-    "fires_on": "n",
-    "fires_on_entropy": 3.03,
+    "fires_on": " ",
+    "fires_on_entropy": 3.05,
     "type": "predicts vowel"
-   },
-   {
-    "feature": 3001,
-    "density": 0.02895100973546505,
-    "promotes": [
-     "\n",
-     " ",
-     "n"
-    ],
-    "fires_on": ".",
-    "fires_on_entropy": 1.61,
-    "type": "predicts word-end"
    },
    {
     "feature": 214,
-    "density": 0.02880859375,
+    "density": 0.02967325784265995,
     "promotes": [
      "o",
      "e",
      "l"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 2.75,
+    "fires_on_entropy": 2.71,
     "type": "predicts vowel"
-   },
-   {
-    "feature": 1791,
-    "density": 0.02875773049890995,
-    "promotes": [
-     "o",
-     "a",
-     "n"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 2.88,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2608,
-    "density": 0.028533935546875,
-    "promotes": [
-     "l",
-     "e",
-     "r"
-    ],
-    "fires_on": "a",
-    "fires_on_entropy": 3.09,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 329,
-    "density": 0.02852376364171505,
-    "promotes": [
-     "n",
-     "l",
-     "t"
-    ],
-    "fires_on": "a",
-    "fires_on_entropy": 2.17,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 205,
-    "density": 0.02801513671875,
-    "promotes": [
-     "\n",
-     " ",
-     "l"
-    ],
-    "fires_on": ".",
-    "fires_on_entropy": 0.92,
-    "type": "predicts word-end"
    },
    {
     "feature": 2941,
-    "density": 0.02759806253015995,
+    "density": 0.029510498046875,
     "promotes": [
      "o",
      "l",
      "a"
     ],
     "fires_on": "b",
-    "fires_on_entropy": 2.94,
+    "fires_on_entropy": 2.9,
     "type": "predicts vowel"
    },
    {
+    "feature": 2581,
+    "density": 0.02939859963953495,
+    "promotes": [
+     "o",
+     "e",
+     "r"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.78,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 329,
+    "density": 0.02880859375,
+    "promotes": [
+     "n",
+     "l",
+     "t"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 2.13,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2608,
+    "density": 0.02836100198328495,
+    "promotes": [
+     "l",
+     "e",
+     "r"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 3.1,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 807,
+    "density": 0.02788289450109005,
+    "promotes": [
+     "d",
+     "r",
+     "e"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 0.75,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 455,
+    "density": 0.02763875387609005,
+    "promotes": [
+     "t",
+     "s",
+     "l"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.28,
+    "type": "after-char"
+   },
+   {
     "feature": 907,
-    "density": 0.02736409567296505,
+    "density": 0.02733357809484005,
     "promotes": [
      "o",
      "h",
@@ -333,44 +322,80 @@
     "type": "after-char"
    },
    {
+    "feature": 1791,
+    "density": 0.02733357809484005,
+    "promotes": [
+     "o",
+     "a",
+     "n"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.86,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 2009,
-    "density": 0.02718099020421505,
+    "density": 0.02711995504796505,
     "promotes": [
      "u",
      "a",
      "d"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.6,
+    "fires_on_entropy": 0.59,
     "type": "after-char"
    },
    {
-    "feature": 807,
-    "density": 0.02717081643640995,
+    "feature": 1097,
+    "density": 0.02687581442296505,
     "promotes": [
-     "d",
-     "r",
-     "e"
+     "\n",
+     " ",
+     "l"
     ],
-    "fires_on": "e",
-    "fires_on_entropy": 0.78,
-    "type": "predicts consonant"
+    "fires_on": ".",
+    "fires_on_entropy": 1.86,
+    "type": "predicts word-end"
    },
    {
-    "feature": 2581,
-    "density": 0.026580810546875,
+    "feature": 3001,
+    "density": 0.02626546286046505,
     "promotes": [
-     "o",
-     "e",
-     "r"
+     "\n",
+     " ",
+     "n"
     ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.8,
-    "type": "predicts vowel"
+    "fires_on": ".",
+    "fires_on_entropy": 1.61,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 205,
+    "density": 0.02617391012609005,
+    "promotes": [
+     "\n",
+     " ",
+     "l"
+    ],
+    "fires_on": ".",
+    "fires_on_entropy": 0.96,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 459,
+    "density": 0.02614339254796505,
+    "promotes": [
+     "e",
+     "r",
+     "a"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 0.48,
+    "type": "after-char"
    },
    {
     "feature": 2383,
-    "density": 0.02657063864171505,
+    "density": 0.02582804299890995,
     "promotes": [
      "e",
      "l",
@@ -381,32 +406,8 @@
     "type": "predicts vowel"
    },
    {
-    "feature": 455,
-    "density": 0.02644856832921505,
-    "promotes": [
-     "t",
-     "s",
-     "l"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.31,
-    "type": "after-char"
-   },
-   {
-    "feature": 459,
-    "density": 0.02630615234375,
-    "promotes": [
-     "e",
-     "r",
-     "a"
-    ],
-    "fires_on": "h",
-    "fires_on_entropy": 0.51,
-    "type": "after-char"
-   },
-   {
     "feature": 916,
-    "density": 0.02538045309484005,
+    "density": 0.02564493753015995,
     "promotes": [
      "s",
      " ",
@@ -418,138 +419,655 @@
    },
    {
     "feature": 2131,
-    "density": 0.025238037109375,
+    "density": 0.02531941793859005,
     "promotes": [
      "e",
      "r",
      "i"
     ],
     "fires_on": "h",
-    "fires_on_entropy": 0.42,
+    "fires_on_entropy": 0.44,
     "type": "after-char"
    },
    {
-    "feature": 841,
-    "density": 0.02491251565515995,
-    "promotes": [
-     "e",
-     " ",
-     "l"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.75,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 286,
-    "density": 0.0245361328125,
-    "promotes": [
-     "e",
-     "I",
-     "?"
-    ],
-    "fires_on": "\n",
-    "fires_on_entropy": 2.97,
-    "type": "predicts vowel"
-   },
-   {
     "feature": 945,
-    "density": 0.02403767965734005,
+    "density": 0.02486165426671505,
     "promotes": [
      " ",
      "l",
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.8,
+    "fires_on_entropy": 2.86,
     "type": "predicts word-end"
    },
    {
     "feature": 285,
-    "density": 0.02398681640625,
+    "density": 0.02455647848546505,
     "promotes": [
      "e",
      "r",
      " "
     ],
     "fires_on": "h",
-    "fires_on_entropy": 0.32,
+    "fires_on_entropy": 0.37,
     "type": "after-char"
    },
    {
+    "feature": 841,
+    "density": 0.02446492575109005,
+    "promotes": [
+     "e",
+     " ",
+     "l"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.7,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 11,
-    "density": 0.02372233010828495,
+    "density": 0.02421061135828495,
     "promotes": [
      " ",
      "y",
      "r"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 0.52,
+    "fires_on_entropy": 0.49,
     "type": "after-char"
    },
    {
-    "feature": 3027,
-    "density": 0.02367146871984005,
+    "feature": 1800,
+    "density": 0.02379353903234005,
     "promotes": [
+     "o",
      "l",
+     "a"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.95,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2617,
+    "density": 0.02354939840734005,
+    "promotes": [
+     " ",
+     "u",
+     "e"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.8,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2291,
+    "density": 0.02344767190515995,
+    "promotes": [
      "c",
-     "d"
+     "s",
+     "l"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.31,
+    "type": "after-char"
+   }
+  ]
+ },
+ {
+  "model": "mccarthy_d2_s2",
+  "site": 2,
+  "author": "mccarthy",
+  "l1": 3.0,
+  "steps": 5000,
+  "d_sae": 3072,
+  "dead_frac": 0.0006510416666666666,
+  "live": 3070,
+  "L0": 10.2655029296875,
+  "var_explained": 0.8799704313278198,
+  "types": {
+   "predicts punctuation": 0.5899022801302931,
+   "after-char": 0.01758957654723127,
+   "predicts capital": 0.08078175895765473,
+   "predicts word-end": 0.005863192182410423,
+   "predicts vowel": 0.0013029315960912053,
+   "predicts consonant": 0.30456026058631924
+  },
+  "density_hist": [
+   0,
+   0,
+   42,
+   539,
+   1877,
+   230,
+   55,
+   46,
+   183,
+   89,
+   9,
+   0
+  ],
+  "top_features": [
+   {
+    "feature": 3039,
+    "density": 0.2047119140625,
+    "promotes": [
+     "_",
+     "Y",
+     "0"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 3.08,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 3007,
+    "density": 0.152679443359375,
+    "promotes": [
+     "?",
+     ".",
+     ","
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.79,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 194,
+    "density": 0.134521484375,
+    "promotes": [
+     "I",
+     "D",
+     "S"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.56,
+    "type": "after-char"
+   },
+   {
+    "feature": 1433,
+    "density": 0.1336262971162796,
+    "promotes": [
+     "K",
+     "B",
+     "S"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.46,
+    "type": "after-char"
+   },
+   {
+    "feature": 1257,
+    "density": 0.1306864470243454,
+    "promotes": [
+     "S",
+     "B",
+     "D"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.5,
+    "type": "after-char"
+   },
+   {
+    "feature": 1261,
+    "density": 0.1250813752412796,
+    "promotes": [
+     "I",
+     "Y",
+     "D"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.71,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 173,
+    "density": 0.12353515625,
+    "promotes": [
+     " ",
+     ":",
+     "?"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.79,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1318,
+    "density": 0.110992431640625,
+    "promotes": [
+     "I",
+     "_",
+     "Y"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.78,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1980,
+    "density": 0.1085713729262352,
+    "promotes": [
+     ".",
+     "\n",
+     ","
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.78,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 464,
+    "density": 0.0921529158949852,
+    "promotes": [
+     "H",
+     "D",
+     "Y"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.33,
+    "type": "after-char"
+   },
+   {
+    "feature": 719,
+    "density": 0.0893147811293602,
+    "promotes": [
+     "Y",
+     "_",
+     "A"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.5,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 198,
+    "density": 0.0880025252699852,
+    "promotes": [
+     "e",
+     "_",
+     "E"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.92,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2894,
+    "density": 0.0832010880112648,
+    "promotes": [
+     "_",
+     "r",
+     "l"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.76,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 684,
+    "density": 0.0824686661362648,
+    "promotes": [
+     "F",
+     "D",
+     "T"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.63,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1527,
+    "density": 0.0789896622300148,
+    "promotes": [
+     ".",
+     ",",
+     ":"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.67,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2695,
+    "density": 0.0787251815199852,
+    "promotes": [
+     "F",
+     "D",
+     "B"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 1.06,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2581,
+    "density": 0.0776468887925148,
+    "promotes": [
+     "H",
+     "_",
+     "h"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.62,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1696,
+    "density": 0.0776265487074852,
+    "promotes": [
+     "\n",
+     " ",
+     "0"
+    ],
+    "fires_on": ".",
+    "fires_on_entropy": 2.35,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2118,
+    "density": 0.077392578125,
+    "promotes": [
+     "_",
+     "0",
+     "H"
+    ],
+    "fires_on": "o",
+    "fires_on_entropy": 2.93,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2009,
+    "density": 0.0757039412856102,
+    "promotes": [
+     "B",
+     "D",
+     "H"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.43,
+    "type": "after-char"
+   },
+   {
+    "feature": 793,
+    "density": 0.0755208358168602,
+    "promotes": [
+     "Y",
+     "v",
+     "L"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 2.33,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 732,
+    "density": 0.075347900390625,
+    "promotes": [
+     "\n",
+     " ",
+     "0"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 2.71,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1496,
+    "density": 0.0693868026137352,
+    "promotes": [
+     "B",
+     "D",
+     "S"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.51,
+    "type": "after-char"
+   },
+   {
+    "feature": 247,
+    "density": 0.0687662735581398,
+    "promotes": [
+     "_",
+     "7",
+     "."
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.72,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 490,
+    "density": 0.06829833984375,
+    "promotes": [
+     "_",
+     "O",
+     "A"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.45,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2868,
+    "density": 0.0674235001206398,
+    "promotes": [
+     "k",
+     "0",
+     "K"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.53,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 685,
+    "density": 0.066864013671875,
+    "promotes": [
+     "O",
+     "_",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.75,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1087,
+    "density": 0.0655008926987648,
+    "promotes": [
+     "T",
+     "S",
+     "F"
     ],
     "fires_on": " ",
     "fires_on_entropy": 0.32,
     "type": "after-char"
    },
    {
-    "feature": 2593,
-    "density": 0.02265421487390995,
+    "feature": 813,
+    "density": 0.063262939453125,
     "promotes": [
-     "l",
-     "n",
-     "i"
+     "8",
+     "0",
+     "9"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.66,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 585,
+    "density": 0.0623881034553051,
+    "promotes": [
+     "_",
+     "O",
+     "Y"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.7,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 807,
+    "density": 0.06219482421875,
+    "promotes": [
+     ".",
+     ")",
+     "D"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 1.73,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1034,
+    "density": 0.0617268867790699,
+    "promotes": [
+     " ",
+     ".",
+     "8"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.06,
+    "fires_on_entropy": 2.34,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2083,
+    "density": 0.0612589530646801,
+    "promotes": [
+     "A",
+     "a",
+     "D"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.61,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1450,
+    "density": 0.0610453300178051,
+    "promotes": [
+     "o",
+     "O",
+     "_"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.81,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 889,
+    "density": 0.0603841133415699,
+    "promotes": [
+     "h",
+     "H",
+     "W"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 1.66,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1720,
+    "density": 0.060302734375,
+    "promotes": [
+     "1",
+     "C",
+     "P"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.66,
+    "type": "after-char"
+   },
+   {
+    "feature": 1190,
+    "density": 0.0584716796875,
+    "promotes": [
+     "n",
+     "N",
+     "_"
+    ],
+    "fires_on": "i",
+    "fires_on_entropy": 2.39,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1445,
+    "density": 0.0580851249396801,
+    "promotes": [
+     "Y",
+     ".",
+     "?"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.47,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 423,
+    "density": 0.057586669921875,
+    "promotes": [
+     "v",
+     "k",
+     "d"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.53,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2054,
+    "density": 0.056182861328125,
+    "promotes": [
+     "d",
+     "D",
+     "_"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.31,
     "type": "predicts consonant"
    }
   ]
  },
  {
   "model": "melville_d2",
+  "site": 1,
   "author": "melville",
   "l1": 3.0,
   "steps": 5000,
   "d_sae": 3072,
-  "dead_frac": 0.005208333333333333,
-  "live": 3056,
-  "L0": 10.09375,
-  "var_explained": 0.894732654094696,
+  "dead_frac": 0.010091145833333334,
+  "live": 3041,
+  "L0": 10.064208984375,
+  "var_explained": 0.8937644958496094,
   "types": {
-   "predicts vowel": 0.3285340314136126,
-   "after-char": 0.1318717277486911,
-   "predicts word-end": 0.061518324607329845,
-   "predicts consonant": 0.44142670157068065,
-   "predicts punctuation": 0.032722513089005235,
-   "predicts capital": 0.003926701570680628
+   "predicts vowel": 0.3255508056560342,
+   "after-char": 0.1410720157842815,
+   "predicts word-end": 0.057546859585662614,
+   "predicts consonant": 0.4383426504439329,
+   "predicts punctuation": 0.033541598158500496,
+   "predicts capital": 0.003946070371588293
   },
   "density_hist": [
    0,
    0,
-   260,
-   608,
-   539,
-   289,
-   302,
-   859,
+   281,
+   621,
+   513,
+   274,
+   311,
+   842,
    187,
-   8,
-   2,
+   9,
+   1,
    2
   ],
   "top_features": [
    {
     "feature": 1113,
-    "density": 0.336334228515625,
+    "density": 0.337127685546875,
     "promotes": [
      "e",
      "n",
@@ -561,31 +1079,31 @@
    },
    {
     "feature": 2088,
-    "density": 0.328857421875,
+    "density": 0.3284403383731842,
     "promotes": [
      "e",
      "n",
      "s"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 3.2,
+    "fires_on_entropy": 3.17,
     "type": "predicts vowel"
    },
    {
     "feature": 3027,
-    "density": 0.1023661270737648,
+    "density": 0.102020263671875,
     "promotes": [
      "a",
      "t",
      "c"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.2,
+    "fires_on_entropy": 0.19,
     "type": "after-char"
    },
    {
     "feature": 595,
-    "density": 0.10052490234375,
+    "density": 0.0976053848862648,
     "promotes": [
      "\n",
      "e",
@@ -597,19 +1115,19 @@
    },
    {
     "feature": 898,
-    "density": 0.093353271484375,
+    "density": 0.0928751602768898,
     "promotes": [
      "t",
      "a",
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.45,
+    "fires_on_entropy": 0.44,
     "type": "after-char"
    },
    {
     "feature": 2581,
-    "density": 0.0887451171875,
+    "density": 0.0887044295668602,
     "promotes": [
      "t",
      "a",
@@ -621,7 +1139,7 @@
    },
    {
     "feature": 1087,
-    "density": 0.0808512344956398,
+    "density": 0.0811564102768898,
     "promotes": [
      "a",
      "t",
@@ -633,31 +1151,31 @@
    },
    {
     "feature": 214,
-    "density": 0.0748392716050148,
+    "density": 0.0752766951918602,
     "promotes": [
      "e",
      "a",
      "o"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.09,
+    "fires_on_entropy": 3.07,
     "type": "predicts vowel"
    },
    {
     "feature": 309,
-    "density": 0.0545857734978199,
+    "density": 0.054168701171875,
     "promotes": [
      "a",
      "e",
      "r"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.36,
+    "fires_on_entropy": 3.32,
     "type": "predicts vowel"
    },
    {
     "feature": 2902,
-    "density": 0.05224609375,
+    "density": 0.0536397285759449,
     "promotes": [
      "o",
      "e",
@@ -668,224 +1186,212 @@
     "type": "predicts vowel"
    },
    {
-    "feature": 2009,
-    "density": 0.032989501953125,
-    "promotes": [
-     "s",
-     "a",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.27,
-    "type": "after-char"
-   },
-   {
     "feature": 1629,
-    "density": 0.032623291015625,
+    "density": 0.032958984375,
     "promotes": [
      "t",
      "s",
      "a"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.2,
+    "fires_on_entropy": 0.18,
+    "type": "after-char"
+   },
+   {
+    "feature": 2009,
+    "density": 0.032867431640625,
+    "promotes": [
+     "s",
+     "a",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.28,
     "type": "after-char"
    },
    {
     "feature": 2617,
-    "density": 0.0315348319709301,
+    "density": 0.030975341796875,
     "promotes": [
      "h",
      "o",
      "r"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 0.54,
+    "fires_on_entropy": 0.52,
     "type": "after-char"
    },
    {
     "feature": 2941,
-    "density": 0.02884928323328495,
+    "density": 0.02912394143640995,
     "promotes": [
      "e",
      "n",
      "o"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.13,
+    "fires_on_entropy": 3.11,
     "type": "predicts vowel"
    },
    {
     "feature": 1211,
-    "density": 0.02773030661046505,
+    "density": 0.02821858786046505,
     "promotes": [
      "s",
      "l",
      "c"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.29,
+    "fires_on_entropy": 0.35,
     "type": "after-char"
    },
    {
     "feature": 2241,
-    "density": 0.027557373046875,
+    "density": 0.02684529684484005,
     "promotes": [
      "t",
      "a",
      "o"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.27,
-    "type": "after-char"
-   },
-   {
-    "feature": 1022,
-    "density": 0.02698771096765995,
-    "promotes": [
-     "n",
-     "e",
-     "r"
-    ],
-    "fires_on": "a",
-    "fires_on_entropy": 2.99,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2222,
-    "density": 0.025726318359375,
-    "promotes": [
-     "h",
-     "r",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 0.82,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2409,
-    "density": 0.02568562887609005,
-    "promotes": [
-     "c",
-     "s",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.42,
+    "fires_on_entropy": 0.24,
     "type": "after-char"
    },
    {
     "feature": 674,
-    "density": 0.025482177734375,
+    "density": 0.02665201760828495,
     "promotes": [
      "e",
      "l",
      "s"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 2.88,
+    "fires_on_entropy": 2.85,
     "type": "predicts vowel"
    },
    {
-    "feature": 1381,
-    "density": 0.02508544921875,
+    "feature": 1022,
+    "density": 0.02620442770421505,
     "promotes": [
-     " ",
-     "\n",
-     "-"
+     "n",
+     "e",
+     "r"
     ],
-    "fires_on": ",",
-    "fires_on_entropy": 1.17,
-    "type": "predicts word-end"
+    "fires_on": "a",
+    "fires_on_entropy": 2.96,
+    "type": "predicts consonant"
    },
    {
-    "feature": 2596,
-    "density": 0.02501424215734005,
+    "feature": 2409,
+    "density": 0.02592976950109005,
     "promotes": [
-     "a",
+     "c",
      "s",
      "t"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.71,
-    "type": "predicts vowel"
+    "fires_on_entropy": 0.41,
+    "type": "after-char"
    },
    {
     "feature": 2180,
-    "density": 0.02484130859375,
+    "density": 0.025421142578125,
     "promotes": [
      "d",
      "r",
      "n"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 0.27,
+    "fires_on_entropy": 0.28,
     "type": "after-char"
    },
    {
+    "feature": 2222,
+    "density": 0.025299072265625,
+    "promotes": [
+     "h",
+     "r",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.8,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1381,
+    "density": 0.02528890036046505,
+    "promotes": [
+     " ",
+     "\n",
+     "-"
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 1.24,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2596,
+    "density": 0.02486165426671505,
+    "promotes": [
+     "a",
+     "s",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.72,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 1175,
-    "density": 0.02443440817296505,
+    "density": 0.02414957620203495,
     "promotes": [
      "a",
      "t",
      "n"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.35,
+    "fires_on_entropy": 0.34,
     "type": "after-char"
    },
    {
     "feature": 2998,
-    "density": 0.02422078512609005,
+    "density": 0.023895263671875,
     "promotes": [
      "a",
      "e",
      "u"
     ],
     "fires_on": "s",
-    "fires_on_entropy": 3.09,
+    "fires_on_entropy": 3.05,
     "type": "predicts vowel"
    },
    {
     "feature": 964,
-    "density": 0.02373250387609005,
+    "density": 0.02335611917078495,
     "promotes": [
      "e",
      "a",
      "r"
     ],
     "fires_on": "h",
-    "fires_on_entropy": 0.54,
+    "fires_on_entropy": 0.56,
     "type": "after-char"
    },
    {
-    "feature": 1583,
-    "density": 0.022674560546875,
-    "promotes": [
-     " ",
-     "\n",
-     "\u201d"
-    ],
-    "fires_on": ",",
-    "fires_on_entropy": 1.93,
-    "type": "predicts word-end"
-   },
-   {
     "feature": 198,
-    "density": 0.02225748635828495,
+    "density": 0.02239990234375,
     "promotes": [
      "e",
      "a",
      "o"
     ],
     "fires_on": "l",
-    "fires_on_entropy": 2.87,
+    "fires_on_entropy": 2.85,
     "type": "predicts vowel"
    },
    {
     "feature": 1204,
-    "density": 0.021575927734375,
+    "density": 0.02228800393640995,
     "promotes": [
      "n",
      "e",
@@ -896,44 +1402,20 @@
     "type": "predicts consonant"
    },
    {
-    "feature": 273,
-    "density": 0.02154541015625,
-    "promotes": [
-     "e",
-     "n",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.07,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 1976,
-    "density": 0.02152506448328495,
+    "feature": 1583,
+    "density": 0.02216593362390995,
     "promotes": [
      " ",
      "\n",
-     "-"
+     "\u201d"
     ],
     "fires_on": ",",
-    "fires_on_entropy": 1.33,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 28,
-    "density": 0.02144368551671505,
-    "promotes": [
-     " ",
-     "\n",
-     "s"
-    ],
-    "fires_on": "d",
-    "fires_on_entropy": 2.53,
+    "fires_on_entropy": 1.89,
     "type": "predicts word-end"
    },
    {
     "feature": 2249,
-    "density": 0.02132161520421505,
+    "density": 0.021942138671875,
     "promotes": [
      "e",
      " ",
@@ -944,8 +1426,68 @@
     "type": "predicts vowel"
    },
    {
+    "feature": 273,
+    "density": 0.02192179299890995,
+    "promotes": [
+     "e",
+     "n",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.06,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1976,
+    "density": 0.02171834371984005,
+    "promotes": [
+     " ",
+     "\n",
+     "-"
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 1.35,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 861,
+    "density": 0.02109781838953495,
+    "promotes": [
+     "s",
+     ",",
+     " "
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.35,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 28,
+    "density": 0.02082316018640995,
+    "promotes": [
+     " ",
+     "\n",
+     "s"
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.52,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1345,
+    "density": 0.02060953713953495,
+    "promotes": [
+     "e",
+     "l",
+     "r"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.06,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 1228,
-    "density": 0.02129109762609005,
+    "density": 0.02036539651453495,
     "promotes": [
      "e",
      "n",
@@ -956,32 +1498,8 @@
     "type": "predicts vowel"
    },
    {
-    "feature": 2486,
-    "density": 0.020599365234375,
-    "promotes": [
-     "a",
-     "r",
-     "s"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.87,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2719,
-    "density": 0.020538330078125,
-    "promotes": [
-     "a",
-     "e",
-     "l"
-    ],
-    "fires_on": "r",
-    "fires_on_entropy": 3.09,
-    "type": "predicts vowel"
-   },
-   {
     "feature": 1150,
-    "density": 0.02033487893640995,
+    "density": 0.02027384378015995,
     "promotes": [
      "d",
      " ",
@@ -992,307 +1510,860 @@
     "type": "predicts consonant"
    },
    {
-    "feature": 56,
+    "feature": 2486,
     "density": 0.020233154296875,
+    "promotes": [
+     "a",
+     "r",
+     "s"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.87,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 56,
+    "density": 0.02018229104578495,
     "promotes": [
      "a",
      "c",
      "e"
     ],
     "fires_on": "w",
-    "fires_on_entropy": 3.22,
+    "fires_on_entropy": 3.15,
     "type": "predicts vowel"
    },
    {
-    "feature": 1216,
-    "density": 0.02020263671875,
+    "feature": 1736,
+    "density": 0.02010091207921505,
     "promotes": [
-     "n",
-     "c",
-     "e"
+     "a",
+     "s",
+     " "
     ],
-    "fires_on": "i",
+    "fires_on": " ",
+    "fires_on_entropy": 2.87,
+    "type": "predicts vowel"
+   }
+  ]
+ },
+ {
+  "model": "melville_d2_s2",
+  "site": 2,
+  "author": "melville",
+  "l1": 3.0,
+  "steps": 5000,
+  "d_sae": 3072,
+  "dead_frac": 0.001953125,
+  "live": 3066,
+  "L0": 9.2984619140625,
+  "var_explained": 0.8641000390052795,
+  "types": {
+   "predicts consonant": 0.8483365949119374,
+   "after-char": 0.03359425962165688,
+   "predicts capital": 0.10437051532941943,
+   "predicts word-end": 0.0045662100456621,
+   "predicts punctuation": 0.008480104370515329,
+   "predicts vowel": 0.0006523157208088715
+  },
+  "density_hist": [
+   0,
+   0,
+   109,
+   776,
+   1667,
+   153,
+   36,
+   85,
+   157,
+   72,
+   11,
+   0
+  ],
+  "top_features": [
+   {
+    "feature": 1470,
+    "density": 0.1823527067899704,
+    "promotes": [
+     "9",
+     "L",
+     "N"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.96,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2127,
+    "density": 0.1713968962430954,
+    "promotes": [
+     "C",
+     "P",
+     "L"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.69,
+    "type": "after-char"
+   },
+   {
+    "feature": 2593,
+    "density": 0.1644490510225296,
+    "promotes": [
+     "I",
+     "C",
+     "P"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.8,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1433,
+    "density": 0.1612752228975296,
+    "promotes": [
+     "C",
+     "P",
+     "L"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 1.37,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 3027,
+    "density": 0.15338134765625,
+    "promotes": [
+     "I",
+     "P",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.6,
+    "type": "after-char"
+   },
+   {
+    "feature": 595,
+    "density": 0.14129638671875,
+    "promotes": [
+     "3",
+     "7",
+     "N"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.92,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2009,
+    "density": 0.1338907927274704,
+    "promotes": [
+     "C",
+     "P",
+     "F"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 1.03,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2817,
+    "density": 0.1211039200425148,
+    "promotes": [
+     "C",
+     "B",
+     "P"
+    ],
+    "fires_on": " ",
     "fires_on_entropy": 0.48,
     "type": "after-char"
    },
    {
-    "feature": 861,
-    "density": 0.02015177346765995,
+    "feature": 684,
+    "density": 0.1142171248793602,
     "promotes": [
-     "s",
-     ",",
-     " "
+     "A",
+     "E",
+     "e"
     ],
-    "fires_on": "d",
-    "fires_on_entropy": 2.29,
+    "fires_on": "h",
+    "fires_on_entropy": 2.67,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 717,
+    "density": 0.113555908203125,
+    "promotes": [
+     "\n",
+     "]",
+     "0"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.97,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 898,
+    "density": 0.1077982559800148,
+    "promotes": [
+     "I",
+     "Y",
+     "M"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.9,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1408,
+    "density": 0.096771240234375,
+    "promotes": [
+     "\n",
+     "'",
+     ":"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.74,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1980,
+    "density": 0.0881754532456398,
+    "promotes": [
+     ",",
+     ".",
+     "\n"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.77,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1087,
+    "density": 0.0871683731675148,
+    "promotes": [
+     "I",
+     "N",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.54,
+    "type": "after-char"
+   },
+   {
+    "feature": 3059,
+    "density": 0.086029052734375,
+    "promotes": [
+     "E",
+     "e",
+     "\u00f1"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.93,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1915,
+    "density": 0.0845947265625,
+    "promotes": [
+     "D",
+     "B",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.48,
+    "type": "after-char"
+   },
+   {
+    "feature": 1498,
+    "density": 0.0838623046875,
+    "promotes": [
+     "h",
+     "H",
+     "R"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.42,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2380,
+    "density": 0.0835672989487648,
+    "promotes": [
+     "A",
+     "U",
+     "E"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.52,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1914,
+    "density": 0.0815226212143898,
+    "promotes": [
+     "R",
+     "L",
+     "O"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.89,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2894,
+    "density": 0.073822021484375,
+    "promotes": [
+     "H",
+     "R",
+     "L"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.73,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 455,
+    "density": 0.06878662109375,
+    "promotes": [
+     "n",
+     "N",
+     "7"
+    ],
+    "fires_on": "i",
+    "fires_on_entropy": 2.46,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2644,
+    "density": 0.0680033341050148,
+    "promotes": [
+     "A",
+     ".",
+     ","
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.7,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2998,
+    "density": 0.0660502091050148,
+    "promotes": [
+     "R",
+     "L",
+     "r"
+    ],
+    "fires_on": "c",
+    "fires_on_entropy": 2.8,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 370,
+    "density": 0.0647786483168602,
+    "promotes": [
+     "C",
+     "L",
+     "U"
+    ],
+    "fires_on": "o",
+    "fires_on_entropy": 3.1,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2176,
+    "density": 0.0647684708237648,
+    "promotes": [
+     " ",
+     "\u2019",
+     "?"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.85,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1312,
+    "density": 0.0618794746696949,
+    "promotes": [
+     "S",
+     ".",
+     ","
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.82,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 318,
+    "density": 0.061370849609375,
+    "promotes": [
+     "i",
+     "I",
+     "Z"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.88,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1251,
+    "density": 0.0586649589240551,
+    "promotes": [
+     "A",
+     "a",
+     "H"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.73,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 181,
+    "density": 0.0576578788459301,
+    "promotes": [
+     "P",
+     "T",
+     "L"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.85,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2669,
+    "density": 0.0569559745490551,
+    "promotes": [
+     "o",
+     "O",
+     "9"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.61,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 574,
+    "density": 0.0569254569709301,
+    "promotes": [
+     ",",
+     ".",
+     ";"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.31,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 461,
+    "density": 0.0567525215446949,
+    "promotes": [
+     "T",
+     "t",
+     "Z"
+    ],
+    "fires_on": "i",
+    "fires_on_entropy": 2.62,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2590,
+    "density": 0.0565897636115551,
+    "promotes": [
+     "Y",
+     "W",
+     "T"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 1.34,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2823,
+    "density": 0.05657958984375,
+    "promotes": [
+     "Y",
+     "y",
+     "U"
+    ],
+    "fires_on": "m",
+    "fires_on_entropy": 2.72,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1398,
+    "density": 0.0510457344353199,
+    "promotes": [
+     "l",
+     "L",
+     "Z"
+    ],
+    "fires_on": "l",
+    "fires_on_entropy": 2.7,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 473,
+    "density": 0.05078125,
+    "promotes": [
+     "C",
+     "P",
+     "T"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.49,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2919,
+    "density": 0.0504659004509449,
+    "promotes": [
+     "N",
+     "n",
+     "g"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 1.46,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2766,
+    "density": 0.0490620918571949,
+    "promotes": [
+     ".",
+     ",",
+     "\n"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 1.63,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 360,
+    "density": 0.04901123046875,
+    "promotes": [
+     "O",
+     "E",
+     "U"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.36,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2594,
+    "density": 0.047515869140625,
+    "promotes": [
+     "d",
+     "D",
+     "R"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 1.29,
     "type": "predicts consonant"
    }
   ]
  },
  {
   "model": "shakespeare_d2",
+  "site": 1,
   "author": "shakespeare",
   "l1": 3.0,
   "steps": 5000,
   "d_sae": 3072,
-  "dead_frac": 0.0126953125,
-  "live": 3033,
-  "L0": 11.393310546875,
-  "var_explained": 0.8828720450401306,
+  "dead_frac": 0.012044270833333334,
+  "live": 3035,
+  "L0": 11.789794921875,
+  "var_explained": 0.8783848285675049,
   "types": {
-   "predicts capital": 0.46224859874711505,
-   "predicts word-end": 0.05637982195845697,
-   "after-char": 0.15858885591823277,
-   "predicts vowel": 0.06989779096604022,
-   "predicts punctuation": 0.12100230794592813,
-   "predicts consonant": 0.13188262446422683
+   "predicts capital": 0.4800658978583196,
+   "after-char": 0.14266886326194397,
+   "predicts word-end": 0.054365733113673806,
+   "predicts vowel": 0.07084019769357495,
+   "predicts punctuation": 0.12026359143327842,
+   "predicts consonant": 0.13179571663920922
   },
   "density_hist": [
    0,
    0,
-   356,
-   704,
-   514,
-   237,
-   226,
-   671,
-   309,
-   14,
+   333,
+   679,
+   558,
+   240,
+   223,
+   677,
+   308,
+   15,
    1,
    1
   ],
   "top_features": [
    {
     "feature": 2453,
-    "density": 0.3648274838924408,
+    "density": 0.365814208984375,
     "promotes": [
      "E",
      ".",
      "T"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.3,
+    "fires_on_entropy": 3.28,
     "type": "predicts capital"
    },
    {
     "feature": 2442,
-    "density": 0.3107808530330658,
+    "density": 0.311248779296875,
     "promotes": [
      "T",
      " ",
      "e"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.33,
+    "fires_on_entropy": 3.34,
     "type": "predicts capital"
    },
    {
     "feature": 2922,
-    "density": 0.0953470841050148,
+    "density": 0.0933634415268898,
     "promotes": [
      "T",
      "t",
      "I"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.71,
-    "type": "predicts capital"
+    "fires_on_entropy": 0.69,
+    "type": "after-char"
    },
    {
     "feature": 2745,
-    "density": 0.0935262069106102,
+    "density": 0.092681884765625,
     "promotes": [
      " ",
      "d",
      "T"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 2.99,
+    "fires_on_entropy": 3.02,
     "type": "predicts word-end"
    },
    {
     "feature": 656,
-    "density": 0.0914103165268898,
+    "density": 0.0901692733168602,
     "promotes": [
      "t",
      "a",
      "o"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.37,
+    "fires_on_entropy": 0.34,
     "type": "after-char"
    },
    {
     "feature": 1716,
-    "density": 0.0909525528550148,
+    "density": 0.0899861678481102,
     "promotes": [
      "o",
      "e",
      "u"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.28,
+    "fires_on_entropy": 3.29,
     "type": "predicts vowel"
    },
    {
     "feature": 1087,
-    "density": 0.077239990234375,
+    "density": 0.0764058455824852,
     "promotes": [
      "t",
      "o",
      "a"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.21,
-    "type": "after-char"
-   },
-   {
-    "feature": 1512,
-    "density": 0.0543009452521801,
-    "promotes": [
-     "I",
-     "i",
-     "d"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.35,
+    "fires_on_entropy": 0.23,
     "type": "after-char"
    },
    {
     "feature": 1971,
-    "density": 0.0538330078125,
+    "density": 0.0547993965446949,
     "promotes": [
      "o",
      "i",
      "u"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.09,
+    "fires_on_entropy": 3.11,
     "type": "predicts vowel"
    },
    {
-    "feature": 2109,
-    "density": 0.04779052734375,
+    "feature": 1512,
+    "density": 0.0536397285759449,
     "promotes": [
-     ".",
-     ",",
-     "s"
+     "I",
+     "i",
+     "d"
     ],
-    "fires_on": "r",
-    "fires_on_entropy": 2.71,
-    "type": "predicts punctuation"
+    "fires_on": " ",
+    "fires_on_entropy": 0.31,
+    "type": "after-char"
    },
    {
     "feature": 476,
-    "density": 0.047393798828125,
+    "density": 0.049163818359375,
     "promotes": [
      "o",
      "u",
      "l"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.02,
+    "fires_on_entropy": 3.04,
     "type": "predicts vowel"
    },
    {
+    "feature": 2109,
+    "density": 0.0469970703125,
+    "promotes": [
+     ".",
+     ",",
+     "s"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.69,
+    "type": "predicts punctuation"
+   },
+   {
     "feature": 1219,
-    "density": 0.0437418632209301,
+    "density": 0.0422871895134449,
     "promotes": [
      "t",
      "a",
      "I"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.4,
+    "fires_on_entropy": 0.38,
     "type": "after-char"
    },
    {
     "feature": 3027,
-    "density": 0.0354105643928051,
+    "density": 0.03717041015625,
     "promotes": [
      "a",
      "t",
      "d"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.27,
+    "fires_on_entropy": 0.25,
     "type": "after-char"
    },
    {
-    "feature": 1784,
-    "density": 0.0344340018928051,
-    "promotes": [
-     "o",
-     "T",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.79,
-    "type": "predicts vowel"
-   },
-   {
     "feature": 360,
-    "density": 0.0343119315803051,
+    "density": 0.0340067557990551,
     "promotes": [
      "a",
      "r",
      "o"
     ],
     "fires_on": "h",
-    "fires_on_entropy": 2.74,
+    "fires_on_entropy": 2.77,
     "type": "predicts vowel"
    },
    {
     "feature": 1361,
-    "density": 0.0337015800178051,
+    "density": 0.0334370918571949,
     "promotes": [
      ".",
      ",",
      "d"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 0.46,
+    "fires_on_entropy": 0.53,
     "type": "after-char"
    },
    {
+    "feature": 1784,
+    "density": 0.0328470878303051,
+    "promotes": [
+     "o",
+     "T",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.78,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 169,
-    "density": 0.03125,
+    "density": 0.0317789725959301,
     "promotes": [
      "a",
      "i",
      "e"
     ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.12,
+    "fires_on": "h",
+    "fires_on_entropy": 3.15,
     "type": "predicts vowel"
    },
    {
+    "feature": 1743,
+    "density": 0.03078206442296505,
+    "promotes": [
+     "t",
+     "i",
+     "a"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.57,
+    "type": "after-char"
+   },
+   {
     "feature": 1980,
-    "density": 0.03102620504796505,
+    "density": 0.03074137307703495,
     "promotes": [
      "h",
      "r",
      "o"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 0.88,
+    "fires_on_entropy": 0.9,
     "type": "predicts consonant"
    },
    {
     "feature": 825,
-    "density": 0.03037516213953495,
+    "density": 0.03053792379796505,
     "promotes": [
      ".",
      ",",
      "s"
     ],
     "fires_on": "s",
-    "fires_on_entropy": 2.84,
+    "fires_on_entropy": 2.85,
     "type": "predicts punctuation"
    },
    {
+    "feature": 2998,
+    "density": 0.02979532815515995,
+    "promotes": [
+     "e",
+     "u",
+     "o"
+    ],
+    "fires_on": "b",
+    "fires_on_entropy": 3.16,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 311,
+    "density": 0.02901204489171505,
+    "promotes": [
+     "d",
+     "s",
+     "."
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 1.94,
+    "type": "predicts consonant"
+   },
+   {
     "feature": 1097,
-    "density": 0.03020223043859005,
+    "density": 0.0289306640625,
     "promotes": [
      "\n",
      " ",
@@ -1303,128 +2374,32 @@
     "type": "predicts word-end"
    },
    {
-    "feature": 1743,
-    "density": 0.02994791604578495,
-    "promotes": [
-     "t",
-     "i",
-     "a"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.6,
-    "type": "after-char"
-   },
-   {
-    "feature": 2998,
-    "density": 0.02984619140625,
-    "promotes": [
-     "e",
-     "u",
-     "o"
-    ],
-    "fires_on": "w",
-    "fires_on_entropy": 3.18,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 311,
-    "density": 0.02833048440515995,
-    "promotes": [
-     "d",
-     "s",
-     "."
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 1.91,
-    "type": "predicts consonant"
-   },
-   {
     "feature": 585,
-    "density": 0.028228759765625,
+    "density": 0.0284423828125,
     "promotes": [
      "a",
      "e",
      "o"
     ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.24,
+    "fires_on": "h",
+    "fires_on_entropy": 3.27,
     "type": "predicts vowel"
-   },
-   {
-    "feature": 2617,
-    "density": 0.02815755270421505,
-    "promotes": [
-     "h",
-     "o",
-     "r"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 0.96,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 1873,
-    "density": 0.0274658203125,
-    "promotes": [
-     "I",
-     "a",
-     "s"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.55,
-    "type": "after-char"
-   },
-   {
-    "feature": 3067,
-    "density": 0.027252197265625,
-    "promotes": [
-     "l",
-     "g",
-     "d"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.42,
-    "type": "after-char"
    },
    {
     "feature": 1695,
-    "density": 0.02717081643640995,
+    "density": 0.02791341207921505,
     "promotes": [
      "o",
      "a",
      "e"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.24,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 705,
-    "density": 0.02716064453125,
-    "promotes": [
-     "u",
-     "s",
-     " "
-    ],
-    "fires_on": "a",
-    "fires_on_entropy": 3.38,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2955,
-    "density": 0.02630615234375,
-    "promotes": [
-     "e",
-     "n",
-     "i"
-    ],
-    "fires_on": "h",
-    "fires_on_entropy": 3.15,
+    "fires_on_entropy": 3.25,
     "type": "predicts vowel"
    },
    {
     "feature": 645,
-    "density": 0.026123046875,
+    "density": 0.02734375,
     "promotes": [
      ".",
      ",",
@@ -1435,56 +2410,152 @@
     "type": "predicts punctuation"
    },
    {
-    "feature": 1481,
-    "density": 0.025970458984375,
+    "feature": 2617,
+    "density": 0.02723185159265995,
     "promotes": [
-     "T",
-     "\n",
-     "S"
+     "h",
+     "o",
+     "r"
     ],
-    "fires_on": "\n",
-    "fires_on_entropy": 1.22,
-    "type": "predicts capital"
+    "fires_on": "t",
+    "fires_on_entropy": 0.97,
+    "type": "predicts consonant"
    },
    {
-    "feature": 3026,
-    "density": 0.02541097067296505,
+    "feature": 3067,
+    "density": 0.02657063864171505,
     "promotes": [
-     "\n",
-     " ",
-     "_"
+     "l",
+     "g",
+     "d"
     ],
-    "fires_on": ",",
-    "fires_on_entropy": 2.48,
-    "type": "predicts word-end"
+    "fires_on": " ",
+    "fires_on_entropy": 0.38,
+    "type": "after-char"
+   },
+   {
+    "feature": 1873,
+    "density": 0.02630615234375,
+    "promotes": [
+     "I",
+     "a",
+     "s"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.48,
+    "type": "after-char"
+   },
+   {
+    "feature": 2955,
+    "density": 0.02596028707921505,
+    "promotes": [
+     "e",
+     "n",
+     "i"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 3.18,
+    "type": "predicts vowel"
    },
    {
     "feature": 2367,
-    "density": 0.02537027932703495,
+    "density": 0.02582804299890995,
     "promotes": [
      "e",
      "o",
      "i"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.22,
+    "fires_on_entropy": 3.21,
     "type": "predicts vowel"
    },
    {
+    "feature": 705,
+    "density": 0.02574666403234005,
+    "promotes": [
+     "u",
+     "s",
+     " "
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.4,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 143,
+    "density": 0.02552286721765995,
+    "promotes": [
+     "I",
+     "i",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.5,
+    "type": "after-char"
+   },
+   {
+    "feature": 2659,
+    "density": 0.02552286721765995,
+    "promotes": [
+     "e",
+     "l",
+     " "
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.2,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1481,
+    "density": 0.025360107421875,
+    "promotes": [
+     "T",
+     "\n",
+     "S"
+    ],
+    "fires_on": "\n",
+    "fires_on_entropy": 1.19,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 3026,
+    "density": 0.0252685546875,
+    "promotes": [
+     "\n",
+     " ",
+     "_"
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 2.5,
+    "type": "predicts word-end"
+   },
+   {
     "feature": 2101,
-    "density": 0.02522786520421505,
+    "density": 0.02512613870203495,
     "promotes": [
      "K",
      "c",
      "E"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.25,
+    "fires_on_entropy": 0.21,
     "type": "after-char"
    },
    {
+    "feature": 1160,
+    "density": 0.02469889260828495,
+    "promotes": [
+     ",",
+     ".",
+     " "
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 0.71,
+    "type": "predicts punctuation"
+   },
+   {
     "feature": 2966,
-    "density": 0.02513631246984005,
+    "density": 0.02466837503015995,
     "promotes": [
      "\n",
      " ",
@@ -1495,83 +2566,564 @@
     "type": "predicts word-end"
    },
    {
-    "feature": 2659,
-    "density": 0.02512613870203495,
-    "promotes": [
-     "e",
-     "l",
-     " "
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.21,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 143,
-    "density": 0.02507527731359005,
-    "promotes": [
-     "I",
-     "i",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.47,
-    "type": "after-char"
-   },
-   {
-    "feature": 1586,
-    "density": 0.02480061911046505,
-    "promotes": [
-     " ",
-     ".",
-     ","
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 2.93,
-    "type": "predicts word-end"
-   },
-   {
     "feature": 2432,
-    "density": 0.024261474609375,
+    "density": 0.0245361328125,
     "promotes": [
      ".",
      ",",
      " "
     ],
     "fires_on": "t",
-    "fires_on_entropy": 1.07,
+    "fires_on_entropy": 1.08,
     "type": "predicts punctuation"
    }
   ]
  },
  {
-  "model": "shakespeare_noheads_d2",
-  "author": "shakespeare_noheads",
+  "model": "shakespeare_d2_s2",
+  "site": 2,
+  "author": "shakespeare",
   "l1": 3.0,
   "steps": 5000,
   "d_sae": 3072,
-  "dead_frac": 0.013671875,
-  "live": 3030,
-  "L0": 10.7264404296875,
-  "var_explained": 0.8895671367645264,
+  "dead_frac": 0.0029296875,
+  "live": 3063,
+  "L0": 9.1722412109375,
+  "var_explained": 0.8766515851020813,
   "types": {
-   "predicts vowel": 0.26798679867986797,
-   "after-char": 0.1438943894389439,
-   "predicts punctuation": 0.08415841584158416,
-   "predicts consonant": 0.35313531353135313,
-   "predicts word-end": 0.053465346534653464,
-   "predicts capital": 0.09735973597359736
+   "predicts capital": 0.9288279464577212,
+   "predicts punctuation": 0.016976820111002284,
+   "after-char": 0.033627162912177606,
+   "predicts word-end": 0.001632386549134835,
+   "predicts consonant": 0.01860920666013712,
+   "predicts vowel": 0.000326477309826967
   },
   "density_hist": [
    0,
    0,
-   434,
-   861,
-   490,
-   178,
-   171,
-   568,
-   316,
+   109,
+   647,
+   1666,
+   318,
+   45,
+   31,
+   161,
+   73,
+   13,
+   0
+  ],
+  "top_features": [
+   {
+    "feature": 2593,
+    "density": 0.1684977263212204,
+    "promotes": [
+     "I",
+     "C",
+     "R"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.88,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1087,
+    "density": 0.1624959260225296,
+    "promotes": [
+     "C",
+     "R",
+     "P"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.82,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2622,
+    "density": 0.139129638671875,
+    "promotes": [
+     "U",
+     "R",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 3.21,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1111,
+    "density": 0.130615234375,
+    "promotes": [
+     ".",
+     "\n",
+     ","
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.92,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1216,
+    "density": 0.1295064240694046,
+    "promotes": [
+     "I",
+     "T",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.56,
+    "type": "after-char"
+   },
+   {
+    "feature": 1864,
+    "density": 0.129302978515625,
+    "promotes": [
+     "C",
+     "R",
+     "P"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.55,
+    "type": "after-char"
+   },
+   {
+    "feature": 2127,
+    "density": 0.1231791153550148,
+    "promotes": [
+     "G",
+     "C",
+     "P"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.95,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1408,
+    "density": 0.1184895858168602,
+    "promotes": [
+     "S",
+     " ",
+     "R"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 3.0,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 684,
+    "density": 0.1177164688706398,
+    "promotes": [
+     "U",
+     "R",
+     "u"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.98,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2789,
+    "density": 0.1063232421875,
+    "promotes": [
+     "O",
+     "U",
+     "E"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.63,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1974,
+    "density": 0.1034444198012352,
+    "promotes": [
+     ".",
+     "S",
+     ","
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.76,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1800,
+    "density": 0.1019083634018898,
+    "promotes": [
+     "I",
+     "L",
+     "G"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.43,
+    "type": "after-char"
+   },
+   {
+    "feature": 1219,
+    "density": 0.1004435196518898,
+    "promotes": [
+     "I",
+     "G",
+     "N"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.45,
+    "type": "after-char"
+   },
+   {
+    "feature": 213,
+    "density": 0.0958251953125,
+    "promotes": [
+     "R",
+     "L",
+     "O"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.01,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 732,
+    "density": 0.0947062149643898,
+    "promotes": [
+     ".",
+     "\n",
+     "?"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.67,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 261,
+    "density": 0.0846354141831398,
+    "promotes": [
+     ".",
+     "R",
+     "L"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.63,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1450,
+    "density": 0.0838521346449852,
+    "promotes": [
+     "R",
+     "E",
+     "U"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.8,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1440,
+    "density": 0.0769144669175148,
+    "promotes": [
+     "R",
+     "C",
+     "G"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.48,
+    "type": "after-char"
+   },
+   {
+    "feature": 861,
+    "density": 0.0748697891831398,
+    "promotes": [
+     ".",
+     ",",
+     "L"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.91,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 198,
+    "density": 0.072662353515625,
+    "promotes": [
+     "E",
+     "e",
+     "P"
+    ],
+    "fires_on": "r",
+    "fires_on_entropy": 2.94,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 32,
+    "density": 0.0704345703125,
+    "promotes": [
+     ".",
+     "S",
+     "N"
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.76,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1883,
+    "density": 0.0701904296875,
+    "promotes": [
+     "T",
+     "t",
+     "D"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.74,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1361,
+    "density": 0.0683492049574852,
+    "promotes": [
+     ".",
+     "R",
+     "D"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.01,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2083,
+    "density": 0.0683085098862648,
+    "promotes": [
+     "O",
+     "R",
+     "E"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.15,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2998,
+    "density": 0.068145751953125,
+    "promotes": [
+     "R",
+     "L",
+     "E"
+    ],
+    "fires_on": "b",
+    "fires_on_entropy": 2.82,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2082,
+    "density": 0.0664265975356102,
+    "promotes": [
+     "\n",
+     " ",
+     "U"
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 2.6,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 455,
+    "density": 0.0641988143324852,
+    "promotes": [
+     "C",
+     "g",
+     "D"
+    ],
+    "fires_on": "a",
+    "fires_on_entropy": 2.44,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2748,
+    "density": 0.06304931640625,
+    "promotes": [
+     "?",
+     ",",
+     "Z"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.91,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1583,
+    "density": 0.0626424178481102,
+    "promotes": [
+     ".",
+     "T",
+     ","
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.33,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2849,
+    "density": 0.062469482421875,
+    "promotes": [
+     "C",
+     "T",
+     "h"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.58,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 3058,
+    "density": 0.0616556815803051,
+    "promotes": [
+     "T",
+     "k",
+     "U"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.58,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1186,
+    "density": 0.06097412109375,
+    "promotes": [
+     "N",
+     "n",
+     "R"
+    ],
+    "fires_on": "i",
+    "fires_on_entropy": 2.4,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 2581,
+    "density": 0.0603129081428051,
+    "promotes": [
+     "R",
+     "U",
+     "O"
+    ],
+    "fires_on": "d",
+    "fires_on_entropy": 2.81,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 373,
+    "density": 0.0599466972053051,
+    "promotes": [
+     "R",
+     "O",
+     "L"
+    ],
+    "fires_on": "l",
+    "fires_on_entropy": 2.92,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 1318,
+    "density": 0.0594278983771801,
+    "promotes": [
+     "E",
+     "U",
+     "A"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 2.67,
+    "type": "predicts capital"
+   },
+   {
+    "feature": 889,
+    "density": 0.0593973807990551,
+    "promotes": [
+     "h",
+     "H",
+     "R"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.07,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 378,
+    "density": 0.0589599609375,
+    "promotes": [
+     ".",
+     ",",
+     " "
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 2.41,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 807,
+    "density": 0.058013916015625,
+    "promotes": [
+     "d",
+     "D",
+     "N"
+    ],
+    "fires_on": "n",
+    "fires_on_entropy": 2.34,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2502,
+    "density": 0.0561930350959301,
+    "promotes": [
+     "y",
+     "Y",
+     "U"
+    ],
+    "fires_on": "m",
+    "fires_on_entropy": 2.49,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1190,
+    "density": 0.0559590645134449,
+    "promotes": [
+     "u",
+     "U",
+     "T"
+    ],
+    "fires_on": "o",
+    "fires_on_entropy": 2.2,
+    "type": "predicts vowel"
+   }
+  ]
+ },
+ {
+  "model": "shakespeare_noheads_d2",
+  "site": 1,
+  "author": "shakespeare_noheads",
+  "l1": 3.0,
+  "steps": 5000,
+  "d_sae": 3072,
+  "dead_frac": 0.014973958333333334,
+  "live": 3026,
+  "L0": 10.4937744140625,
+  "var_explained": 0.8931664824485779,
+  "types": {
+   "predicts vowel": 0.25611368142762725,
+   "after-char": 0.16953073364177132,
+   "predicts punctuation": 0.08195637805684071,
+   "predicts word-end": 0.05122273628552545,
+   "predicts consonant": 0.3456708526107072,
+   "predicts capital": 0.09550561797752809
+  },
+  "density_hist": [
+   0,
+   0,
+   493,
+   821,
+   471,
+   173,
+   172,
+   557,
+   327,
    9,
    2,
    1
@@ -1579,19 +3131,19 @@
   "top_features": [
    {
     "feature": 476,
-    "density": 0.3443196713924408,
+    "density": 0.3450927734375,
     "promotes": [
      "e",
      " ",
      "\u2019"
     ],
-    "fires_on": " ",
-    "fires_on_entropy": 3.24,
+    "fires_on": "e",
+    "fires_on_entropy": 3.26,
     "type": "predicts vowel"
    },
    {
     "feature": 1977,
-    "density": 0.301971435546875,
+    "density": 0.3024190366268158,
     "promotes": [
      "e",
      "r",
@@ -1603,79 +3155,79 @@
    },
    {
     "feature": 1087,
-    "density": 0.1014404296875,
+    "density": 0.1004638671875,
     "promotes": [
      "t",
      "a",
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.29,
+    "fires_on_entropy": 0.34,
     "type": "after-char"
    },
    {
     "feature": 1866,
-    "density": 0.0959879532456398,
+    "density": 0.0957438126206398,
     "promotes": [
      "t",
      "s",
      "a"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.38,
+    "fires_on_entropy": 0.4,
     "type": "after-char"
    },
    {
     "feature": 1784,
-    "density": 0.0919901505112648,
+    "density": 0.0911661759018898,
     "promotes": [
      "t",
      "o",
      "a"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.21,
+    "fires_on_entropy": 0.23,
     "type": "after-char"
    },
    {
     "feature": 1113,
-    "density": 0.0823872908949852,
+    "density": 0.0826416015625,
     "promotes": [
      ".",
      ",",
      "e"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 2.74,
+    "fires_on_entropy": 2.76,
     "type": "predicts punctuation"
    },
    {
     "feature": 1292,
-    "density": 0.0632120743393898,
+    "density": 0.065673828125,
     "promotes": [
      "e",
      " ",
      ","
     ],
     "fires_on": "s",
-    "fires_on_entropy": 2.8,
+    "fires_on_entropy": 2.81,
     "type": "predicts vowel"
    },
    {
     "feature": 1159,
-    "density": 0.061309814453125,
+    "density": 0.0594075508415699,
     "promotes": [
      "e",
      "o",
      "u"
     ],
-    "fires_on": "s",
-    "fires_on_entropy": 3.1,
+    "fires_on": "t",
+    "fires_on_entropy": 3.13,
     "type": "predicts vowel"
    },
    {
     "feature": 353,
-    "density": 0.037109375,
+    "density": 0.0377400703728199,
     "promotes": [
      "t",
      "e",
@@ -1687,139 +3239,127 @@
    },
    {
     "feature": 379,
-    "density": 0.03704833984375,
+    "density": 0.0359903983771801,
     "promotes": [
      "e",
      "u",
      "o"
     ],
     "fires_on": "l",
-    "fires_on_entropy": 2.9,
+    "fires_on_entropy": 2.87,
     "type": "predicts vowel"
    },
    {
     "feature": 338,
-    "density": 0.034149169921875,
+    "density": 0.0342000313103199,
     "promotes": [
      "t",
      "s",
      "e"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.4,
+    "fires_on_entropy": 0.32,
     "type": "after-char"
    },
    {
     "feature": 447,
-    "density": 0.03363037109375,
+    "density": 0.033447265625,
     "promotes": [
      "e",
      "o",
      "u"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.18,
+    "fires_on_entropy": 3.14,
     "type": "predicts vowel"
-   },
-   {
-    "feature": 1599,
-    "density": 0.0315043143928051,
-    "promotes": [
-     "d",
-     "e",
-     "s"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.4,
-    "type": "after-char"
-   },
-   {
-    "feature": 2617,
-    "density": 0.0314127616584301,
-    "promotes": [
-     "h",
-     "r",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 1.01,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 1150,
-    "density": 0.03065999411046505,
-    "promotes": [
-     "e",
-     "r",
-     "n"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.2,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 247,
-    "density": 0.03049723245203495,
-    "promotes": [
-     "d",
-     "r",
-     "n"
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 0.62,
-    "type": "after-char"
    },
    {
     "feature": 2994,
-    "density": 0.03038533590734005,
+    "density": 0.0312703438103199,
     "promotes": [
      "\n",
      " ",
      "T"
     ],
     "fires_on": ",",
-    "fires_on_entropy": 2.87,
+    "fires_on_entropy": 2.88,
     "type": "predicts word-end"
    },
    {
-    "feature": 1506,
-    "density": 0.029388427734375,
+    "feature": 247,
+    "density": 0.03053792379796505,
+    "promotes": [
+     "d",
+     "r",
+     "n"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 0.64,
+    "type": "after-char"
+   },
+   {
+    "feature": 1599,
+    "density": 0.03040567971765995,
+    "promotes": [
+     "d",
+     "e",
+     "s"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.44,
+    "type": "after-char"
+   },
+   {
+    "feature": 2617,
+    "density": 0.03003946878015995,
     "promotes": [
      "h",
      "r",
-     "e"
+     "o"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 0.75,
+    "fires_on_entropy": 1.02,
     "type": "predicts consonant"
    },
    {
+    "feature": 1150,
+    "density": 0.02955118753015995,
+    "promotes": [
+     "e",
+     "r",
+     "n"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.23,
+    "type": "predicts vowel"
+   },
+   {
     "feature": 513,
-    "density": 0.028106689453125,
+    "density": 0.02852376364171505,
     "promotes": [
      " ",
      "\n",
      ","
     ],
     "fires_on": ",",
-    "fires_on_entropy": 1.49,
+    "fires_on_entropy": 1.56,
     "type": "predicts word-end"
    },
    {
-    "feature": 2306,
-    "density": 0.027923583984375,
+    "feature": 1506,
+    "density": 0.02790323831140995,
     "promotes": [
      "h",
      "r",
      "e"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 1.34,
+    "fires_on_entropy": 0.77,
     "type": "predicts consonant"
    },
    {
     "feature": 1512,
-    "density": 0.02753702737390995,
+    "density": 0.02762858010828495,
     "promotes": [
      "s",
      "n",
@@ -1830,104 +3370,152 @@
     "type": "after-char"
    },
    {
-    "feature": 2075,
-    "density": 0.02660115621984005,
-    "promotes": [
-     "a",
-     "e",
-     "r"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.19,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 1574,
-    "density": 0.02617391012609005,
-    "promotes": [
-     "r",
-     "a",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.17,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2327,
-    "density": 0.026153564453125,
-    "promotes": [
-     "\n",
-     " ",
-     ","
-    ],
-    "fires_on": ",",
-    "fires_on_entropy": 1.52,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 2393,
-    "density": 0.025909423828125,
-    "promotes": [
-     ",",
-     " ",
-     "."
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 0.59,
-    "type": "after-char"
-   },
-   {
-    "feature": 2902,
-    "density": 0.02588907815515995,
+    "feature": 2306,
+    "density": 0.02669270895421505,
     "promotes": [
      "h",
      "r",
-     "o"
+     "e"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 0.66,
-    "type": "after-char"
+    "fires_on_entropy": 1.36,
+    "type": "predicts consonant"
    },
    {
     "feature": 2362,
-    "density": 0.02579752542078495,
+    "density": 0.02562459371984005,
     "promotes": [
      "n",
      "\u2019",
      "u"
     ],
     "fires_on": "a",
-    "fires_on_entropy": 3.17,
+    "fires_on_entropy": 3.2,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2393,
+    "density": 0.02525838278234005,
+    "promotes": [
+     ",",
+     " ",
+     "."
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 0.54,
+    "type": "after-char"
+   },
+   {
+    "feature": 1477,
+    "density": 0.025238037109375,
+    "promotes": [
+     ",",
+     ".",
+     "e"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 0.88,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2327,
+    "density": 0.02515665628015995,
+    "promotes": [
+     "\n",
+     " ",
+     ","
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 1.49,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2075,
+    "density": 0.02500406838953495,
+    "promotes": [
+     "a",
+     "e",
+     "r"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.14,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1318,
+    "density": 0.024932861328125,
+    "promotes": [
+     "r",
+     "a",
+     "e"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.24,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1574,
+    "density": 0.02471923828125,
+    "promotes": [
+     "r",
+     "a",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.21,
     "type": "predicts consonant"
    },
    {
     "feature": 1141,
-    "density": 0.02516683004796505,
+    "density": 0.024261474609375,
     "promotes": [
      "t",
      "n",
      "u"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.55,
+    "fires_on_entropy": 0.59,
     "type": "after-char"
    },
    {
+    "feature": 2902,
+    "density": 0.02414957620203495,
+    "promotes": [
+     "h",
+     "r",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.67,
+    "type": "after-char"
+   },
+   {
+    "feature": 1227,
+    "density": 0.02399698831140995,
+    "promotes": [
+     "n",
+     "u",
+     "e"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.91,
+    "type": "predicts consonant"
+   },
+   {
     "feature": 2706,
-    "density": 0.02480061911046505,
+    "density": 0.02390543557703495,
     "promotes": [
      "a",
      "I",
      "t"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.49,
+    "fires_on_entropy": 0.48,
     "type": "after-char"
    },
    {
     "feature": 1498,
-    "density": 0.024688720703125,
+    "density": 0.02385457418859005,
     "promotes": [
      "e",
      "r",
@@ -1938,155 +3526,120 @@
     "type": "predicts vowel"
    },
    {
-    "feature": 1477,
-    "density": 0.02467854879796505,
-    "promotes": [
-     ",",
-     ".",
-     "e"
-    ],
-    "fires_on": "s",
-    "fires_on_entropy": 0.87,
-    "type": "predicts punctuation"
-   },
-   {
-    "feature": 1318,
-    "density": 0.02460733987390995,
-    "promotes": [
-     "r",
-     "a",
-     "e"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.17,
-    "type": "predicts consonant"
-   },
-   {
     "feature": 1789,
-    "density": 0.02458699606359005,
+    "density": 0.023712158203125,
     "promotes": [
      ".",
      ",",
      ";"
     ],
     "fires_on": "y",
-    "fires_on_entropy": 2.39,
+    "fires_on_entropy": 2.36,
     "type": "predicts punctuation"
    },
    {
-    "feature": 979,
-    "density": 0.02373250387609005,
-    "promotes": [
-     "e",
-     "\u2019",
-     "r"
-    ],
-    "fires_on": "h",
-    "fires_on_entropy": 0.83,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 1227,
-    "density": 0.02327474020421505,
-    "promotes": [
-     "n",
-     "u",
-     "e"
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 2.92,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2587,
-    "density": 0.02323404885828495,
-    "promotes": [
-     " ",
-     "\n",
-     "e"
-    ],
-    "fires_on": ",",
-    "fires_on_entropy": 1.57,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 2292,
-    "density": 0.02281697653234005,
-    "promotes": [
-     " ",
-     ",",
-     "."
-    ],
-    "fires_on": "d",
-    "fires_on_entropy": 1.03,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 3007,
-    "density": 0.022613525390625,
-    "promotes": [
-     " ",
-     ",",
-     "."
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 2.73,
-    "type": "predicts word-end"
-   },
-   {
     "feature": 2897,
-    "density": 0.02254231832921505,
+    "density": 0.02349853515625,
     "promotes": [
      "T",
      "\n",
      "A"
     ],
     "fires_on": "\n",
-    "fires_on_entropy": 1.58,
+    "fires_on_entropy": 1.5,
     "type": "predicts capital"
    },
    {
-    "feature": 2433,
-    "density": 0.02215576171875,
+    "feature": 2587,
+    "density": 0.023040771484375,
     "promotes": [
-     "e",
-     "\u2019",
-     "r"
+     " ",
+     "\n",
+     "e"
     ],
-    "fires_on": "h",
-    "fires_on_entropy": 0.44,
-    "type": "after-char"
+    "fires_on": ",",
+    "fires_on_entropy": 1.58,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 3007,
+    "density": 0.02280680276453495,
+    "promotes": [
+     " ",
+     ",",
+     "."
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 2.76,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 1905,
+    "density": 0.02271525003015995,
+    "promotes": [
+     ".",
+     ",",
+     "n"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 2.77,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 791,
+    "density": 0.022247314453125,
+    "promotes": [
+     "\u2019",
+     "e",
+     "T"
+    ],
+    "fires_on": "\n",
+    "fires_on_entropy": 3.28,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 109,
+    "density": 0.02217610739171505,
+    "promotes": [
+     "\n",
+     " ",
+     "\u2019"
+    ],
+    "fires_on": ".",
+    "fires_on_entropy": 1.98,
+    "type": "predicts word-end"
    }
   ]
  },
  {
   "model": "shakespeare_nonum_d2",
+  "site": 1,
   "author": "shakespeare_nonum",
   "l1": 3.0,
   "steps": 5000,
   "d_sae": 3072,
   "dead_frac": 0.014322916666666666,
   "live": 3028,
-  "L0": 11.364990234375,
-  "var_explained": 0.8843314051628113,
+  "L0": 11.19384765625,
+  "var_explained": 0.8809969425201416,
   "types": {
-   "predicts capital": 0.4247027741083223,
-   "predicts consonant": 0.18163804491413474,
-   "predicts punctuation": 0.14002642007926025,
-   "after-char": 0.15785997357992074,
-   "predicts vowel": 0.04821664464993395,
-   "predicts word-end": 0.047556142668428
+   "predicts capital": 0.4299867899603699,
+   "predicts consonant": 0.18428005284015853,
+   "predicts punctuation": 0.14101717305151915,
+   "after-char": 0.14696169088507266,
+   "predicts vowel": 0.04953764861294584,
+   "predicts word-end": 0.04821664464993395
   },
   "density_hist": [
    0,
    0,
-   372,
-   652,
-   509,
-   278,
-   233,
-   637,
-   335,
+   383,
+   677,
+   485,
+   260,
+   239,
+   643,
+   329,
    8,
    2,
    2
@@ -2094,43 +3647,43 @@
   "top_features": [
    {
     "feature": 1270,
-    "density": 0.3515421450138092,
+    "density": 0.3527730405330658,
     "promotes": [
      "E",
      ".",
      "O"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.3,
+    "fires_on_entropy": 3.28,
     "type": "predicts capital"
    },
    {
     "feature": 2745,
-    "density": 0.3214620053768158,
+    "density": 0.3206075131893158,
     "promotes": [
      "s",
      "n",
      " "
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.31,
+    "fires_on_entropy": 3.3,
     "type": "predicts consonant"
    },
    {
     "feature": 2453,
-    "density": 0.1633809357881546,
+    "density": 0.1660970002412796,
     "promotes": [
      ".",
      ",",
      "\n"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 3.22,
+    "fires_on_entropy": 3.19,
     "type": "predicts punctuation"
    },
    {
     "feature": 2661,
-    "density": 0.1072591170668602,
+    "density": 0.107513427734375,
     "promotes": [
      ".",
      ",",
@@ -2142,31 +3695,31 @@
    },
    {
     "feature": 1784,
-    "density": 0.0908406600356102,
+    "density": 0.0914103165268898,
     "promotes": [
      "o",
      "t",
      "a"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.26,
+    "fires_on_entropy": 0.28,
     "type": "after-char"
    },
    {
     "feature": 1087,
-    "density": 0.0893656387925148,
+    "density": 0.0886433944106102,
     "promotes": [
      "t",
      "I",
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.42,
+    "fires_on_entropy": 0.37,
     "type": "after-char"
    },
    {
     "feature": 373,
-    "density": 0.058502197265625,
+    "density": 0.0599263496696949,
     "promotes": [
      "o",
      "a",
@@ -2174,6 +3727,18 @@
     ],
     "fires_on": "h",
     "fires_on_entropy": 3.33,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2459,
+    "density": 0.0332438163459301,
+    "promotes": [
+     "a",
+     "u",
+     "i"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 3.04,
     "type": "predicts vowel"
    },
    {
@@ -2185,320 +3750,308 @@
      "s"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 3.02,
-    "type": "predicts punctuation"
-   },
-   {
-    "feature": 329,
-    "density": 0.033050537109375,
-    "promotes": [
-     "I",
-     "t",
-     "s"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.34,
-    "type": "after-char"
-   },
-   {
-    "feature": 270,
-    "density": 0.0327860526740551,
-    "promotes": [
-     ".",
-     "e",
-     "R"
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 3.26,
+    "fires_on_entropy": 2.96,
     "type": "predicts punctuation"
    },
    {
     "feature": 2432,
-    "density": 0.0324503593146801,
+    "density": 0.0330912284553051,
     "promotes": [
      ".",
      ",",
      "s"
     ],
     "fires_on": "r",
-    "fires_on_entropy": 2.87,
+    "fires_on_entropy": 2.89,
     "type": "predicts punctuation"
    },
    {
-    "feature": 2459,
-    "density": 0.0318806953728199,
-    "promotes": [
-     "a",
-     "u",
-     "i"
-    ],
-    "fires_on": "h",
-    "fires_on_entropy": 3.04,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2059,
-    "density": 0.03094482421875,
+    "feature": 270,
+    "density": 0.0326334647834301,
     "promotes": [
      ".",
-     "t",
-     "l"
+     "e",
+     "R"
     ],
     "fires_on": "e",
-    "fires_on_entropy": 3.23,
+    "fires_on_entropy": 3.27,
     "type": "predicts punctuation"
    },
    {
-    "feature": 2617,
-    "density": 0.030914306640625,
-    "promotes": [
-     "h",
-     "r",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 0.76,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2050,
-    "density": 0.030792236328125,
-    "promotes": [
-     ".",
-     ",",
-     "s"
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 3.14,
-    "type": "predicts punctuation"
-   },
-   {
-    "feature": 2356,
-    "density": 0.03001912496984005,
-    "promotes": [
-     "\n",
-     " ",
-     "."
-    ],
-    "fires_on": ",",
-    "fires_on_entropy": 1.6,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 1570,
-    "density": 0.02947998046875,
-    "promotes": [
-     "o",
-     "a",
-     "e"
-    ],
-    "fires_on": "h",
-    "fires_on_entropy": 3.34,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2972,
-    "density": 0.02915445901453495,
-    "promotes": [
-     " ",
-     "\n",
-     "s"
-    ],
-    "fires_on": ",",
-    "fires_on_entropy": 2.28,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 2045,
-    "density": 0.02912394143640995,
-    "promotes": [
-     ".",
-     "s",
-     "d"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.83,
-    "type": "predicts punctuation"
-   },
-   {
-    "feature": 3015,
-    "density": 0.028564453125,
-    "promotes": [
-     "o",
-     "a",
-     "i"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.23,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2178,
-    "density": 0.0283203125,
-    "promotes": [
-     "u",
-     "o",
-     "l"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.24,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 807,
-    "density": 0.02815755270421505,
-    "promotes": [
-     "d",
-     "s",
-     "."
-    ],
-    "fires_on": "e",
-    "fires_on_entropy": 0.74,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2091,
-    "density": 0.02805582620203495,
-    "promotes": [
-     "o",
-     "a",
-     "e"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.24,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 674,
-    "density": 0.027862548828125,
+    "feature": 329,
+    "density": 0.032012939453125,
     "promotes": [
      "I",
-     "s",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 0.51,
-    "type": "after-char"
-   },
-   {
-    "feature": 692,
-    "density": 0.02762858010828495,
-    "promotes": [
-     "o",
-     "e",
-     "a"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 3.22,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 1688,
-    "density": 0.02703857421875,
-    "promotes": [
-     " ",
      "t",
-     "l"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.64,
-    "type": "predicts word-end"
-   },
-   {
-    "feature": 511,
-    "density": 0.02646891213953495,
-    "promotes": [
-     "y",
-     "l",
-     "t"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 3.01,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 1864,
-    "density": 0.026123046875,
-    "promotes": [
-     ".",
-     ",",
      "s"
-    ],
-    "fires_on": "s",
-    "fires_on_entropy": 0.79,
-    "type": "predicts punctuation"
-   },
-   {
-    "feature": 335,
-    "density": 0.02519734762609005,
-    "promotes": [
-     "n",
-     " ",
-     "C"
-    ],
-    "fires_on": " ",
-    "fires_on_entropy": 2.68,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 1971,
-    "density": 0.0250244140625,
-    "promotes": [
-     "o",
-     "i",
-     "e"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 2.99,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 1318,
-    "density": 0.024749755859375,
-    "promotes": [
-     "i",
-     "e",
-     "a"
-    ],
-    "fires_on": "w",
-    "fires_on_entropy": 2.32,
-    "type": "predicts vowel"
-   },
-   {
-    "feature": 2367,
-    "density": 0.02470906637609005,
-    "promotes": [
-     "h",
-     "o",
-     "r"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 0.82,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 1993,
-    "density": 0.02461751364171505,
-    "promotes": [
-     "I",
-     "s",
-     "n"
     ],
     "fires_on": " ",
     "fires_on_entropy": 0.39,
     "type": "after-char"
    },
    {
+    "feature": 2059,
+    "density": 0.0315755195915699,
+    "promotes": [
+     ".",
+     "t",
+     "l"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 3.17,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 1570,
+    "density": 0.0313008613884449,
+    "promotes": [
+     "o",
+     "a",
+     "e"
+    ],
+    "fires_on": "h",
+    "fires_on_entropy": 3.31,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2050,
+    "density": 0.0311279296875,
+    "promotes": [
+     ".",
+     ",",
+     "s"
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 3.11,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2617,
+    "density": 0.03089396096765995,
+    "promotes": [
+     "h",
+     "r",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.8,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 2045,
+    "density": 0.03087361715734005,
+    "promotes": [
+     ".",
+     "s",
+     "d"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.85,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 2356,
+    "density": 0.03083292581140995,
+    "promotes": [
+     "\n",
+     " ",
+     "."
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 1.59,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 2972,
+    "density": 0.02885945700109005,
+    "promotes": [
+     " ",
+     "\n",
+     "s"
+    ],
+    "fires_on": ",",
+    "fires_on_entropy": 2.22,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 3015,
+    "density": 0.02869669534265995,
+    "promotes": [
+     "o",
+     "a",
+     "i"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.23,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 807,
+    "density": 0.02823893167078495,
+    "promotes": [
+     "d",
+     "s",
+     "."
+    ],
+    "fires_on": "e",
+    "fires_on_entropy": 0.64,
+    "type": "after-char"
+   },
+   {
+    "feature": 674,
+    "density": 0.02783203125,
+    "promotes": [
+     "I",
+     "s",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.54,
+    "type": "after-char"
+   },
+   {
+    "feature": 2091,
+    "density": 0.02782185934484005,
+    "promotes": [
+     "o",
+     "a",
+     "e"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.25,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1688,
+    "density": 0.02754720114171505,
+    "promotes": [
+     " ",
+     "t",
+     "l"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.67,
+    "type": "predicts word-end"
+   },
+   {
+    "feature": 692,
+    "density": 0.02742513082921505,
+    "promotes": [
+     "o",
+     "e",
+     "a"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.26,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2178,
+    "density": 0.02728271484375,
+    "promotes": [
+     "u",
+     "o",
+     "l"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.25,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 335,
+    "density": 0.02727254293859005,
+    "promotes": [
+     "n",
+     " ",
+     "C"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.65,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1864,
+    "density": 0.02622477151453495,
+    "promotes": [
+     ".",
+     ",",
+     "s"
+    ],
+    "fires_on": "s",
+    "fires_on_entropy": 0.76,
+    "type": "predicts punctuation"
+   },
+   {
+    "feature": 511,
+    "density": 0.02583821676671505,
+    "promotes": [
+     "y",
+     "l",
+     "t"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 2.97,
+    "type": "predicts consonant"
+   },
+   {
+    "feature": 1318,
+    "density": 0.02557373046875,
+    "promotes": [
+     "i",
+     "e",
+     "a"
+    ],
+    "fires_on": "w",
+    "fires_on_entropy": 2.3,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 1971,
+    "density": 0.02507527731359005,
+    "promotes": [
+     "o",
+     "i",
+     "e"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 3.02,
+    "type": "predicts vowel"
+   },
+   {
+    "feature": 2367,
+    "density": 0.02506510354578495,
+    "promotes": [
+     "h",
+     "o",
+     "r"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.89,
+    "type": "predicts consonant"
+   },
+   {
     "feature": 353,
-    "density": 0.02446492575109005,
+    "density": 0.02506510354578495,
     "promotes": [
      "i",
      "y",
      "n"
     ],
     "fires_on": "t",
-    "fires_on_entropy": 3.11,
+    "fires_on_entropy": 3.12,
     "type": "predicts vowel"
+   },
+   {
+    "feature": 1853,
+    "density": 0.02448526956140995,
+    "promotes": [
+     "I",
+     "a",
+     "s"
+    ],
+    "fires_on": " ",
+    "fires_on_entropy": 0.66,
+    "type": "after-char"
    },
    {
     "feature": 2610,
@@ -2509,36 +4062,24 @@
      ","
     ],
     "fires_on": ",",
-    "fires_on_entropy": 1.33,
+    "fires_on_entropy": 1.2,
     "type": "predicts word-end"
    },
    {
     "feature": 2794,
-    "density": 0.02402750588953495,
+    "density": 0.02422078512609005,
     "promotes": [
      "t",
      "l",
      "e"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 2.49,
-    "type": "predicts consonant"
-   },
-   {
-    "feature": 2880,
-    "density": 0.02361043356359005,
-    "promotes": [
-     "h",
-     "r",
-     "o"
-    ],
-    "fires_on": "t",
-    "fires_on_entropy": 0.99,
+    "fires_on_entropy": 2.45,
     "type": "predicts consonant"
    },
    {
     "feature": 534,
-    "density": 0.02347818948328495,
+    "density": 0.023834228515625,
     "promotes": [
      "t",
      "d",
@@ -2550,27 +4091,39 @@
    },
    {
     "feature": 476,
-    "density": 0.02337646484375,
+    "density": 0.02369181253015995,
     "promotes": [
      "r",
      "l",
      "a"
     ],
     "fires_on": "f",
-    "fires_on_entropy": 2.05,
+    "fires_on_entropy": 2.06,
     "type": "predicts consonant"
    },
    {
-    "feature": 1853,
-    "density": 0.02335611917078495,
+    "feature": 1993,
+    "density": 0.02345784567296505,
     "promotes": [
      "I",
-     "a",
-     "s"
+     "s",
+     "n"
     ],
     "fires_on": " ",
-    "fires_on_entropy": 0.6,
+    "fires_on_entropy": 0.4,
     "type": "after-char"
+   },
+   {
+    "feature": 2880,
+    "density": 0.02325439453125,
+    "promotes": [
+     "h",
+     "r",
+     "o"
+    ],
+    "fires_on": "t",
+    "fires_on_entropy": 0.99,
+    "type": "predicts consonant"
    }
   ]
  }

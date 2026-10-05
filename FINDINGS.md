@@ -311,9 +311,52 @@ cluster near 10⁻² and a sparse one near 10⁻⁴), so the dictionaries are th
 same shape; what differs is what the features are for. Same verdict as §1
 from one level further in: identical machinery, allocated to different work.
 
+## 8. The stripped texts at six layers, and a limit of the SAE typing
+
+The two stripped Shakespeare texts were also trained as 6-layer models at the
+4-epoch budget (`out/REPORT_controls.md`), so every structural claim could be
+re-checked without the play's apparatus.
+
+- **The far pair and the asymmetry survive.** McCarthy's model reads
+  Shakespeare without headings or numbers at 3.04 bits/char, against Melville
+  at 2.74; with the apparatus it was 3.17. The headings-free Shakespeare model
+  reads McCarthy at 2.47 and Melville at 2.64, the same shape as before. About
+  0.13 bits of the McCarthy–Shakespeare distance was the apparatus; the rest
+  is the language.
+- **The logit-lens ordering needs a correction.** Share of improvement still
+  outstanding after block 4: McCarthy 0.145, Melville 0.244, Shakespeare
+  0.202 with the full text, 0.232 without line numbers, **0.159 without
+  speech headings**. Removing 601 numbered lines moved the measure by 0.03,
+  which is larger than the seed difference seen earlier (0.01), so the noise
+  on this statistic is nearer 0.03 than 0.01. The robust claim is the
+  McCarthy–Melville gap (0.10): McCarthy's prose is decided earliest in the
+  stack, Melville's latest. Shakespeare's place between them is not resolved
+  beyond noise, and stripping the dramatic form moves him toward McCarthy.
+  §2 and §6 above should be read with this correction.
+- **The layer-1 long-reach heads were partly reading the headings.** Mean
+  reach of the layer-1 heads: 44 chars with the full text, 46 without
+  numbers, 34 without speech headings. A third of that reach was a head
+  looking back to the last speaker label.
+- **Alphas unchanged** (MLP-in 2.16–2.24, Wq 2.31–2.34): the stripped texts
+  train to the same spectral state as the full one, which is the §1 verdict
+  again.
+
+**A limit of the feature typing.** Dictionaries at the second site, the
+residual after block 2 (the last block, feeding the unembedding directly),
+collapse to one type each: Shakespeare 93% "predicts capital", Melville 85%
+"predicts consonant", McCarthy 59% "predicts punctuation". The after-character
+type nearly vanishes (2–3%). At the output-adjacent site every decoder
+direction is already a logit direction, and the type is assigned by the
+largest raw logit shift, which is dominated by whichever characters have the
+widest logit range in that model (capitals for a text full of speech headings,
+punctuation for a text with almost none). So the typing is only meaningful at
+an interior site, where it reads what a feature is for rather than what the
+unembedding amplifies. A probability-based read (softmax shift, not raw
+logit) is the fix; not done.
+
 ## If this goes further
 
 - Delta and blind judge on samples: done (§4).
-- An SAE at the second site (after block 2), and the same stripping controls on the 6-layer models.
+- Probability-based feature typing so site-2 dictionaries can be read; more seeds on the logit-lens statistic.
 - A word-level tokeniser so token geometry means something.
 - More seeds per author to put error bars on every off-diagonal.
