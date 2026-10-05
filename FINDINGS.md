@@ -273,14 +273,19 @@ on held-out windows (input side).
 This is the sharpest author fingerprint in the study, and it has to be read
 with its caveat in the same breath:
 
-- **Shakespeare's dictionary is half typography.** The strongest
-  capital-predicting features fire after a sentence end followed by a line
-  break or by the Gutenberg edition's line numbers; they are predicting the
-  capital that opens the next verse line or speech heading. Verse capitalises
-  every line and the edition numbers them, so the model spends half its
-  features on the page rather than the poetry. The 12% on punctuation is the
-  same: verse lineation and stage-direction brackets. Cilibrasi's warning
-  about translators applies here as editors and typesetters.
+- **Shakespeare's dictionary is half the verse form, and the control says
+  how much is the edition.** The strongest capital-predicting features fire
+  after a sentence end and a line break: they predict the capital that opens
+  the next verse line or speech heading. To separate the poem from the page,
+  the same 2-layer model and the same dictionary were retrained on the text
+  with Gutenberg's line and sonnet numbers stripped (`shakespeare_nonum_d2`,
+  601 of 196,015 lines touched). Capital-predicting features went from
+  48.2% to 43.5%; every other type moved under two points. So about five
+  points were the edition's numbering and 43% is the form itself: verse
+  capitalises every line and a play names every speaker. The 12–14% on
+  punctuation is the same stratum, lineation and stage-direction brackets.
+  That is still typography in Cilibrasi's sense, but it is Shakespeare's
+  typography, not his editor's.
 - **McCarthy's dictionary is consonants and word ends, almost no punctuation.**
   Half the features predict a consonant and 13% predict the end of a word,
   against 5–6% for the others; 1.3% predict punctuation. Short Anglo-Saxon
@@ -300,6 +305,6 @@ from one level further in: identical machinery, allocated to different work.
 ## If this goes further
 
 - Delta and blind judge on samples: done (§4).
-- An SAE at the second site (after block 2) and on a plain-text Shakespeare without line numbers, to separate verse from edition.
+- An SAE at the second site (after block 2); a Shakespeare control with speech headings removed, to split lineation from dramatic form.
 - A word-level tokeniser so token geometry means something.
 - More seeds per author to put error bars on every off-diagonal.
