@@ -19,6 +19,14 @@ ROOT = pathlib.Path(__file__).resolve().parent
 CORPUS, DATA = ROOT / "corpus", ROOT / "data"
 
 
+def encode(text, stoi):
+    """Characters to ids under the frozen vocab. The one rule every reader of a
+    checkpoint has to share: a character the vocab lacks is '?', the same id the
+    training data got, never id 0 (which is a newline in the shipped vocab)."""
+    unk = stoi.get("?", 0)
+    return [stoi.get(c, unk) for c in text]
+
+
 def load(author):
     texts = []
     for p in sorted((CORPUS / author).glob("*.txt")):
@@ -52,12 +60,11 @@ def main():
         chars = sorted(c for c, n in counts.items() if n >= 20)
         stoi = {c: i for i, c in enumerate(chars)}
         meta = {"vocab_size": len(chars), "itos": {i: c for c, i in stoi.items()}, "stoi": stoi, "authors": {}}
-    unk = stoi.get("?", 0)
     for a, t in corpora.items():
         missing = sum(1 for c in t if c not in stoi)
         if missing:
             print(f"{a}: {missing} chars ({missing/len(t)*100:.3f}%) outside the frozen vocab -> '?'")
-        ids = np.array([stoi.get(c, unk) for c in t], dtype=np.uint16)
+        ids = np.array(encode(t, stoi), dtype=np.uint16)
         n = len(ids)
         split = int(n * 0.9)
         (DATA / a).mkdir(exist_ok=True)

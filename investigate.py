@@ -26,7 +26,8 @@ np.random.seed(0)
 
 meta = pickle.loads((ROOT / "data" / "meta.pkl").read_bytes())
 stoi, itos = meta["stoi"], meta["itos"]
-encode = lambda s: [stoi.get(c, stoi.get("?", 0)) for c in s]
+from prepare import encode as _encode
+encode = lambda s: _encode(s, stoi)
 decode = lambda l: "".join(itos[int(i)] for i in l)
 
 AUTHORS = [p.parent.name for p in sorted(OUT.glob("*/ckpt.pt"))]
