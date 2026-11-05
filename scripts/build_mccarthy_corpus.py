@@ -3,7 +3,7 @@ essays, because the novels are in copyright and are not fetched.
 
 Sources, in order of trust:
   1. Aidan's own quotations master (Notion pull at
-     ~/Desktop/writing-topology/data/personal_corpus/quotes.json), author McCarthy
+     ~/Desktop/workspace/writing-topology/data/personal_corpus/quotes.json), author McCarthy
   2. Wikiquote, Cormac McCarthy page (quotes by him; "about" sections skipped)
   3. Goodreads author quotes, every page
   4. Nautilus: "The Kekulé Problem" and its sequel, his two published essays
@@ -21,7 +21,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DEST = ROOT / "corpus" / "mccarthy"
 DEST.mkdir(parents=True, exist_ok=True)
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/128 Safari/537.36"}
-LOCAL = pathlib.Path.home() / "Desktop/writing-topology/data/personal_corpus/quotes.json"
+LOCAL = pathlib.Path.home() / "Desktop/workspace/writing-topology/data/personal_corpus/quotes.json"
 
 
 def get(url, tries=3):
